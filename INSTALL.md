@@ -19,3 +19,10 @@ source twoD-env/bin/activate
 cd 2DAlphabet
 python setup.py develop
 ```
+
+After installation, on new shell login:
+```
+cd CMSSW_10_6_14/src
+cmsenv
+source twoD-env/bin/activate
+```
