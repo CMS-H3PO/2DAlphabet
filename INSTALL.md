@@ -12,4 +12,10 @@ cd 2DAlphabet
 git checkout H3PO
 cd ..
 scram b -j4
+
+
+python -m virtualenv twoD-env
+source twoD-env/bin/activate
+cd 2DAlphabet
+python setup.py develop
 ```
