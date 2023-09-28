@@ -8,7 +8,7 @@
           "COLOR":1,
           "TYPE":"DATA",
           "TITLE":"data_obs",
-          "LOC":"path/JetHT2017_Boosted_$region.root:HIST"
+          "LOC":"PATH/JetHT2017_Histograms.root:HIST"
        },
        "TTbar":{
           "SYSTEMATICS":[
@@ -19,7 +19,7 @@
           "COLOR":2,
           "TYPE":"BKG",
           "TITLE":"t#bar{t}",
-          "LOC":"path/FILE:HIST"
+          "LOC":"PATH/FILE:HIST"
        },
        "QCD":{
           "SYSTEMATICS":[
@@ -29,9 +29,9 @@
           "COLOR":8,
           "TYPE":"BKG",
           "TITLE":"QCD",
-          "LOC":"path/FILE:HIST"
+          "LOC":"PATH/FILE:HIST"
        },
-       "XToHY_6b_2000_1100":{
+       "XToYHTo6B_MX-2400_MY-800":{
           "SYSTEMATICS":[
              "lumi"
           ],
@@ -39,32 +39,32 @@
           "COLOR":1,
           "TYPE":"SIGNAL",
           "TITLE":"Signal",
-          "LOC":"path/XToYHTo6B_MX-2400_MY-800_Boosted_$region.root:HIST"
+          "LOC":"PATH/FILE:HIST"
         }
     },
     "REGIONS":{
        "fail":{
           "PROCESSES":[
-	    "TTbar"
+            "TTbar"
           ],
           "BINNING":"default"
        },
        "pass":{
           "PROCESSES":[
-	    "TTbar",
-            "XToHY_6b_2000_1100"
+            "TTbar",
+            "XToYHTo6B_MX-2400_MY-800"
           ],
           "BINNING":"default"
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_CR",
+       "HIST":"mjj_vs_mjjj_VR_$region_boosted",
        "HIST_UP":"$process_m_pT_$region__$syst_up",
        "HIST_DOWN":"$process_m_pT_$region__$syst_down",
        "HIST_ALT_UP":"$process_m_pT_$region_$systUp",
        "HIST_ALT_DOWN":"$process_m_pT_$region_$systDown",
-       "path":"/users/bchitrod/HHH/H3PO/Analysis/rootfiles/fit",
-       "FILE":"$process_Boosted_$region.root"
+       "PATH":"/users/ferencek/HHH/condor_jobs_CutFlowImprovedSelection_20230913_140140/fit",
+       "FILE":"$process_Histograms.root"
     },
     "BINNING":{
        "default":{
@@ -85,12 +85,12 @@
                 1800,
                 1900,
                 2000,
-		2200,
-		2400,
-		2600,
-		2800,
+                2200,
+                2400,
+                2600,
+                2800,
                 3000,
-		3500,
+                3500,
                 4000
             ],
              "SIGSTART":2200,
@@ -134,6 +134,7 @@
        "plotPrefitSigInFitB":false,
        "plotUncerts":true,
        "plotTitles":false,
-       "year":2
+       "year":2017,
+       "plotEvtsPerUnit":false
     }
  }
