@@ -1,3 +1,5 @@
+# Installation (Lorien)
+
 ```
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 export SCRAM_ARCH=slc7_amd64_gcc700
@@ -25,3 +27,15 @@ cd -
 source twoD-env/bin/activate
 cd 2DAlphabet
 ```
+
+# Running fits
+
+For running fits and making plots for the boosted selection, run
+```
+python HHH_boosted.py |& tee boosted_`date "+%Y%m%d_%H%M%S"`.log
+```
+To do the same for the semiboosted selection, run
+```
+python HHH_semiboosted.py |& tee semiboosted_`date "+%Y%m%d_%H%M%S"`.log
+```
+Note that piping output to the `tee` command will both print it to the terminal and save it in a log file. The log file name will contain a timestamp.
