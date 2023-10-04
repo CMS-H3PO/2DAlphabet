@@ -398,14 +398,14 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_semiboosted_CR":"3"}
-    for working_area in ["2017_semiboosted_CR"]:
+    bestOrder = {"2017_boosted_CR":"1"}
+    for working_area in ["2017_boosted_CR"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
         test_make(jsonConfig)
 
-        for order in ["1","2","3","4"]:
+        for order in ["1","2","3"]:
             polyOrder = order
             test_fit()
             test_plot()
@@ -416,4 +416,3 @@ if __name__ == '__main__':
 
         test_FTest("1","2")
         test_FTest("2","3")
-        test_FTest("3","4")

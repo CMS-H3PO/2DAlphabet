@@ -8,7 +8,7 @@
           "COLOR":1,
           "TYPE":"DATA",
           "TITLE":"data_obs",
-          "LOC":"path/JetHT2017_semiBoosted_$region_50.root:HIST"
+          "LOC":"PATH/JetHT2017_Histograms.root:HIST"
        },
        "TTbar":{
           "SYSTEMATICS":[
@@ -19,7 +19,7 @@
           "COLOR":2,
           "TYPE":"BKG",
           "TITLE":"t#bar{t}",
-          "LOC":"path/FILE:HIST"
+          "LOC":"PATH/FILE:HIST"
        },
        "QCD":{
           "SYSTEMATICS":[
@@ -29,9 +29,9 @@
           "COLOR":8,
           "TYPE":"BKG",
           "TITLE":"QCD",
-          "LOC":"path/FILE:HIST"
+          "LOC":"PATH/FILE:HIST"
        },
-       "XToHY_6b_2000_1100":{
+       "XToYHTo6B_MX-2400_MY-800":{
           "SYSTEMATICS":[
              "lumi"
           ],
@@ -39,7 +39,7 @@
           "COLOR":1,
           "TYPE":"SIGNAL",
           "TITLE":"Signal",
-          "LOC":"path/XToYHTo6B_MX-2400_MY-800_semiBoosted_$region_50.root:HIST"
+          "LOC":"PATH/FILE:HIST"
         }
     },
     "REGIONS":{
@@ -52,19 +52,19 @@
        "pass":{
           "PROCESSES":[
 	    "TTbar",
-            "XToHY_6b_2000_1100"
+            "XToYHTo6B_MX-2400_MY-800"
           ],
           "BINNING":"default"
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_CR_sb",
+       "HIST":"mjj_vs_mjjj_VR_$region_semiboosted",
        "HIST_UP":"$process_m_pT_$region__$syst_up",
        "HIST_DOWN":"$process_m_pT_$region__$syst_down",
        "HIST_ALT_UP":"$process_m_pT_$region_$systUp",
        "HIST_ALT_DOWN":"$process_m_pT_$region_$systDown",
-       "path":"/users/bchitrod/HHH/H3PO/Analysis/rootfiles/fit",
-       "FILE":"$process_semiBoosted_$region_50.root"
+       "PATH":"/STORE/HHH/Histograms/2017/20230913_140140",
+       "FILE":"$process_Histograms.root"
     },
     "BINNING":{
        "default":{
@@ -78,7 +78,7 @@
                 1800,
                 2400,
                 3000,
-		          4500
+                4500
             ],
              "SIGSTART":1400,
              "SIGEND":2400
@@ -93,7 +93,7 @@
                 1000,
                 1500,
                 2000,
-		          3000
+                3000
             ]
           }
        }
@@ -116,6 +116,6 @@
        "plotUncerts":true,
        "plotTitles":false,
        "year":2017,
-       "plotEvtsPerUnit":true
+       "plotEvtsPerUnit":false
     }
  }

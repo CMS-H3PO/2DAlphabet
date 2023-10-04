@@ -322,7 +322,7 @@ class CondorRunner():
 
     def submit(self):
         abs_path = os.getcwd()
-        abs_twoD_dir_base = abs_path[:abs_path.find(self.cmssw)]+self.cmssw+'/src/2DAlphabet/TwoDAlphabet/'
+        abs_twoD_dir_base = os.path.dirname(os.path.abspath(__file__))
         timestr = time.strftime("%Y%m%d-%H%M%S")
         out_jdl = 'temp_'+timestr+'_jdl'
 
@@ -338,6 +338,10 @@ class CondorRunner():
             execute_cmd("chmod +x {0}".format(self.run_script_path))
             execute_cmd("condor_submit "+out_jdl)
             execute_cmd("mv {0} notneeded/".format(out_jdl))
+            print("Waiting for all jobs to finish...")
+            for log in glob.glob('notneeded/output_*.log'):
+                execute_cmd('condor_wait {0}'.format(log))
+            print("All jobs finished.")
 
     def _make_pkg_tarball(self,to_pkg):
         start_dir = os.getcwd()
@@ -394,7 +398,9 @@ class CondorRunner():
         blocks.append("#!/bin/bash")
         blocks.append("echo RUNNING IN DIR: $(pwd)")
         blocks.append("source /cvmfs/cms.cern.ch/cmsset_default.sh")
+        blocks.append('cd {0}'.format(os.environ['CMSSW_BASE']))
         blocks.append('eval `scramv1 runtime -sh`')
+        blocks.append('cd -')
         blocks.append('echo $*')
         blocks.append('$*')
 
