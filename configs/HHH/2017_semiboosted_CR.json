@@ -63,7 +63,7 @@
        "HIST_DOWN":"$process_m_pT_$region__$syst_down",
        "HIST_ALT_UP":"$process_m_pT_$region_$systUp",
        "HIST_ALT_DOWN":"$process_m_pT_$region_$systDown",
-       "PATH":"/users/ferencek/HHH/condor_jobs_CutFlowImprovedSelection_20230913_140140/fit",
+       "PATH":"/STORE/HHH/Histograms/2017/20230913_140140",
        "FILE":"$process_Histograms.root"
     },
     "BINNING":{
