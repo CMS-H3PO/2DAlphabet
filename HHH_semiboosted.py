@@ -405,7 +405,8 @@ if __name__ == '__main__':
 
         test_make(jsonConfig)
 
-        for order in ["1","2","3","4"]:
+        #for order in ["0","1","2","3","4","5"]:
+        for order in ["0","1","2","3"]:
             polyOrder = order
             test_fit()
             test_plot()
@@ -413,7 +414,8 @@ if __name__ == '__main__':
                 test_GoF() # this waits for toy fits on Condor to finish
                 test_GoF_plot()
 
-
+        test_FTest("0","1")
         test_FTest("1","2")
         test_FTest("2","3")
-        test_FTest("3","4")
+        #test_FTest("3","4")
+        #test_FTest("4","5")
