@@ -1,5 +1,6 @@
 # Installation (Lorien)
 
+The following steps need to be done only once for the initial installation
 ```
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 export SCRAM_ARCH=slc7_amd64_gcc700
@@ -17,14 +18,20 @@ git clone git@github.com:CMS-H3PO/2DAlphabet.git
 cd 2DAlphabet
 python setup.py develop
 ```
+You now have all the required software installed and the enviroment set up.
 
-After installation, on new shell login:
+To set up environment in a new shell, run the following
 ```
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 cd CMSSW_10_6_14
 cmsenv
 cd -
 source twoD-env/bin/activate
+cd 2DAlphabet
+```
+or alternatively just run
+```
+source 2DAlphabet/activate_env
 cd 2DAlphabet
 ```
 
