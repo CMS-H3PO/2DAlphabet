@@ -37,12 +37,21 @@ cd 2DAlphabet
 
 # Running fits
 
-For running fits and making plots for the boosted selection, run
+For running fits and making plots for the boosted control region, run
 ```
 python -u HHH_boosted_CR.py |& tee boosted_CR_`date "+%Y%m%d_%H%M%S"`.log
 ```
-To do the same for the semiboosted selection, run
+To do the same for the semiboosted control region, run
 ```
 python -u HHH_semiboosted_CR.py |& tee semiboosted_CR_`date "+%Y%m%d_%H%M%S"`.log
 ```
 Note that piping output to the `tee` command will both print it to the terminal and save it in a log file. The log file name will contain a timestamp.
+
+To calculate expected limits for the boosted selection, run
+```
+python -u HHH_boosted_SR.py |& tee boosted_SR_`date "+%Y%m%d_%H%M%S"`.log
+```
+To do the same for the semiboosted selection, run
+```
+python -u HHH_semiboosted_SR.py |& tee semiboosted_SR_`date "+%Y%m%d_%H%M%S"`.log
+```

@@ -51,31 +51,31 @@ def _select_bkg(row, args):
     Returns:
         Bool: True if keeping the row, False if dropping.
     '''
-    poly_order = args[0]
+    polyOrder = args[0]
     if row.process_type == 'SIGNAL':
         return True
     elif 'qcd_' in row.process:
-        if row.process == 'qcd_'+poly_order:
+        if row.process == 'qcd_'+polyOrder:
             return True
         else:
             return False
     else:
         return True
 
-def _load_CR_rpf(poly_order):
-    twoD_CRonly = TwoDAlphabet('XHYfits_CR','XHYbbWW.json', loadPrevious=True)
-    params_to_set = twoD_CRonly.GetParamsOnMatch('rpf.*'+poly_order, 'MX_2000_MY_800_area', 'b')
+def _load_CR_rpf(polyOrder, working_area_CR):
+    twoD_CRonly = TwoDAlphabet(working_area_CR,'%s/runConfig.json'%working_area, loadPrevious=True)
+    params_to_set = twoD_CRonly.GetParamsOnMatch('rpf.*', '{0}_area'.format(polyOrder), 'b')
     return {k:v['val'] for k,v in params_to_set.items()}
 
 
-def _load_fit_rpf(working_area,orderSR,json_file):
+def _load_fit_rpf(working_area,subtag,json_file):
     twoD_blindFit = TwoDAlphabet(working_area,json_file, loadPrevious=True)
-    params_to_set = twoD_blindFit.GetParamsOnMatch('rpf.*', '{0}_area'.format(orderSR), 'b')
+    params_to_set = twoD_blindFit.GetParamsOnMatch('rpf.*', subtag, 'b')
     return {k:v['val'] for k,v in params_to_set.items()}
 
-def _load_CR_rpf_as_SR(poly_order):
+def _load_CR_rpf_as_SR(polyOrder, working_area_CR):
     params_to_set = {}
-    for k,v in _load_CR_rpf(poly_order).items():
+    for k,v in _load_CR_rpf(polyOrder, working_area_CR).items():
         params_to_set[k.replace('CR','SR')] = v
     return params_to_set
 
@@ -223,27 +223,29 @@ def test_fit(strategy=0):
 
     twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
 
-def test_limit(working_area,orderSR,json_file,blind=True):
+def test_limit(working_area,subtag,json_file,blind=True,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
     will create an Asimov toy dataset from the pre-fit model. Since the TF parameters are meaningless
     in our true "pre-fit", we need to load in the parameter values from a different fit so we have
     something reasonable to create the Asimov toy. 
     '''
     # Returns a dictionary of the TF parameters with the names as keys and the post-fit values as dict values.
-    params_to_set = _load_fit_rpf(working_area,orderSR,json_file)
+    params_to_set = _load_fit_rpf(working_area,subtag,json_file)
     print(params_to_set)
+
     twoD = TwoDAlphabet(working_area, json_file, loadPrevious=True)
 
     # Make a subset and card as in test_fit()
-    #subset = twoD.ledger.select(_select_bkg,poly_order)
-    #twoD.MakeCard(subset, poly_order+'_area')
+    #subset = twoD.ledger.select(_select_bkg,polyOrder)
+    #twoD.MakeCard(subset, polyOrder+'_area')
     # Run the blinded limit with our dictionary of TF parameters
     twoD.Limit(
-        subtag='{0}_area'.format(orderSR),
+        subtag=subtag,
         blindData=blind,
         verbosity=1,
         setParams=params_to_set,
-        condor=False
+        condor=False,
+        extra=extra
     )
 
 
@@ -386,12 +388,38 @@ def test_FTest(poly1,poly2):
 
     plot_FTest(base_fstat,nRpfs1,nRpfs2,nBins)
 
-def test_sf(working_area,polyOrder):
-    os.chdir("{0}/{1}_area".format(working_area,polyOrder))
-    fitCmd = "combine -M MultiDimFit TnP.root --algo singles --cminDefaultMinimizerStrategy=0"
-    print("Fit cmd: ", fitCmd)
-    os.system(fitCmd)
-    os.chdir("../..")
+def test_generate_for_SR(working_area, polyOrder):
+    '''NOTE: This is an expert-level manipulation that requires understanding the underlying Combine
+    commands. Use and change it only if you understand what each step is doing.
+    
+    Use the CR fit result to generate and fit a toy in the SR (without looking at SR data).
+    There are two ways to do this which will be broken up into toyArea1 and toyArea2.'''
+    # Load in the SR TwoDAlphabet object
+    twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
+    subset = twoD.ledger.select(_select_bkg, polyOrder)
+    params_to_set = _load_CR_rpf_as_SR(polyOrder, working_area.replace("SR","CR"))
+    print("Setting these parameters for SR RPF: ", params_to_set)
+    toyArea = '{0}_toy_area'.format(polyOrder)
+
+    # ###################################
+    # #-------- Version 1 --------------#
+    # ###################################
+    twoD.MakeCard(subset, toyArea)
+
+    # Perform a fit as normal but via the `extra` arg, provide some commands
+    # directly to combine to generate 1 toy, with seed 123456, and with r=0.
+    twoD.MLfit(
+        subtag=toyArea,
+        setParams=params_to_set,
+        rMin=0,rMax=5,verbosity=0,
+        extra='-t 1 -s 123456 --expectSignal 0'
+    )
+
+def test_plot_toy(working_area, polyOrder):
+    twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
+    subset = twoD.ledger.select(_select_bkg, polyOrder)
+    toyArea = '{0}_toy_area'.format(polyOrder)
+    twoD.StdPlots(toyArea,ledger=subset)
 
 if __name__ == '__main__':
     # Provided for convenience is this function which will package the current CMSSW and store it on the user's EOS (assumes FNAL).
@@ -399,21 +427,13 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_boosted_CR":"1"}
-    for working_area in ["2017_boosted_CR"]:
+    bestOrder = {"2017_semiboosted_CR":"3"}
+    for working_area in ["2017_semiboosted_SR"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
         test_make(jsonConfig)
-
-        for order in ["0","1","2","3"]:
-            polyOrder = order
-            test_fit()
-            test_plot()
-            if polyOrder==bestOrder[working_area]:
-                test_GoF() # this waits for toy fits on Condor to finish
-                test_GoF_plot()
-
-        test_FTest("0","1")
-        test_FTest("1","2")
-        test_FTest("2","3")
+        polyOrder = "3"
+        test_generate_for_SR(working_area, polyOrder)
+        test_plot_toy(working_area, polyOrder)
+        test_limit(working_area,"{0}_toy_area".format(polyOrder),'%s/runConfig.json'%working_area,blind=True,extra="--rMin=-1 --rMax=1")
