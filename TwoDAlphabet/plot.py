@@ -298,7 +298,7 @@ class Plotter(object):
                         make_pad_1D(out_pad_name, data=this_data, bkgs=these_bkgs, signals=these_signals,
                                     subtitle=slice_str, totalBkg=this_totalbkg,
                                     logyFlag=logyFlag, year=self.twoD.options.year,
-                                    extraText='', savePDF=True, savePNG=True, ROOTout=False)
+                                    extraText='Preliminary', savePDF=True, savePNG=True, ROOTout=False)
                         pads = pads.append({'pad':out_pad_name+'.png', 'region':region, 'proj':projn, 'logy':logyFlag}, ignore_index=True)
 
         for logy in ['','_logy']:
@@ -341,7 +341,7 @@ class Plotter(object):
                     make_pad_1D(
                         out_pad_name, 
                         post, [pre], totalBkg=pre, subtitle=slice_str, savePDF=True, savePNG=True, 
-                        datastyle='histe', year=self.twoD.options.year, extraText=''
+                        datastyle='histe', year=self.twoD.options.year, extraText='Preliminary'
                     )
                     
                     pads = pads.append({'pad':out_pad_name+'.png','process':process,'region':region,'proj':projn}, ignore_index=True)
@@ -542,17 +542,6 @@ def make_pad_1D(outname, data, bkgs=[], signals=[], title='', subtitle='',
     Returns:
         ROOT.TPad: Output pad.
     '''
-
-    def _draw_extralumi_tex():
-        lumiE = ROOT.TLatex()
-        lumiE.SetNDC()
-        lumiE.SetTextAngle(0)
-        lumiE.SetTextColor(ROOT.kBlack)
-        lumiE.SetTextFont(42)
-        lumiE.SetTextAlign(31) 
-        lumiE.SetTextSize(0.7*0.1)
-        lumiE.DrawLatex(1-0.05,1-0.1+0.2*0.1,"137 fb^{-1} (13 TeV)")
-
     pad = _make_pad_gen(outname)
 
     data.SetBinErrorOption(ROOT.TH1.kPoisson)
@@ -676,8 +665,8 @@ def make_pad_1D(outname, data, bkgs=[], signals=[], title='', subtitle='',
         
         CMS_lumi.extraText = extraText
         CMS_lumi.cmsTextSize = 0.9
-        CMS_lumi.cmsTextOffset = 2
-        CMS_lumi.lumiTextSize = 0.9
+        CMS_lumi.cmsTextOffset = 1
+        CMS_lumi.lumiTextSize = 0.75
         CMS_lumi.CMS_lumi(main_pad, year, 11)
         
         subtitle_tex = ROOT.TLatex()
