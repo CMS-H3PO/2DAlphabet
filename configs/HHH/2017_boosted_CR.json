@@ -123,7 +123,7 @@
        "blindedPlots":[],
        "blindedFit":[],
        "plotPrefitSigInFitB":false,
-       "plotUncerts":true,
+       "plotTemplateComparisons":false,
        "plotTitles":false,
        "year":2017,
        "plotEvtsPerUnit":false
