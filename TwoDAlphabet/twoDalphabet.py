@@ -540,7 +540,7 @@ class TwoDAlphabet:
         _runDirSetup(run_dir)
 
         with cd(run_dir):
-            limit_cmd = _runLimit(blindData, verbosity, setParams, card_or_w, condor, extra) # runs on this line if location == 'local'
+            limit_cmd = _runLimit(blindData, verbosity, strategy, setParams, card_or_w, condor, extra) # runs on this line if location == 'local'
             
             if condor:
                 condor = CondorRunner(
