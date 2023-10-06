@@ -35,13 +35,13 @@
     "REGIONS":{
        "fail":{
           "PROCESSES":[
-	    "TTbar"
+            "TTbar"
           ],
           "BINNING":"default"
        },
        "pass":{
           "PROCESSES":[
-	    "TTbar",
+            "TTbar",
             "XToYHTo6B_MX-2400_MY-800"
           ],
           "BINNING":"default"

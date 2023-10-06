@@ -411,8 +411,8 @@ if __name__ == '__main__':
             test_fit()
             test_plot()
             if polyOrder==bestOrder[working_area]:
-               test_GoF() # this waits for toy fits on Condor to finish
-               test_GoF_plot()
+                test_GoF() # this waits for toy fits on Condor to finish
+                test_GoF_plot()
 
         test_FTest("0","1")
         test_FTest("1","2")
