@@ -114,8 +114,9 @@
        "blindedFit":[],
        "plotPrefitSigInFitB":false,
        "plotTemplateComparisons":false,
+       "plotUncerts":true,
        "plotTitles":false,
-       "year":2017,
+       "year":17,
        "plotEvtsPerUnit":false
     }
  }
