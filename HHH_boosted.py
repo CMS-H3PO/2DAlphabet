@@ -403,19 +403,16 @@ if __name__ == '__main__':
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
-        #test_make(jsonConfig)
+        test_make(jsonConfig)
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            #test_fit()
-            #test_plot()
+            test_fit()
+            test_plot()
             if polyOrder==bestOrder[working_area]:
-            #    test_GoF() # this waits for toy fits on Condor to finish
-            #    test_GoF_plot()
-                test_fit()
-                test_plot()
+               test_GoF() # this waits for toy fits on Condor to finish
+               test_GoF_plot()
 
-
-        # test_FTest("0","1")
-        # test_FTest("1","2")
-        # test_FTest("2","3")
+        test_FTest("0","1")
+        test_FTest("1","2")
+        test_FTest("2","3")
