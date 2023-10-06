@@ -68,9 +68,9 @@ def _load_CR_rpf(polyOrder, working_area_CR):
     return {k:v['val'] for k,v in params_to_set.items()}
 
 
-def _load_fit_rpf(working_area,orderSR,json_file):
+def _load_fit_rpf(working_area,subtag,json_file):
     twoD_blindFit = TwoDAlphabet(working_area,json_file, loadPrevious=True)
-    params_to_set = twoD_blindFit.GetParamsOnMatch('rpf.*', '{0}_area'.format(orderSR), 'b')
+    params_to_set = twoD_blindFit.GetParamsOnMatch('rpf.*', subtag, 'b')
     return {k:v['val'] for k,v in params_to_set.items()}
 
 def _load_CR_rpf_as_SR(polyOrder, working_area_CR):
@@ -223,15 +223,16 @@ def test_fit(strategy=0):
 
     twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
 
-def test_limit(working_area,orderSR,json_file,blind=True):
+def test_limit(working_area,subtag,json_file,blind=True,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
     will create an Asimov toy dataset from the pre-fit model. Since the TF parameters are meaningless
     in our true "pre-fit", we need to load in the parameter values from a different fit so we have
     something reasonable to create the Asimov toy. 
     '''
     # Returns a dictionary of the TF parameters with the names as keys and the post-fit values as dict values.
-    params_to_set = _load_fit_rpf(working_area,orderSR,json_file)
+    params_to_set = _load_fit_rpf(working_area,subtag,json_file)
     print(params_to_set)
+
     twoD = TwoDAlphabet(working_area, json_file, loadPrevious=True)
 
     # Make a subset and card as in test_fit()
@@ -239,11 +240,12 @@ def test_limit(working_area,orderSR,json_file,blind=True):
     #twoD.MakeCard(subset, polyOrder+'_area')
     # Run the blinded limit with our dictionary of TF parameters
     twoD.Limit(
-        subtag='{0}_area'.format(orderSR),
+        subtag=subtag,
         blindData=blind,
         verbosity=1,
         setParams=params_to_set,
-        condor=False
+        condor=False,
+        extra=extra
     )
 
 
@@ -411,7 +413,11 @@ def test_generate_for_SR(working_area, polyOrder):
         rMin=0,rMax=5,verbosity=0,
         extra='-t 1 -s 123456 --expectSignal 0'
     )
-    # Plot!
+
+def test_plot_toy(working_area, polyOrder):
+    twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
+    subset = twoD.ledger.select(_select_bkg, polyOrder)
+    toyArea = '{0}_toy_area'.format(polyOrder)
     twoD.StdPlots(toyArea,ledger=subset)
 
 if __name__ == '__main__':
@@ -428,3 +434,5 @@ if __name__ == '__main__':
         test_make(jsonConfig)
         polyOrder = "1"
         test_generate_for_SR(working_area, polyOrder)
+        test_plot_toy(working_area, polyOrder)
+        test_limit(working_area,"{0}_toy_area".format(polyOrder),'%s/runConfig.json'%working_area,blind=True,extra="--rMin=-1 --rMax=1")
