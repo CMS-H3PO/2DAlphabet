@@ -2,7 +2,7 @@ import glob
 import ROOT, os, warnings, pandas, math, time
 from PIL import Image
 from TwoDAlphabet.helpers import set_hist_maximums, execute_cmd, cd
-from TwoDAlphabet.binning import stitch_hists_in_x, convert_to_events_per_unit, get_min_bin_width
+from TwoDAlphabet.binning import stitch_hists_in_x, convert_to_events_per_unit
 from TwoDAlphabet.ext import tdrstyle, CMS_lumi
 
 class Plotter(object):
@@ -14,7 +14,7 @@ class Plotter(object):
         fit_results (RooFitResult): The RooFitResult corresponding to the fit_tag.
         signal_strength (float): The post-fit signal strength.
         twoD (TwoDAlphabet): TwoDAlphabet object storing various meta information needed for access.
-        yaxis1D_title (str): Title for "counts" axis of 1D plots. Defaults to 'Events / bin' but can change if plotting events per unit.
+        yaxis1D_title (str): Title for "counts" axis of 1D plots. Defaults to 'Events/Bin' but can change if plotting events per unit.
         df (pandas.DataFrame): DataFrame organizing the post-fit and pre-fit plots and their 1D projections.
         dir (str): Directory path to save final images.
         slices (dict): Stores edges to slice "x" and "y" axes. 
@@ -32,7 +32,7 @@ class Plotter(object):
         self.fittag = fittag
         self.twoD = twoD
         self.ledger = ledger
-        self.yaxis1D_title = 'Events / bin'
+        self.yaxis1D_title = 'Events/Bin'
         self.df = pandas.DataFrame(columns=['process','region','process_type','title'])
         self.dir = 'plots_fit_{f}'.format(f=self.fittag)
         self.slices = {'x': {}, 'y': {}}
@@ -78,7 +78,7 @@ class Plotter(object):
         ytitle = self.yaxis1D_title
         if self.twoD.options.plotEvtsPerUnit:
             hslice = convert_to_events_per_unit(hslice)
-            ytitle = 'Events / %s GeV' % get_min_bin_width(hslice)
+            ytitle = 'Events/Bin Width [GeV^{-1}]'
         hslice.SetMinimum(0)
         hslice.SetTitle(title)
         hslice.GetXaxis().SetTitle(xtitle)
