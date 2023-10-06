@@ -381,7 +381,8 @@ def test_FTest(poly1,poly2):
         latex.SetTextFont(42)
         latex.SetTextFont(52)
         latex.SetTextSize(0.045)
-        c.SaveAs(working_area+'/ftest_{0}_vs_{1}_notoys.png'.format(poly1,poly2))
+        for ext in ["png", "pdf"]:
+            c.SaveAs(working_area+'/ftest_{0}_vs_{1}_notoys.{2}'.format(poly1,poly2,ext))
 
     plot_FTest(base_fstat,nRpfs1,nRpfs2,nBins)
 
