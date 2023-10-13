@@ -77,7 +77,7 @@ class Plotter(object):
         '''
         ytitle = self.yaxis1D_title
         if self.twoD.options.plotEvtsPerUnit:
-            hslice = convert_to_events_per_unit(hslice)
+            hslice = convert_to_events_per_unit(hslice,width=1)
             ytitle = 'Events/Bin Width [GeV^{-1}]'
         hslice.SetMinimum(0)
         hslice.SetTitle(title)
@@ -161,6 +161,9 @@ class Plotter(object):
                     full = stitch_hists_in_x(out2d_name, binning, [low,sig,high], blinded=blinding if process == 'data_obs' else [])
                     full.SetMinimum(0)
                     full.SetTitle('%s, %s, %s'%(proc_title,region,time))
+
+                    if process=="data_obs":
+                        full.SetBinErrorOption(ROOT.TH1.kPoisson)
 
                     self.root_out.WriteTObject(full,full.GetName())
 
@@ -544,7 +547,6 @@ def make_pad_1D(outname, data, bkgs=[], signals=[], title='', subtitle='',
     '''
     pad = _make_pad_gen(outname)
 
-    data.SetBinErrorOption(ROOT.TH1.kPoisson)
     data.SetLineColorAlpha(ROOT.kBlack, 0 if dataOff else 1)
     if 'pe' in datastyle.lower():
         data.SetMarkerColorAlpha(ROOT.kBlack,0 if dataOff else 1)

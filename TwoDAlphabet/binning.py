@@ -518,7 +518,7 @@ def get_min_bin_width(hist):
 
 def convert_to_events_per_unit(hist,width=None):
     '''Convert the bin contents of a 1D histogram so they are normalized to the
-    width of the narrowest bin. Only useful if the bin widths are variable.
+    width of the narrowest bin or to the specified width. Only useful if the bin widths are variable.
 
     Args:
         hist (TH1): 1D histogram to manipulate.
