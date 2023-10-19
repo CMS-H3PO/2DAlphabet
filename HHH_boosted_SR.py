@@ -411,7 +411,7 @@ def test_generate_for_SR(working_area, polyOrder):
     twoD.MLfit(
         subtag=toyArea,
         setParams=params_to_set,
-        rMin=0,rMax=5,verbosity=0,
+        rMin=-1,rMax=5,verbosity=0,
         extra='-t 1 -s 123456 --expectSignal 0'
     )
 

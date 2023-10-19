@@ -399,7 +399,7 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_semiboosted_CR":"3"}
+    bestOrder = {"2017_semiboosted_CR":"2"}
     for working_area in ["2017_semiboosted_CR"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
@@ -408,10 +408,7 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3","4"]:
             polyOrder = order
-            if polyOrder=="4":
-                test_fit(strategy=1)
-            else:
-                test_fit()
+            test_fit()
             test_plot()
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish

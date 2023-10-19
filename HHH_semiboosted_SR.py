@@ -411,7 +411,7 @@ def test_generate_for_SR(working_area, polyOrder):
     twoD.MLfit(
         subtag=toyArea,
         setParams=params_to_set,
-        rMin=0,rMax=5,verbosity=0,
+        rMin=-1,rMax=5,verbosity=0,
         extra='-t 1 -s 123456 --expectSignal 0'
     )
 
@@ -427,13 +427,13 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_semiboosted_CR":"3"}
+    bestOrder = {"2017_semiboosted_CR":"2"}
     for working_area in ["2017_semiboosted_SR"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
         test_make(jsonConfig)
-        polyOrder = "3"
+        polyOrder = "2"
         test_generate_for_SR(working_area, polyOrder)
         test_plot_toy(working_area, polyOrder)
         test_limit(working_area,"{0}_toy_area".format(polyOrder),'%s/runConfig.json'%working_area,blind=True,extra="--rMin=-1 --rMax=1")
