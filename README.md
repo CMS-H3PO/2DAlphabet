@@ -49,9 +49,9 @@ Note that piping output to the `tee` command will both print it to the terminal 
 
 To calculate expected limits for the boosted selection, run
 ```
-python -u HHH_boosted_SR.py |& tee boosted_SR_`date "+%Y%m%d_%H%M%S"`.log
+python -u HHH_boosted_SR_pass_toy.py |& tee boosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
 ```
 To do the same for the semiboosted selection, run
 ```
-python -u HHH_semiboosted_SR.py |& tee semiboosted_SR_`date "+%Y%m%d_%H%M%S"`.log
+python -u HHH_semiboosted_SR_pass_toy.py |& tee semiboosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
 ```
