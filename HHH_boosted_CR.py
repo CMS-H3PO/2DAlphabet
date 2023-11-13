@@ -408,7 +408,10 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            test_fit()
+            if polyOrder in []:
+                test_fit(strategy=1)
+            else:
+                test_fit()
             test_plot()
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish
