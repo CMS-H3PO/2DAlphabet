@@ -411,4 +411,4 @@ if __name__ == '__main__':
         test_make(jsonConfig)
         polyOrder = "1"
         test_fit(polyOrder,"XToYHTo6B_MX-2400_MY-800")
-        test_fit(polyOrder,"XToYHTo6B_MX-2400_MY-1200_fake")
+        test_fit(polyOrder,"XToYHTo6B_MX-2500_MY-1000")

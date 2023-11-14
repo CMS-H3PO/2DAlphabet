@@ -8,7 +8,7 @@
           "COLOR":1,
           "TYPE":"DATA",
           "TITLE":"data_obs",
-          "LOC":"PATH/JetHT2017_Histograms.root:HIST"
+          "LOC":"PATH/JetHT_Histograms.root:HIST"
        },
        "TTbar":{
           "SYSTEMATICS":[
@@ -63,9 +63,9 @@
        "HIST_DOWN":"$process_m_pT_$region__$syst_down",
        "HIST_ALT_UP":"$process_m_pT_$region_$systUp",
        "HIST_ALT_DOWN":"$process_m_pT_$region_$systDown",
-       "PATH":"/STORE/HHH/Histograms/2017/20230913_140140",
+       "PATH":"/STORE/HHH/Histograms/2017/20231019_162502",
        "FILE":"$process_Histograms.root",
-       "SIGNAME": ["XToYHTo6B_MX-2400_MY-800","XToYHTo6B_MX-2400_MY-1200_fake"]
+       "SIGNAME": ["XToYHTo6B_MX-2400_MY-800","XToYHTo6B_MX-2500_MY-1000"]
     },
     "BINNING":{
        "default":{
@@ -85,7 +85,8 @@
                 2800,
                 3000,
                 3500,
-                4000
+                4000,
+                4500
             ],
              "SIGSTART":2200,
              "SIGEND":2600
@@ -94,6 +95,8 @@
              "NAME":"MJJ",
              "TITLE":"M_{JJ} [GeV]",
              "BINS":[
+                200,
+                300,
                 400,
                 600,
                 800,
@@ -104,7 +107,10 @@
                 1800,
                 2000,
                 2500,
-                3000
+                3000,
+                3500,
+                4000,
+                4500
             ]
           }
        }
@@ -128,6 +134,6 @@
        "plotUncerts":true,
        "plotTitles":false,
        "year":17,
-       "plotEvtsPerUnit":false
+       "plotEvtsPerUnit":true
     }
  }
