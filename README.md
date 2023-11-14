@@ -47,6 +47,30 @@ python -u HHH_semiboosted_CR.py |& tee semiboosted_CR_`date "+%Y%m%d_%H%M%S"`.lo
 ```
 Note that piping output to the `tee` command will both print it to the terminal and save it in a log file. The log file name will contain a timestamp.
 
+To calculate expected limits, we first need to generate toy data in the pass category of the signal regions. For this we use the pass-to-fail transfer functions obtained from the control region fits. First we need to extract the fit parameter values which can be done using the following command
+```
+python printFitParameters.py -i 2017_boosted_CR/1_area/fitDiagnosticsTest.root
+python printFitParameters.py -i 2017_semiboosted_CR/2_area/fitDiagnosticsTest.root
+```
+The printed fit parameter values need to be put into `plotRpf.py` which can be used to plot the transfer functions
+```
+python plotRpf.py
+```
+The toy data is generated using the `generateToys.py` script which imports the transfer functions from `plotRpf.py`
+```
+python generateToys.py -t /STORE/HHH/Histograms/2017/20231019_162502/TTbar_Histograms.root -d /STORE/HHH/Histograms/2017/20231019_162502/JetHT_Histograms.root
+```
+Two output files are produced, `JetHT_Histograms_VR_pass_toy.root` with the toy data in the pass category of the control regions and `JetHT_Histograms_SR_pass_toy.root` with the toy data in the pass category of the signal regions. These files need to be moved to the same folder with the other histogram files
+```
+mv JetHT_Histograms_*_pass_toy.root /STORE/HHH/Histograms/2017/20231019_162502/
+```
+The toy data in the control regions is used in `HHH_boosted_CR_pass_toy.py` and `HHH_semiboosted_CR_pass_toy.py` as a sanity check (closure test) to make sure that the toy data fits converge on parameter values similar to those used in the generation of the toy data. The parameter values can be checked with the following commands
+```
+python printFitParameters.py -i 2017_boosted_CR_pass_toy/1_area/fitDiagnosticsTest.root
+python printFitParameters.py -i 2017_semiboosted_CR_pass_toy/2_area/fitDiagnosticsTest.root
+```
+after `HHH_boosted_CR_pass_toy.py` and `HHH_semiboosted_CR_pass_toy.py` are run.
+
 To calculate expected limits for the boosted selection, run
 ```
 python -u HHH_boosted_SR_pass_toy.py |& tee boosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
