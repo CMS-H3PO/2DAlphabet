@@ -418,7 +418,11 @@ if __name__ == '__main__':
             test_fit(polyOrder,sig)
 
             fit_area = "{0}/{1}_area".format(working_area,polyOrder)
-            cmd = "mv {0} {1}_{2}".format(fit_area,fit_area,sig)
+            sig_area = "{0}_{1}".format(fit_area,sig)
+            if os.path.exists(sig_area):
+                print("\nSignal area {0} already exists. Removing".format(sig_area))
+                os.system("rm -rf {0}".format(sig_area))
+            cmd = "mv {0} {1}".format(fit_area,sig_area)
             print("\n" + cmd)
             os.system(cmd)
 
