@@ -212,7 +212,7 @@ def test_make(jsonConfig,findreplace={}):
     twoD.Save()
     
 
-def test_fit(polyOrder,signame,strategy=0,):
+def test_fit(polyOrder,signame,strategy=0):
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
     subset = twoD.ledger.select(_select_bkg_sig, polyOrder,signame)
     twoD.MakeCard(subset, '{0}_area'.format(polyOrder))
