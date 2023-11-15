@@ -402,13 +402,20 @@ if __name__ == '__main__':
     # This only needs to be run once unless you fundamentally change your working environment.
     # make_env_tarball()
 
+    sigNames = ["XToYHTo6B_MX-2400_MY-800","XToYHTo6B_MX-2500_MY-1000"]
 
-    bestOrder = {"2017_boosted_CR_test":"1"}
-    for working_area in ["2017_boosted_CR_test"]:
+    bestOrder = {"2017_boosted_CR_multiSignal_example":"1"}
+    for working_area in ["2017_boosted_CR_multiSignal_example"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
         test_make(jsonConfig)
         polyOrder = "1"
-        test_fit(polyOrder,"XToYHTo6B_MX-2400_MY-800")
-        test_fit(polyOrder,"XToYHTo6B_MX-2500_MY-1000")
+
+        for sig in sigNames:
+            test_fit(polyOrder,sig)
+
+            fit_area = "{0}/{1}_area".format(working_area,polyOrder)
+            cmd = "mv {0} {1}_{2}".format(fit_area,fit_area,sig)
+            print("\n" + cmd + "\n")
+            os.system(cmd)
