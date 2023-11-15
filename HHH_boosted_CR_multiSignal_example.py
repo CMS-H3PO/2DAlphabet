@@ -413,9 +413,13 @@ if __name__ == '__main__':
         polyOrder = "1"
 
         for sig in sigNames:
+            print("Processing {0}...".format(sig))
+          
             test_fit(polyOrder,sig)
 
             fit_area = "{0}/{1}_area".format(working_area,polyOrder)
             cmd = "mv {0} {1}_{2}".format(fit_area,fit_area,sig)
-            print("\n" + cmd + "\n")
+            print("\n" + cmd)
             os.system(cmd)
+
+            print("\nDone processing {0}".format(sig))
