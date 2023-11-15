@@ -413,7 +413,7 @@ if __name__ == '__main__':
         polyOrder = "1"
 
         for sig in sigNames:
-            print("Processing {0}...".format(sig))
+            print("\nProcessing {0}...\n".format(sig))
           
             test_fit(polyOrder,sig)
 
@@ -422,4 +422,4 @@ if __name__ == '__main__':
             print("\n" + cmd)
             os.system(cmd)
 
-            print("\nDone processing {0}".format(sig))
+            print("\nDone processing {0}\n".format(sig))
