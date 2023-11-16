@@ -423,7 +423,7 @@ if __name__ == '__main__':
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
-        #test_make(jsonConfig)
+        #test_make(jsonConfig) # this line can be commented out when reprocessing a subset of signal samples if signal cross sections have not been modified
         polyOrder = "1"
 
         for sig in sigNames:
