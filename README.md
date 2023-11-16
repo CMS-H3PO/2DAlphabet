@@ -71,11 +71,26 @@ python printFitParameters.py -i 2017_semiboosted_CR_pass_toy/2_area/fitDiagnosti
 ```
 after `HHH_boosted_CR_pass_toy.py` and `HHH_semiboosted_CR_pass_toy.py` are run.
 
-To calculate expected limits for the boosted selection, run
+To perform the same checks as for the control region fits and calculate expected limits for the benchmark XToYHTo6B_MX-2400_MY-800 case for the boosted selection, run
 ```
 python -u HHH_boosted_SR_pass_toy.py |& tee boosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
 ```
 To do the same for the semiboosted selection, run
 ```
 python -u HHH_semiboosted_SR_pass_toy.py |& tee semiboosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
+```
+
+To calculate expected limits for multiple signal samples for the boosted selection, run
+```
+python -u HHH_boosted_SR_pass_toy_multiSignal.py |& tee boosted_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
+```
+To do the same for the semiboosted selection, run
+```
+python -u HHH_semiboosted_SR_pass_toy_multiSignal.py |& tee semiboosted_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
+```
+Note that some samples might require special processing with a modified `rMax` value for the limit calculation to converge.
+
+Finally, to produce the expected limit plots, run
+```
+python plotLimits.py
 ```
