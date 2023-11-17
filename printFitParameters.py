@@ -38,7 +38,8 @@ if __name__ == '__main__':
         if re.search(options.regex, par.GetName()):
             par_info.append([par.GetName(), par.getValV(), par.getError()])
 
-    f.Close()
+    # print fit status
+    print('\nFit status: {0}\n'.format(fit.status()))
     
     # print parameters and their values
     headers = ['Parameter', 'Value', 'Error']
@@ -46,3 +47,5 @@ if __name__ == '__main__':
     print("-"*72)
     for row in par_info:
         print("{: >30} {: >20.10f} {: >20.10f}".format(*row))
+
+    f.Close()
