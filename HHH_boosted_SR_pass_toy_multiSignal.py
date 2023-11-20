@@ -415,10 +415,13 @@ if __name__ == '__main__':
     #rMax = 5
     
     # datasets that required special processing
-    #sigNames = ["XToYHTo6B_MX-1500_MY-1300", "XToYHTo6B_MX-2000_MY-900", "XToYHTo6B_MX-2000_MY-1600"]
+    #sigNames = ["XToYHTo6B_MX-1500_MY-600", "XToYHTo6B_MX-1500_MY-1300", "XToYHTo6B_MX-2000_MY-900", "XToYHTo6B_MX-2000_MY-1600"]
     #rMax = 2
     
-    sigNames = ["XToYHTo6B_MX-1200_MY-1000", "XToYHTo6B_MX-4000_MY-300"]
+    #sigNames = ["XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1500_MY-800"]
+    #rMax = 3
+
+    sigNames = ["XToYHTo6B_MX-1200_MY-1000", "XToYHTo6B_MX-1500_MY-300", "XToYHTo6B_MX-4000_MY-300"]
     rMax = 10
 
     bestOrder = {"2017_boosted_SR_pass_toy_multiSignal":"1"}
