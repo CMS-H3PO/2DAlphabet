@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 
 def generate(ttbar_path, data_path, region):
-    from plotRpf import x_min, x_max, y_min, y_max, rpf_boosted_CR, rpf_semiboosted_CR
+    from plotRpf import x_min, x_max, y_min, y_max, rpf_boosted_VR, rpf_semiboosted_VR
     import ROOT
 
     print('Processing {0} region...\n'.format(region))
@@ -58,7 +58,7 @@ def generate(ttbar_path, data_path, region):
                 print('WARNING: qcd_fail_b negative for (mjjj, mjj)=({0}, {1}). Manually set to 0 (data_fail_b={2}, ttbar_fail_b={3})'.format(x_center, y_center, data_fail_b, ttbar_fail_b))
                 qcd_fail_b = 0.
 
-            qcd_pass_b_exp = qcd_fail_b * rpf_boosted_CR.Eval(x_center, y_center)
+            qcd_pass_b_exp = qcd_fail_b * rpf_boosted_VR.Eval(x_center, y_center)
             
             # in case the transfer function becomes negative (it shouldn't in the phase space of interest)
             if qcd_pass_b_exp < 0.:
@@ -84,7 +84,7 @@ def generate(ttbar_path, data_path, region):
                 print('WARNING: qcd_fail_sb negative for (mjjj, mjj)=({0}, {1}). Manually set to 0 (data_fail_sb={2}, ttbar_fail_sb={3})'.format(x_center, y_center, data_fail_sb, ttbar_fail_sb))
                 qcd_fail_sb = 0.
 
-            qcd_pass_sb_exp = qcd_fail_sb * rpf_semiboosted_CR.Eval(x_center, y_center)
+            qcd_pass_sb_exp = qcd_fail_sb * rpf_semiboosted_VR.Eval(x_center, y_center)
             
             # in case the transfer function becomes negative (it shouldn't in the phase space of interest)
             if qcd_pass_sb_exp < 0.:

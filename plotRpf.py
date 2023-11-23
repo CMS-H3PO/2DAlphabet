@@ -28,20 +28,20 @@ class Pol_2:
 # fail-to-pass transfer functions
 # boosted
 p1 = Pol_1()
-rpf_boosted_CR = ROOT.TF2("rpf_boosted_CR;m_{jjj} [GeV];m_{jj} [GeV]",p1,x_min,x_max,y_min,y_max,3)
-rpf_boosted_CR.SetParameter(0,6.354246278903588)
-rpf_boosted_CR.SetParameter(1,-1.5596348441299028)
-rpf_boosted_CR.SetParameter(2,-0.16367639797209677)
+rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p1,x_min,x_max,y_min,y_max,3)
+rpf_boosted_VR.SetParameter(0,6.354246278903588)
+rpf_boosted_VR.SetParameter(1,-1.5596348441299028)
+rpf_boosted_VR.SetParameter(2,-0.16367639797209677)
 
 # semiboosted
 p2 = Pol_2()
-rpf_semiboosted_CR = ROOT.TF2("rpf_semiboosted_CR;m_{jjj} [GeV];m_{jj} [GeV]",p2,x_min,x_max,y_min,y_max,6)
-rpf_semiboosted_CR.SetParameter(0,5.276590529385103)
-rpf_semiboosted_CR.SetParameter(1,-6.354581835388871)
-rpf_semiboosted_CR.SetParameter(2,1.0980653307670138)
-rpf_semiboosted_CR.SetParameter(3,4.88705909668947)
-rpf_semiboosted_CR.SetParameter(4,2.5024077870572796)
-rpf_semiboosted_CR.SetParameter(5,-5.606124121805323)
+rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p2,x_min,x_max,y_min,y_max,6)
+rpf_semiboosted_VR.SetParameter(0,5.276590529385103)
+rpf_semiboosted_VR.SetParameter(1,-6.354581835388871)
+rpf_semiboosted_VR.SetParameter(2,1.0980653307670138)
+rpf_semiboosted_VR.SetParameter(3,4.88705909668947)
+rpf_semiboosted_VR.SetParameter(4,2.5024077870572796)
+rpf_semiboosted_VR.SetParameter(5,-5.606124121805323)
 
 
 if __name__ == '__main__':
@@ -60,10 +60,10 @@ if __name__ == '__main__':
     c = ROOT.TCanvas("c", "",1000,800)
     c.cd()
     
-    rpf_boosted_CR.Draw("colz")
+    rpf_boosted_VR.Draw("colz")
 
-    c.SaveAs("rpf_boosted_CR.png")
+    c.SaveAs("rpf_boosted_VR.png")
 
-    rpf_semiboosted_CR.Draw("colzsame")
+    rpf_semiboosted_VR.Draw("colzsame")
 
-    c.SaveAs("rpf_semiboosted_CR.png")
+    c.SaveAs("rpf_semiboosted_VR.png")
