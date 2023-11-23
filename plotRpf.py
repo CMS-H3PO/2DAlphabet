@@ -28,14 +28,14 @@ class Pol_2:
 # fail-to-pass transfer functions
 # boosted
 p1 = Pol_1()
-rpf_boosted_CR = ROOT.TF2("rpf_boosted_CR",p1,x_min,x_max,y_min,y_max,3)
+rpf_boosted_CR = ROOT.TF2("rpf_boosted_CR;m_{jjj} [GeV];m_{jj} [GeV]",p1,x_min,x_max,y_min,y_max,3)
 rpf_boosted_CR.SetParameter(0,6.354246278903588)
 rpf_boosted_CR.SetParameter(1,-1.5596348441299028)
 rpf_boosted_CR.SetParameter(2,-0.16367639797209677)
 
 # semiboosted
 p2 = Pol_2()
-rpf_semiboosted_CR = ROOT.TF2("rpf_semiboosted_CR",p2,x_min,x_max,y_min,y_max,6)
+rpf_semiboosted_CR = ROOT.TF2("rpf_semiboosted_CR;m_{jjj} [GeV];m_{jj} [GeV]",p2,x_min,x_max,y_min,y_max,6)
 rpf_semiboosted_CR.SetParameter(0,5.276590529385103)
 rpf_semiboosted_CR.SetParameter(1,-6.354581835388871)
 rpf_semiboosted_CR.SetParameter(2,1.0980653307670138)
@@ -54,13 +54,16 @@ if __name__ == '__main__':
     #ROOT.gStyle.SetPadLeftMargin(0.10);
     ROOT.gStyle.SetPadRightMargin(0.15);
 
+    # tweak axis title offsets
+    ROOT.gStyle.SetTitleOffset(1.45, "Y")
+
     c = ROOT.TCanvas("c", "",1000,800)
     c.cd()
-
+    
     rpf_boosted_CR.Draw("colz")
 
-    c.SaveAs("rpf_boosted_CR.pdf")
+    c.SaveAs("rpf_boosted_CR.png")
 
-    rpf_semiboosted_CR.Draw("colz")
+    rpf_semiboosted_CR.Draw("colzsame")
 
-    c.SaveAs("rpf_semiboosted_CR.pdf")
+    c.SaveAs("rpf_semiboosted_CR.png")
