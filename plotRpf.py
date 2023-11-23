@@ -64,6 +64,6 @@ if __name__ == '__main__':
 
     c.SaveAs("rpf_boosted_VR.png")
 
-    rpf_semiboosted_VR.Draw("colzsame")
+    rpf_semiboosted_VR.Draw("colz")
 
     c.SaveAs("rpf_semiboosted_VR.png")
