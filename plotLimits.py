@@ -1,6 +1,7 @@
 import ROOT
 import json
 import copy
+from TwoDAlphabet.ext import CMS_lumi
 
 
 mass_points = [
@@ -21,7 +22,7 @@ def makePlot(fit_area, year, config, polyOrder):
         selection = 'semiboosted'
 
     gr_limit = copy.deepcopy(ROOT.TGraph2D())
-    gr_limit.SetTitle(";m_{X} [GeV];m_{Y} [GeV];Expected 95% CL upper limit (" + selection + ") [fb]")
+    gr_limit.SetTitle(";m_{X} [GeV];m_{Y} [GeV];95% CL expected upper limit (" + selection + ") [fb]")
 
     n = 0
     for (mX, mY) in mass_points:
@@ -58,6 +59,11 @@ def makePlot(fit_area, year, config, polyOrder):
     gr_limit.SetMaximum(700) # for now put by hand
 
     gr_limit.Draw("cont4z")
+
+    CMS_lumi.cmsTextSize = 0.5
+    CMS_lumi.cmsTextOffset = 0.8
+    CMS_lumi.lumiTextSize = 0.4
+    CMS_lumi.CMS_lumi(c, 17, 11)
 
     c.SetLogz()
 
