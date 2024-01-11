@@ -26,22 +26,22 @@ class Pol_2:
 
 
 # fail-to-pass transfer functions
-# boosted
-p1 = Pol_1()
-rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p1,x_min,x_max,y_min,y_max,3)
-rpf_boosted_VR.SetParameter(0,6.354246278903588)
-rpf_boosted_VR.SetParameter(1,-1.5596348441299028)
-rpf_boosted_VR.SetParameter(2,-0.16367639797209677)
+# boosted (best order)
+p_b = Pol_2()
+rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b,x_min,x_max,y_min,y_max,6)
+rpf_boosted_VR.SetParameter(0,7.2265644275)
+rpf_boosted_VR.SetParameter(1,-5.0387058722)
+rpf_boosted_VR.SetParameter(2,-1.0051107197)
+rpf_boosted_VR.SetParameter(3,0.2052041065)
+rpf_boosted_VR.SetParameter(4,3.4365967742)
+rpf_boosted_VR.SetParameter(5,0.8978355793)
 
-# semiboosted
-p2 = Pol_2()
-rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p2,x_min,x_max,y_min,y_max,6)
-rpf_semiboosted_VR.SetParameter(0,5.276590529385103)
-rpf_semiboosted_VR.SetParameter(1,-6.354581835388871)
-rpf_semiboosted_VR.SetParameter(2,1.0980653307670138)
-rpf_semiboosted_VR.SetParameter(3,4.88705909668947)
-rpf_semiboosted_VR.SetParameter(4,2.5024077870572796)
-rpf_semiboosted_VR.SetParameter(5,-5.606124121805323)
+# semiboosted (best order)
+p_sb = Pol_1()
+rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb,x_min,x_max,y_min,y_max,3)
+rpf_semiboosted_VR.SetParameter(0,4.6467220702)
+rpf_semiboosted_VR.SetParameter(1,-2.7446774797)
+rpf_semiboosted_VR.SetParameter(2,0.0917551877)
 
 
 if __name__ == '__main__':
