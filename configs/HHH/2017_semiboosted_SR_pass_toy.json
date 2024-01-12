@@ -21,7 +21,7 @@
           "TITLE":"t#bar{t}",
           "LOC":"PATH/FILE:HIST"
        },
-       "XToYHTo6B_MX-2400_MY-800":{
+       "XToYHTo6B_MX-2500_MY-800":{
           "SYSTEMATICS":[
              "lumi"
           ],
@@ -42,18 +42,18 @@
        "pass":{
           "PROCESSES":[
             "TTbar",
-            "XToYHTo6B_MX-2400_MY-800"
+            "XToYHTo6B_MX-2500_MY-800"
           ],
           "BINNING":"default"
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_SR_$region_semiboosted",
-       "HIST_UP":"$process_m_pT_$region__$syst_up",
-       "HIST_DOWN":"$process_m_pT_$region__$syst_down",
-       "HIST_ALT_UP":"$process_m_pT_$region_$systUp",
-       "HIST_ALT_DOWN":"$process_m_pT_$region_$systDown",
-       "PATH":"/STORE/HHH/Histograms/2017/20231019_162502",
+       "HIST":"mjj_vs_mjjj_SR_$region_semiboosted_nominal",
+       "HIST_UP":"mjj_vs_mjjj_SR_$region_semiboosted__$syst_up",
+       "HIST_DOWN":"mjj_vs_mjjj_SR_$region_semiboosted__$syst_down",
+       "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_semiboosted_$systUp",
+       "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_semiboosted_$systDown",
+       "PATH":"/STORE/HHH/Histograms/2017/20231220_123208",
        "FILE":"$process_Histograms.root"
     },
     "BINNING":{

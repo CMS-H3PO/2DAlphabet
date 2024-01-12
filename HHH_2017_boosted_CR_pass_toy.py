@@ -399,7 +399,7 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_boosted_CR_pass_toy":"1"}
+    bestOrder = {"2017_boosted_CR_pass_toy":"2"}
     for working_area in ["2017_boosted_CR_pass_toy"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
@@ -408,8 +408,8 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in []:
-                test_fit(strategy=1)
+            if polyOrder in ["2","3"]:
+                test_fit(strategy=2)
             else:
                 test_fit()
             test_plot()

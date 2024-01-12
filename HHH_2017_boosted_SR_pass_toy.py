@@ -410,9 +410,9 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in ["1"]:
+            if polyOrder in []:
                 test_fit(strategy=2)
-            elif polyOrder in ["2","3"]:
+            elif polyOrder in ["1","2","3"]:
                 test_fit(strategy=1)
             else:
                 test_fit()
@@ -420,7 +420,7 @@ if __name__ == '__main__':
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish
                 test_GoF_plot()
-                test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=2,extra="--rMin=-1 --rMax=5")
+                test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
 
         test_FTest("0","1")
         test_FTest("1","2")
