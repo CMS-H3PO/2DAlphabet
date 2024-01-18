@@ -29,19 +29,19 @@ class Pol_2:
 # boosted (best order)
 p_b = Pol_2()
 rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b,x_min,x_max,y_min,y_max,6)
-rpf_boosted_VR.SetParameter(0,7.2265644275)
-rpf_boosted_VR.SetParameter(1,-5.0387058722)
-rpf_boosted_VR.SetParameter(2,-1.0051107197)
-rpf_boosted_VR.SetParameter(3,0.2052041065)
-rpf_boosted_VR.SetParameter(4,3.4365967742)
-rpf_boosted_VR.SetParameter(5,0.8978355793)
+rpf_boosted_VR.SetParameter(0,7.1254600356)
+rpf_boosted_VR.SetParameter(1,-6.1952111515)
+rpf_boosted_VR.SetParameter(2,1.6876169623)
+rpf_boosted_VR.SetParameter(3,0.0562667290)
+rpf_boosted_VR.SetParameter(4,4.5156972016)
+rpf_boosted_VR.SetParameter(5,-3.2904181798)
 
 # semiboosted (best order)
 p_sb = Pol_1()
 rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb,x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_VR.SetParameter(0,4.6467220702)
-rpf_semiboosted_VR.SetParameter(1,-2.7446774797)
-rpf_semiboosted_VR.SetParameter(2,0.0917551877)
+rpf_semiboosted_VR.SetParameter(0,4.5827847421)
+rpf_semiboosted_VR.SetParameter(1,-2.5909056630)
+rpf_semiboosted_VR.SetParameter(2,-0.0564180778)
 
 
 if __name__ == '__main__':
@@ -62,8 +62,8 @@ if __name__ == '__main__':
     
     rpf_boosted_VR.Draw("colz")
 
-    c.SaveAs("rpf_boosted_VR.png")
+    c.SaveAs("rpf_boosted_VR_pass_toy.png")
 
     rpf_semiboosted_VR.Draw("colz")
 
-    c.SaveAs("rpf_semiboosted_VR.png")
+    c.SaveAs("rpf_semiboosted_VR_pass_toy.png")

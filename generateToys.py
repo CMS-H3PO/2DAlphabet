@@ -24,18 +24,18 @@ def generate(ttbar_path, data_path, region):
     data_file = ROOT.TFile.Open(data_toy_file, 'UPDATE')
 
     # histograms: boosted
-    mjj_vs_mjjj_fail_b_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_fail_boosted'.format(region))
-    mjj_vs_mjjj_pass_b_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_pass_boosted'.format(region))
+    mjj_vs_mjjj_fail_b_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_fail_boosted_nominal'.format(region))
+    mjj_vs_mjjj_pass_b_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_pass_boosted_nominal'.format(region))
 
-    mjj_vs_mjjj_fail_b_data = data_file.Get('mjj_vs_mjjj_{0}_fail_boosted'.format(region))
-    mjj_vs_mjjj_pass_b_data = data_file.Get('mjj_vs_mjjj_{0}_pass_boosted'.format(region))
+    mjj_vs_mjjj_fail_b_data = data_file.Get('mjj_vs_mjjj_{0}_fail_boosted_nominal'.format(region))
+    mjj_vs_mjjj_pass_b_data = data_file.Get('mjj_vs_mjjj_{0}_pass_boosted_nominal'.format(region))
 
     # histograms: semiboosted
-    mjj_vs_mjjj_fail_sb_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_fail_semiboosted'.format(region))
-    mjj_vs_mjjj_pass_sb_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_pass_semiboosted'.format(region))
+    mjj_vs_mjjj_fail_sb_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_fail_semiboosted_nominal'.format(region))
+    mjj_vs_mjjj_pass_sb_ttbar = ttbar_file.Get('mjj_vs_mjjj_{0}_pass_semiboosted_nominal'.format(region))
 
-    mjj_vs_mjjj_fail_sb_data = data_file.Get('mjj_vs_mjjj_{0}_fail_semiboosted'.format(region))
-    mjj_vs_mjjj_pass_sb_data = data_file.Get('mjj_vs_mjjj_{0}_pass_semiboosted'.format(region))
+    mjj_vs_mjjj_fail_sb_data = data_file.Get('mjj_vs_mjjj_{0}_fail_semiboosted_nominal'.format(region))
+    mjj_vs_mjjj_pass_sb_data = data_file.Get('mjj_vs_mjjj_{0}_pass_semiboosted_nominal'.format(region))
 
 
     for i in range(1,mjj_vs_mjjj_pass_b_data.GetNbinsX() + 1):

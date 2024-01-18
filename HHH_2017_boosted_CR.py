@@ -399,17 +399,17 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_semiboosted_CR_pass_toy":"2"}
-    for working_area in ["2017_semiboosted_CR_pass_toy"]:
+    bestOrder = {"2017_boosted_CR":"2"}
+    for working_area in ["2017_boosted_CR"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
         test_make(jsonConfig)
 
-        for order in ["0","1","2","3","4"]:
+        for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in ["4"]:
-                test_fit(strategy=1)
+            if polyOrder in ["2","3"]:
+                test_fit(strategy=2)
             else:
                 test_fit()
             test_plot()
@@ -420,4 +420,3 @@ if __name__ == '__main__':
         test_FTest("0","1")
         test_FTest("1","2")
         test_FTest("2","3")
-        test_FTest("3","4")

@@ -223,7 +223,7 @@ def test_fit(strategy=0):
 
     twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
 
-def test_limit(working_area,orderSR,json_file,blind=True):
+def test_limit(working_area,orderSR,json_file,blind=True,strategy=0,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
     will create an Asimov toy dataset from the pre-fit model. Since the TF parameters are meaningless
     in our true "pre-fit", we need to load in the parameter values from a different fit so we have
@@ -242,8 +242,10 @@ def test_limit(working_area,orderSR,json_file,blind=True):
         subtag='{0}_area'.format(orderSR),
         blindData=blind,
         verbosity=1,
+        strategy=strategy,
         setParams=params_to_set,
-        condor=False
+        condor=False,
+        extra=extra
     )
 
 
@@ -399,16 +401,18 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_semiboosted_CR":"2"}
-    for working_area in ["2017_semiboosted_CR"]:
+    bestOrder = {"2017_semiboosted_SR_pass_toy":"2"}
+    for working_area in ["2017_semiboosted_SR_pass_toy"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
         test_make(jsonConfig)
 
-        for order in ["0","1","2","3","4"]:
+        for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in []:
+            if polyOrder in ["1","2","3"]:
+                test_fit(strategy=2)
+            elif polyOrder in []:
                 test_fit(strategy=1)
             else:
                 test_fit()
@@ -416,8 +420,8 @@ if __name__ == '__main__':
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish
                 test_GoF_plot()
+                test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
 
         test_FTest("0","1")
         test_FTest("1","2")
         test_FTest("2","3")
-        test_FTest("3","4")

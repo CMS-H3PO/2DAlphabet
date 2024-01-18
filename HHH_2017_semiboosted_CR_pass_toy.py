@@ -399,8 +399,8 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_boosted_CR":"1"}
-    for working_area in ["2017_boosted_CR"]:
+    bestOrder = {"2017_semiboosted_CR_pass_toy":"1"}
+    for working_area in ["2017_semiboosted_CR_pass_toy"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
