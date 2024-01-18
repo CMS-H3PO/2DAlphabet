@@ -404,34 +404,42 @@ if __name__ == '__main__':
     # This only needs to be run once unless you fundamentally change your working environment.
     # make_env_tarball()
 
-    #sigNames = ["XToYHTo6B_MX-2400_MY-800",
-                #"XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1200_MY-600", "XToYHTo6B_MX-1200_MY-800", "XToYHTo6B_MX-1200_MY-1000",
-                #"XToYHTo6B_MX-1500_MY-300", "XToYHTo6B_MX-1500_MY-600", "XToYHTo6B_MX-1500_MY-800", "XToYHTo6B_MX-1500_MY-1000", "XToYHTo6B_MX-1500_MY-1300",
-                #"XToYHTo6B_MX-2000_MY-300", "XToYHTo6B_MX-2000_MY-600", "XToYHTo6B_MX-2000_MY-900", "XToYHTo6B_MX-2000_MY-1100", "XToYHTo6B_MX-2000_MY-1300", "XToYHTo6B_MX-2000_MY-1600",
-                #"XToYHTo6B_MX-2500_MY-300", "XToYHTo6B_MX-2500_MY-600", "XToYHTo6B_MX-2500_MY-800", "XToYHTo6B_MX-2500_MY-1000", "XToYHTo6B_MX-2500_MY-1300", "XToYHTo6B_MX-2500_MY-1600", "XToYHTo6B_MX-2500_MY-1800",
-                #"XToYHTo6B_MX-3000_MY-300", "XToYHTo6B_MX-3000_MY-600", "XToYHTo6B_MX-3000_MY-800", "XToYHTo6B_MX-3000_MY-1000", "XToYHTo6B_MX-3000_MY-1300", "XToYHTo6B_MX-3000_MY-1600", "XToYHTo6B_MX-3000_MY-1800", "XToYHTo6B_MX-3000_MY-2600", "XToYHTo6B_MX-3000_MY-2800",
-                #"XToYHTo6B_MX-3500_MY-300", "XToYHTo6B_MX-3500_MY-600", "XToYHTo6B_MX-3500_MY-700", "XToYHTo6B_MX-3500_MY-1100", "XToYHTo6B_MX-3500_MY-1300", "XToYHTo6B_MX-3500_MY-1600", "XToYHTo6B_MX-3500_MY-2000", "XToYHTo6B_MX-3500_MY-2500", "XToYHTo6B_MX-3500_MY-2800",
-                #"XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-1000", "XToYHTo6B_MX-4000_MY-1300", "XToYHTo6B_MX-4000_MY-1600", "XToYHTo6B_MX-4000_MY-2000", "XToYHTo6B_MX-4000_MY-2200", "XToYHTo6B_MX-4000_MY-2500", "XToYHTo6B_MX-4000_MY-2800"]
-    #rMax = 5
-    
-    # datasets that required special processing
-    sigNames = ["XToYHTo6B_MX-3000_MY-2800"]
-    rMax = 1
+    sigNames = [
+        "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",
+        "XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1200_MY-600", "XToYHTo6B_MX-1200_MY-800", "XToYHTo6B_MX-1200_MY-1000",
+        "XToYHTo6B_MX-1600_MY-300", "XToYHTo6B_MX-1600_MY-600", "XToYHTo6B_MX-1600_MY-800", "XToYHTo6B_MX-1600_MY-1000", "XToYHTo6B_MX-1600_MY-1200", "XToYHTo6B_MX-1600_MY-1400",
+        "XToYHTo6B_MX-2000_MY-300", "XToYHTo6B_MX-2000_MY-600", "XToYHTo6B_MX-2000_MY-800", "XToYHTo6B_MX-2000_MY-1000", "XToYHTo6B_MX-2000_MY-1200", "XToYHTo6B_MX-2000_MY-1600", "XToYHTo6B_MX-2000_MY-1800",
+        "XToYHTo6B_MX-2500_MY-300", "XToYHTo6B_MX-2500_MY-600", "XToYHTo6B_MX-2500_MY-800", "XToYHTo6B_MX-2500_MY-1000", "XToYHTo6B_MX-2500_MY-1200", "XToYHTo6B_MX-2500_MY-1600", "XToYHTo6B_MX-2500_MY-2000", "XToYHTo6B_MX-2500_MY-2200",
+        "XToYHTo6B_MX-3000_MY-300", "XToYHTo6B_MX-3000_MY-600", "XToYHTo6B_MX-3000_MY-800", "XToYHTo6B_MX-3000_MY-1000", "XToYHTo6B_MX-3000_MY-1200", "XToYHTo6B_MX-3000_MY-1600", "XToYHTo6B_MX-3000_MY-2000", "XToYHTo6B_MX-3000_MY-2500", "XToYHTo6B_MX-3000_MY-2800",
+        "XToYHTo6B_MX-3500_MY-300", "XToYHTo6B_MX-3500_MY-600", "XToYHTo6B_MX-3500_MY-800", "XToYHTo6B_MX-3500_MY-1000", "XToYHTo6B_MX-3500_MY-1200", "XToYHTo6B_MX-3500_MY-1600", "XToYHTo6B_MX-3500_MY-2000", "XToYHTo6B_MX-3500_MY-2500", "XToYHTo6B_MX-3500_MY-2800",
+        "XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-1000", "XToYHTo6B_MX-4000_MY-1200", "XToYHTo6B_MX-4000_MY-1600", "XToYHTo6B_MX-4000_MY-2000", "XToYHTo6B_MX-4000_MY-2500", "XToYHTo6B_MX-4000_MY-2800"
+    ]
+    rMax = 5
+    strategy = 1
+
+    # datasets that require special processing
+    #sigNames = ["XToYHTo6B_MX-1200_MY-1000", "XToYHTo6B_MX-3000_MY-2800"]
+    #rMax = 2
+    #strategy = 1
+
+    #sigNames = ["XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800", "XToYHTo6B_MX-1600_MY-600", "XToYHTo6B_MX-1600_MY-1200", "XToYHTo6B_MX-2000_MY-300"]
+    #rMax = 10
+    #strategy = 2
 
     bestOrder = {"2017_semiboosted_SR_pass_toy_multiSignal":"2"}
     for working_area in ["2017_semiboosted_SR_pass_toy_multiSignal"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
-        #test_make(jsonConfig) # this line can be commented out when reprocessing a subset of signal samples if signal cross sections have not been modified
-        polyOrder = "2"
+        test_make(jsonConfig) # this line can be commented out when reprocessing a subset of signal samples if signal cross sections have not been modified
+        polyOrder = bestOrder[working_area]
 
         for sig in sigNames:
             print("\nProcessing {0}...\n".format(sig))
 
-            test_fit(polyOrder,sig,strategy=0)
+            test_fit(polyOrder,sig,strategy=2)
             
-            test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=0,extra=("--rMin=-1 --rMax={0}".format(rMax)))
+            test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=strategy,extra=("--rMin=-1 --rMax={0}".format(rMax)))
 
             fit_area = "{0}/{1}_area".format(working_area,polyOrder)
             sig_area = "{0}_{1}".format(fit_area,sig)
