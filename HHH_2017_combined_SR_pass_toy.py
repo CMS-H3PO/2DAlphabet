@@ -267,7 +267,7 @@ def test_make(jsonConfig,findreplace={}):
                     constraints=opt['constraints']
             )
 
-        qcd_sb_t = qcd_b_f.Multiply(fail_name_sb.replace('fail','pass')+'_'+opt_name, qcd_sb_rpfT)
+        qcd_sb_t = qcd_sb_f.Multiply(fail_name_sb.replace('fail','pass')+'_'+opt_name, qcd_sb_rpfT)
 
         # Now add the final models to the `twoD` object for tracking
         # Note that we have unique process names so they are identifiable
