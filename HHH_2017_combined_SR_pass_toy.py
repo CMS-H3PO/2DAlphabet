@@ -73,9 +73,9 @@ def _load_CR_rpf(poly_order):
     return {k:v['val'] for k,v in params_to_set.items()}
 
 
-def _load_fit_rpf(working_area,orderSR,json_file):
+def _load_fit_rpf(working_area,polyOrderB,polyOrderSB,json_file):
     twoD_blindFit = TwoDAlphabet(working_area,json_file, loadPrevious=True)
-    params_to_set = twoD_blindFit.GetParamsOnMatch('rpf.*', '{0}_area'.format(orderSR), 'b')
+    params_to_set = twoD_blindFit.GetParamsOnMatch('rpf.*', '{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), 'b')
     return {k:v['val'] for k,v in params_to_set.items()}
 
 def _load_CR_rpf_as_SR(poly_order):
@@ -291,14 +291,14 @@ def test_fit(polyOrderB,polyOrderSB,strategy=0):
 
     twoD.MLfit('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), strategy=strategy, verbosity=0, rMax=1, extra='--cminDefaultMinimizerTolerance 0.01', setParams=setParams)
 
-def test_limit(working_area,orderSR,json_file,blind=True,strategy=0,extra=''):
+def test_limit(working_area,polyOrderB,polyOrderSB,json_file,blind=True,strategy=0,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
     will create an Asimov toy dataset from the pre-fit model. Since the TF parameters are meaningless
     in our true "pre-fit", we need to load in the parameter values from a different fit so we have
     something reasonable to create the Asimov toy. 
     '''
     # Returns a dictionary of the TF parameters with the names as keys and the post-fit values as dict values.
-    params_to_set = _load_fit_rpf(working_area,orderSR,json_file)
+    params_to_set = _load_fit_rpf(working_area,polyOrderB,polyOrderSB,json_file)
     print(params_to_set)
     twoD = TwoDAlphabet(working_area, json_file, loadPrevious=True)
 
@@ -307,7 +307,7 @@ def test_limit(working_area,orderSR,json_file,blind=True,strategy=0,extra=''):
     #twoD.MakeCard(subset, poly_order+'_area')
     # Run the blinded limit with our dictionary of TF parameters
     twoD.Limit(
-        subtag='{0}_area'.format(orderSR),
+        subtag='{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB),
         blindData=blind,
         verbosity=1,
         strategy=strategy,
@@ -476,6 +476,7 @@ if __name__ == '__main__':
             for orderSB in ["2"]:
                 test_fit(orderB,orderSB,strategy)
                 test_plot(orderB,orderSB)
+                test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
         #for order in ["0","1","2","3"]:
             #polyOrder = order
             #if polyOrder in []:
