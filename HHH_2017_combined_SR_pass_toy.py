@@ -287,7 +287,9 @@ def test_fit(polyOrderB,polyOrderSB,strategy=0):
     subset = twoD.ledger.select(_select_bkg, polyOrderB, polyOrderSB)
     twoD.MakeCard(subset, '{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB))
 
-    twoD.MLfit('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), strategy=strategy, verbosity=0)
+    setParams = {'qcd_b_rpfT_1_par2': '-0.647', 'qcd_b_rpfT_1_par0': '6.772', 'qcd_b_rpfT_1_par1': '-2.607', 'qcd_sb_rpfT_2_par5': '10.428', 'qcd_sb_rpfT_2_par4': '-0.066', 'qcd_sb_rpfT_2_par3': '-2.884', 'qcd_sb_rpfT_2_par2': '-5.295', 'qcd_sb_rpfT_2_par1': '-1.998', 'qcd_sb_rpfT_2_par0': '5.262'}
+
+    twoD.MLfit('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), strategy=strategy, verbosity=0, rMax=1, extra='--cminDefaultMinimizerTolerance 0.01', setParams=setParams)
 
 def test_limit(working_area,orderSR,json_file,blind=True,strategy=0,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
