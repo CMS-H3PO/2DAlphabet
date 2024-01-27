@@ -719,6 +719,8 @@ def make_can(outname, padnames, padx=0, pady=0):
             padx = 3; pady = 2
         elif len(padnames) <= 9:
             padx = 3; pady = 3
+        elif len(padnames) <= 12:
+            padx = 6; pady = 2
         else:
             raise RuntimeError('histlist of size %s not currently supported: %s'%(len(padnames),[p.GetName() for p in padnames]))
 
