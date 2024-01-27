@@ -456,12 +456,6 @@ def test_FTest(poly1,poly2):
 
     plot_FTest(base_fstat,nRpfs1,nRpfs2,nBins)
 
-def test_sf(working_area,polyOrder):
-    os.chdir("{0}/{1}_area".format(working_area,polyOrder))
-    fitCmd = "combine -M MultiDimFit TnP.root --algo singles --cminDefaultMinimizerStrategy=0"
-    print("Fit cmd: ", fitCmd)
-    os.system(fitCmd)
-    os.chdir("../..")
 
 if __name__ == '__main__':
     # Provided for convenience is this function which will package the current CMSSW and store it on the user's EOS (assumes FNAL).
