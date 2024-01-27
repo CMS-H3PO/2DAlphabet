@@ -481,7 +481,7 @@ if __name__ == '__main__':
         for orderB in ["1"]:
             for orderSB in ["2"]:
                 test_fit(orderB,orderSB,strategy)
-                #test_plot(orderB,orderSB)
+                test_plot(orderB,orderSB)
         #for order in ["0","1","2","3"]:
             #polyOrder = order
             #if polyOrder in []:
