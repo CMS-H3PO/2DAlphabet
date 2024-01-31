@@ -502,9 +502,9 @@ if __name__ == '__main__':
                     test_GoF_plot(orderB,orderSB)
                     test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
 
-        #test_FTest(["1","1"],["2","1"])
+        test_FTest(["1","1"],["2","1"])
         test_FTest(["1","1"],["1","2"])
-        #test_FTest(["1","1"],["2","2"])
-        #test_FTest(["1","2"],["2","2"])
-        #test_FTest(["2","1"],["2","2"])
+        test_FTest(["1","1"],["2","2"])
+        test_FTest(["1","2"],["2","2"])
+        test_FTest(["2","1"],["2","2"])
   
