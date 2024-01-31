@@ -287,7 +287,24 @@ def test_fit(polyOrderB,polyOrderSB,strategy=0):
     subset = twoD.ledger.select(_select_bkg, polyOrderB, polyOrderSB)
     twoD.MakeCard(subset, '{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB))
 
-    setParams = {'qcd_b_rpfT_1_par2': '-0.647', 'qcd_b_rpfT_1_par0': '6.772', 'qcd_b_rpfT_1_par1': '-2.607', 'qcd_sb_rpfT_2_par5': '10.428', 'qcd_sb_rpfT_2_par4': '-0.066', 'qcd_sb_rpfT_2_par3': '-2.884', 'qcd_sb_rpfT_2_par2': '-5.295', 'qcd_sb_rpfT_2_par1': '-1.998', 'qcd_sb_rpfT_2_par0': '5.262'}
+    params_b = {}
+    params_b["1"] = {'qcd_b_rpfT_1_par0': '6.772', 'qcd_b_rpfT_1_par1': '-2.607', 'qcd_b_rpfT_1_par2': '-0.647'}
+    params_b["2"] = {'qcd_b_rpfT_2_par0': '6.931', 'qcd_b_rpfT_2_par1': '-9.837', 'qcd_b_rpfT_2_par2': '6.289', 'qcd_b_rpfT_2_par3': '-20.419', 'qcd_b_rpfT_2_par4': '14.530', 'qcd_b_rpfT_2_par5': '5.300'}
+    params_sb = {}
+    params_sb["1"] = {'qcd_sb_rpfT_1_par0': '4.872', 'qcd_sb_rpfT_1_par1': '-2.275', 'qcd_sb_rpfT_1_par2': '-0.904'}
+    params_sb["2"] = {'qcd_sb_rpfT_2_par0': '5.262', 'qcd_sb_rpfT_2_par1': '-1.998', 'qcd_sb_rpfT_2_par2': '-5.295', 'qcd_sb_rpfT_2_par3': '-2.884', 'qcd_sb_rpfT_2_par4': '-0.066', 'qcd_sb_rpfT_2_par5': '10.428'}
+
+    setParams = {}
+
+    if polyOrderB not in params_b:
+        print("WARNING: Parameters for order {0} polynomial in boosted channel not available".format(polyOrderB))
+    else:
+        setParams.update(params_b[polyOrderB])
+
+    if polyOrderSB not in params_sb:
+        print("WARNING: Parameters for order {0} polynomial in semiboosted channel not available".format(polyOrderSB))
+    else:
+        setParams.update(params_sb[polyOrderSB])
 
     twoD.MLfit('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), strategy=strategy, verbosity=0, rMax=1, extra='--cminDefaultMinimizerTolerance 0.01', setParams=setParams)
 
@@ -326,7 +343,7 @@ def test_plot(polyOrderB,polyOrderSB):
     subset = twoD.ledger.select(_select_bkg, polyOrderB, polyOrderSB)
     twoD.StdPlots('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), subset)
 
-def test_GoF():
+def test_GoF(polyOrderB,polyOrderSB):
     '''Perform a Goodness of Fit test using an existing working area.
     Requires using data so SRorCR is enforced to be 'CR' to avoid accidental unblinding.
     '''
@@ -339,16 +356,16 @@ def test_GoF():
     # you must unblind data. If you wish to use a toy dataset instead, you should set that
     # up when making the card.
     twoD.GoodnessOfFit(
-        '{0}_area'.format(polyOrder), ntoys=500, freezeSignal=False,
-        condor=True, njobs=10, lorienTag=True
+        '{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), ntoys=500, freezeSignal=False,
+        condor=True, njobs=10, card_or_w='card.txt', lorienTag=True
     )
 
     # Note that no plotting is done here since one needs to wait for the condor jobs to finish first.
     # See test_GoF_plot() for plotting (which will also collect the outputs from the jobs).
 
 
-def test_GoF_plot():
-    plot.plot_gof(working_area,'{0}_area'.format(polyOrder), condor=True,lorien=True)
+def test_GoF_plot(polyOrderB,polyOrderSB):
+    plot.plot_gof(working_area,'{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), condor=True,lorien=True)
 
 
 def test_Impacts():
@@ -362,28 +379,29 @@ def test_Impacts():
     )
 
 
-def test_FTest(poly1,poly2):
+def test_FTest(orders1,orders2):
     '''Perform an F-test using existing working areas.
     '''
 
     twoD    = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
 
-    binning = twoD.binnings["default"]
-    nBins   = (len(binning.xbinList)-1)*(len(binning.ybinList)-1)
+    binning_b  = twoD.binnings["default"]
+    binning_sb = twoD.binnings["default"]
+    nBins   = (len(binning_b.xbinList)-1)*(len(binning_b.ybinList)-1)+(len(binning_sb.xbinList)-1)*(len(binning_sb.ybinList)-1)
 
-    #Get number of RPF params and run GoF for poly1
-    params1 = twoD.ledger.select(_select_bkg, poly1).alphaParams
+    #Get number of RPF params and run GoF for orders1
+    params1 = twoD.ledger.select(_select_bkg, orders1[0], orders1[1]).alphaParams
     rpfSet1 = params1[params1["name"].str.contains("rpf")]
     nRpfs1  = len(rpfSet1.index)
-    _gof_for_FTest(twoD, "{0}_area".format(poly1))
-    gofFile1= working_area+"/{0}_area/higgsCombine_gof_data.GoodnessOfFit.mH120.root".format(poly1)
+    _gof_for_FTest(twoD, "{0}-b_{1}-sb_area".format(orders1[0],orders1[1]), card_or_w='card.txt')
+    gofFile1= working_area+"/{0}-b_{1}-sb_area/higgsCombine_gof_data.GoodnessOfFit.mH120.root".format(orders1[0],orders1[1])
 
-    #Get number of RPF params and run GoF for poly2
-    params2 = twoD.ledger.select(_select_bkg, poly2).alphaParams
+    #Get number of RPF params and run GoF for orders2
+    params2 = twoD.ledger.select(_select_bkg, orders2[0], orders2[1]).alphaParams
     rpfSet2 = params2[params2["name"].str.contains("rpf")]
     nRpfs2  = len(rpfSet2.index)
-    _gof_for_FTest(twoD, "{0}_area".format(poly2))
-    gofFile2= working_area+"/{0}_area/higgsCombine_gof_data.GoodnessOfFit.mH120.root".format(poly2)
+    _gof_for_FTest(twoD, "{0}-b_{1}-sb_area".format(orders2[0],orders2[1]), card_or_w='card.txt')
+    gofFile2= working_area+"/{0}-b_{1}-sb_area/higgsCombine_gof_data.GoodnessOfFit.mH120.root".format(orders2[0],orders2[1])
 
     base_fstat = FstatCalc(gofFile1,gofFile2,nRpfs1,nRpfs2,nBins)
     print(base_fstat)
@@ -412,10 +430,10 @@ def test_FTest(poly1,poly2):
         c.SetTopMargin(0.1)
         ftestHist_nbins = 30
         ftestHist = TH1F("Fhist","",ftestHist_nbins,0,max(10,1.3*base_fstat[0]))
-        ftestHist.GetXaxis().SetTitle("F")
-        ftestHist.GetXaxis().SetTitleSize(0.06)
-        ftestHist.GetXaxis().SetTitleOffset(0.7)
-        ftestHist.GetYaxis().SetTitleOffset(0.5)
+        ftestHist.GetXaxis().SetTitle("F = #frac{-2log(#lambda_{1}/#lambda_{2})/(p_{2}-p_{1})}{-2log#lambda_{2}/(n-p_{2})}")
+        ftestHist.GetXaxis().SetTitleSize(0.025)
+        ftestHist.GetXaxis().SetTitleOffset(2)
+        ftestHist.GetYaxis().SetTitleOffset(0.85)
         
         ftestHist.Draw("pez")
         ftestobs  = TArrow(base_fstat[0],0.25,base_fstat[0],0)
@@ -434,8 +452,8 @@ def test_FTest(poly1,poly2):
         tLeg.Draw("same")
 
         model_info = TPaveText(0.2,0.6,0.4,0.8,"brNDC")
-        model_info.AddText('p1 = '+poly1)
-        model_info.AddText('p2 = '+poly2)
+        model_info.AddText('p1 = {0}-b_{1}-sb'.format(orders1[0],orders1[1]))
+        model_info.AddText('p2 = {0}-b_{1}-sb'.format(orders2[0],orders2[1]))
         model_info.AddText("p-value = %.2f"%(1-pval))
         model_info.Draw('same')
         
@@ -452,7 +470,7 @@ def test_FTest(poly1,poly2):
         latex.SetTextFont(52)
         latex.SetTextSize(0.045)
         for ext in ["png", "pdf"]:
-            c.SaveAs(working_area+'/ftest_{0}_vs_{1}_notoys.{2}'.format(poly1,poly2,ext))
+            c.SaveAs(working_area+'/ftest_{0}{1}-bsb_vs_{2}{3}-bsb_notoys.{4}'.format(orders1[0],orders1[1],orders2[0],orders2[1],ext))
 
     plot_FTest(base_fstat,nRpfs1,nRpfs2,nBins)
 
@@ -471,9 +489,22 @@ if __name__ == '__main__':
         test_make(jsonConfig)
 
         strategy=2
+        
+        skipPlot = [["2","1"],["2","2"]]
 
-        for orderB in ["1"]:
-            for orderSB in ["2"]:
-                test_fit(orderB,orderSB,strategy)
-                test_plot(orderB,orderSB)
-                test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
+        for orderB in ["1","2"]:
+            for orderSB in ["1","2"]:
+                test_fit(orderB,orderSB,strategy=strategy)
+                if [orderB,orderSB] not in skipPlot:
+                    test_plot(orderB,orderSB)
+                if [orderB,orderSB]==bestOrders[working_area]:
+                    test_GoF(orderB,orderSB) # this waits for toy fits on Condor to finish
+                    test_GoF_plot(orderB,orderSB)
+                    test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
+
+        #test_FTest(["1","1"],["2","1"])
+        test_FTest(["1","1"],["1","2"])
+        #test_FTest(["1","1"],["2","2"])
+        #test_FTest(["1","2"],["2","2"])
+        #test_FTest(["2","1"],["2","2"])
+  
