@@ -500,7 +500,7 @@ if __name__ == '__main__':
                 if [orderB,orderSB]==bestOrders[working_area]:
                     test_GoF(orderB,orderSB) # this waits for toy fits on Condor to finish
                     test_GoF_plot(orderB,orderSB)
-                    test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
+                    #test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
 
         test_FTest(["1","1"],["2","1"])
         test_FTest(["1","1"],["1","2"])
@@ -508,3 +508,5 @@ if __name__ == '__main__':
         test_FTest(["1","2"],["2","2"])
         test_FTest(["2","1"],["2","2"])
   
+        # limit calculation put at the end since it crashes when run right after GoF
+        test_limit(working_area,bestOrders[working_area][0],bestOrders[working_area][1],'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
