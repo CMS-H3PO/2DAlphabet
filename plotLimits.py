@@ -51,6 +51,7 @@ def makePlot(fit_area, year, config, polyOrder):
         xs_limit = limit * xsec * 1000
         if xs_limit == 0.:
             print("WARNING: Limit calculation failed. xs_limit = {0}".format(xs_limit))
+            continue
         else:
             print("xs_limit = {0}".format(xs_limit))
 
