@@ -19,12 +19,14 @@ mass_points = [
 
 def makePlot(fit_area, year, config, polyOrder):
 
-    selection = 'boosted'
+    channel = 'boosted'
     if 'semiboosted' in fit_area:
-        selection = 'semiboosted'
+        channel = 'semiboosted'
+    elif 'combined' in fit_area:
+        channel = 'combined'
 
     gr_limit = copy.deepcopy(ROOT.TGraph2D())
-    gr_limit.SetTitle(";m_{X} [GeV];m_{Y} [GeV];95% CL expected upper limit (" + selection + ") [fb]")
+    gr_limit.SetTitle(";m_{X} [GeV];m_{Y} [GeV];95% CL expected upper limit (" + channel + ") [fb]")
 
     max_xs_limit = 0.
     n = 0
@@ -76,7 +78,7 @@ def makePlot(fit_area, year, config, polyOrder):
 
     c.SetLogz()
 
-    c.SaveAs('{0}_{1}_expected_limits_2D.pdf'.format(year, selection))
+    c.SaveAs('{0}_{1}_expected_limits_2D.pdf'.format(year, channel))
 
 
 if __name__ == '__main__':
@@ -113,5 +115,6 @@ if __name__ == '__main__':
     json_file = open("../H3PO/Analysis/xsecs.json")
     config = json.load(json_file)
 
-    makePlot('{0}_boosted_SR_pass_toy_multiSignal'.format(year), year, config, 1)
-    makePlot('{0}_semiboosted_SR_pass_toy_multiSignal'.format(year), year, config, 2)
+    makePlot('{0}_boosted_SR_pass_toy_multiSignal'.format(year), year, config, '1')
+    makePlot('{0}_semiboosted_SR_pass_toy_multiSignal'.format(year), year, config, '2')
+    makePlot('{0}_combined_SR_pass_toy_multiSignal'.format(year), year, config, '1-b_2-sb')
