@@ -120,7 +120,7 @@ python -u HHH_2017_semiboosted_SR_pass_toy_multiSignal.py |& tee 2017_semibooste
 ```
 Note that some samples might require special processing with a modified `rMax` value for the limit calculation to converge. To calculate expected limits for multiple signal samples for the combination of boosted and semiboosted channels, run
 ```
-python -u HHH_2017_combination_SR_pass_toy_multiSignal.py |& tee 2017_combination_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
+python -u HHH_2017_combined_SR_pass_toy_multiSignal.py |& tee 2017_combined_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
 ```
 Finally, to produce the expected limit plots, run
 ```
