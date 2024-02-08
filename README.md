@@ -83,11 +83,11 @@ The printed fit parameter values need to be put into `plotRpf_CR_pass_toy.py` wh
 python plotRpf_CR_pass_toy.py
 ```
 
-To perform the same checks for the signal region fits and calculate expected limits for the benchmark XToYHTo6B_MX-2500_MY-800 case for the boosted selection, run
+To perform the same checks for the signal region fits and calculate expected limits for the benchmark XToYHTo6B_MX-2500_MY-800 case for the boosted channel, run
 ```
 python -u HHH_2017_boosted_SR_pass_toy.py |& tee 2017_boosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
 ```
-To do the same for the semiboosted selection, run
+To do the same for the semiboosted channel, run
 ```
 python -u HHH_2017_semiboosted_SR_pass_toy.py |& tee 2017_semiboosted_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
 ```
@@ -108,11 +108,11 @@ python plotRpf_SR_pass_toy.py
 ```
 Note that the best polynomial order for the toy data fits might be different from the real data fits. For easier comparison, however, we are also checking parameter values for the polynomial orders used to generate the toy data, i.e., the best orders from the control region real data fits.
 
-To calculate expected limits for multiple signal samples for the boosted selection, run
+To calculate expected limits for multiple signal samples for the boosted channel, run
 ```
 python -u HHH_2017_boosted_SR_pass_toy_multiSignal.py |& tee 2017_boosted_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
 ```
-To do the same for the semiboosted selection, run
+To do the same for the semiboosted channel, run
 ```
 python -u HHH_2017_semiboosted_SR_pass_toy_multiSignal.py |& tee 2017_semiboosted_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
 ```
