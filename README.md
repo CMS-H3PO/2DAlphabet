@@ -106,8 +106,10 @@ The printed fit parameter values need to be put into `plotRpf_SR_pass_toy.py` wh
 ```
 python plotRpf_SR_pass_toy.py
 ```
-Note that the best polynomial order for the toy data fits might be different from the real data fits. For easier comparison, however, we are also checking parameter values for the polynomial orders used to generate the toy data, i.e., the best orders from the control region real data fits.
-
+Note that the best polynomial order for the toy data fits might be different from the real data fits. For easier comparison, however, we are also checking parameter values for the polynomial orders used to generate the toy data, i.e., the best orders from the control region real data fits. To perform the same calculations for the combination of boosted and semiboosted channels, run
+```
+python -u HHH_2017_combined_SR_pass_toy.py |& tee 2017_combined_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
+```
 To calculate expected limits for multiple signal samples for the boosted channel, run
 ```
 python -u HHH_2017_boosted_SR_pass_toy_multiSignal.py |& tee 2017_boosted_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
@@ -116,8 +118,10 @@ To do the same for the semiboosted channel, run
 ```
 python -u HHH_2017_semiboosted_SR_pass_toy_multiSignal.py |& tee 2017_semiboosted_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
 ```
-Note that some samples might require special processing with a modified `rMax` value for the limit calculation to converge.
-
+Note that some samples might require special processing with a modified `rMax` value for the limit calculation to converge. To calculate expected limits for multiple signal samples for the combination of boosted and semiboosted channels, run
+```
+python -u HHH_2017_combination_SR_pass_toy_multiSignal.py |& tee 2017_combination_SR_pass_toy_multiSignal_`date "+%Y%m%d_%H%M%S"`.log
+```
 Finally, to produce the expected limit plots, run
 ```
 python -u plotLimits.py 2017 |& tee plotLimits_2017_`date "+%Y%m%d_%H%M%S"`.log
