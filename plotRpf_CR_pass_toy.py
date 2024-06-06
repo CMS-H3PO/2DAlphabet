@@ -27,21 +27,18 @@ class Pol_2:
 
 # fail-to-pass transfer functions
 # boosted (best order)
-p_b = Pol_2()
+p_b = Pol_1()
 rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b,x_min,x_max,y_min,y_max,6)
-rpf_boosted_VR.SetParameter(0,7.1254600356)
-rpf_boosted_VR.SetParameter(1,-6.1952111515)
-rpf_boosted_VR.SetParameter(2,1.6876169623)
-rpf_boosted_VR.SetParameter(3,0.0562667290)
-rpf_boosted_VR.SetParameter(4,4.5156972016)
-rpf_boosted_VR.SetParameter(5,-3.2904181798)
+rpf_boosted_VR.SetParameter(0,7.8912174849)
+rpf_boosted_VR.SetParameter(1,-4.2568664812)
+rpf_boosted_VR.SetParameter(2,0.1046845712)
 
 # semiboosted (best order)
 p_sb = Pol_1()
 rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb,x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_VR.SetParameter(0,4.5827847421)
-rpf_semiboosted_VR.SetParameter(1,-2.5909056630)
-rpf_semiboosted_VR.SetParameter(2,-0.0564180778)
+rpf_semiboosted_VR.SetParameter(0,4.6185437650)
+rpf_semiboosted_VR.SetParameter(1,-2.1956132022)
+rpf_semiboosted_VR.SetParameter(2,0.1455519099)
 
 
 if __name__ == '__main__':

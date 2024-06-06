@@ -208,7 +208,7 @@ def test_make(jsonConfig,findreplace={}):
     twoD.Save()
     
 
-def test_fit(strategy=0):
+def test_fit(strategy=0, rMin=-1, rMax=10):
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
     subset = twoD.ledger.select(_select_bkg, polyOrder)
     twoD.MakeCard(subset, '{0}_area'.format(polyOrder))
@@ -221,7 +221,7 @@ def test_fit(strategy=0):
     #     print("Fit cmd: ", fitCmd)
     #     os.system(fitCmd)
 
-    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
+    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,rMin=rMin,rMax=rMax,verbosity=0)
 
 def test_limit(working_area,orderSR,json_file,blind=True):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
@@ -399,7 +399,7 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrder = {"2017_boosted_CR":"2"}
+    bestOrder = {"2017_boosted_CR":"1"}
     for working_area in ["2017_boosted_CR"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
@@ -409,9 +409,9 @@ if __name__ == '__main__':
         for order in ["0","1","2","3"]:
             polyOrder = order
             if polyOrder in ["2","3"]:
-                test_fit(strategy=2)
+                test_fit(strategy=2, rMin=-5, rMax=5)
             else:
-                test_fit()
+                test_fit(strategy=1, rMin=-5, rMax=5)
             test_plot()
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish

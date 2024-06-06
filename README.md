@@ -49,22 +49,22 @@ Note that piping output to the `tee` command will both print it to the terminal 
 
 To calculate expected limits, we first need to generate toy data in the pass category of the signal regions. For this we use the pass-to-fail transfer functions (Rpf) obtained from the control region fits. First we need to extract the fit parameter values which can be done using the following command
 ```
-echo -e "Boosted CR:\nOrder 2 (best)" |& tee printFitParameters_`date "+%Y%m%d"`.log
-python printFitParameters.py -i 2017_boosted_CR/2_area/fitDiagnosticsTest.root |& tee -a printFitParameters_`date "+%Y%m%d"`.log
-echo -e "\n\nSemiboosted CR:\nOrder 1 (best)" |& tee -a printFitParameters_`date "+%Y%m%d"`.log
-python printFitParameters.py -i 2017_semiboosted_CR/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_`date "+%Y%m%d"`.log
+echo -e "Boosted CR:\nOrder 1 (best)" |& tee printFitParameters_CR_`date "+%Y%m%d"`.log
+python printFitParameters.py -i 2017_boosted_CR/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_CR_`date "+%Y%m%d"`.log
+echo -e "\n\nSemiboosted CR:\nOrder 1 (best)" |& tee -a printFitParameters_CR_`date "+%Y%m%d"`.log
+python printFitParameters.py -i 2017_semiboosted_CR/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_CR_`date "+%Y%m%d"`.log
 ```
-The printed fit parameter values need to be put into `plotRpf.py` which can be used to plot the transfer functions
+The printed fit parameter values need to be put into `plotRpf.py` in oder to plot the transfer functions
 ```
 python plotRpf.py
 ```
 The toy data is generated using the `generateToys.py` script which imports the transfer functions from `plotRpf.py`
 ```
-python generateToys.py -t /STORE/HHH/Histograms/2017/20231220_123208/TTbar_Histograms.root -d /STORE/HHH/Histograms/2017/20231220_123208/JetHT_Histograms.root
+python generateToys.py -t /STORE/HHH/Histograms/2017/latest/TTbar_Histograms.root -d /STORE/HHH/Histograms/2017/latest/JetHT_Histograms.root
 ```
 Two output files are produced, `JetHT_Histograms_VR_pass_toy.root` with the toy data in the pass category of the control regions and `JetHT_Histograms_SR_pass_toy.root` with the toy data in the pass category of the signal regions. These files need to be moved to the same folder with the other histogram files
 ```
-mv JetHT_Histograms_*_pass_toy.root /STORE/HHH/Histograms/2017/20231220_123208/
+mv JetHT_Histograms_*_pass_toy.root /STORE/HHH/Histograms/2017/latest/
 ```
 The toy data in the control regions is used in `HHH_2017_boosted_CR_pass_toy.py` and `HHH_2017_semiboosted_CR_pass_toy.py` as a sort of sanity check (closure test) to check whether the toy data fits converge to parameter values similar to those used in the generation of the toy data
 ```
@@ -73,12 +73,12 @@ python -u HHH_2017_semiboosted_CR_pass_toy.py |& tee 2017_semiboosted_CR_pass_to
 ```
 The Rpf parameter values can be printed with the following commands
 ```
-echo -e "Boosted CR pass toy:\nOrder 2 (best)" |& tee printFitParameters_CR_pass_toy_`date "+%Y%m%d"`.log
-python printFitParameters.py -i 2017_boosted_CR_pass_toy/2_area/fitDiagnosticsTest.root |& tee -a printFitParameters_CR_pass_toy_`date "+%Y%m%d"`.log
+echo -e "Boosted CR pass toy:\nOrder 1 (best)" |& tee printFitParameters_CR_pass_toy_`date "+%Y%m%d"`.log
+python printFitParameters.py -i 2017_boosted_CR_pass_toy/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_CR_pass_toy_`date "+%Y%m%d"`.log
 echo -e "\n\nSemiboosted CR pass toy:\nOrder 1 (best)" |& tee -a printFitParameters_CR_pass_toy_`date "+%Y%m%d"`.log
 python printFitParameters.py -i 2017_semiboosted_CR_pass_toy/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_CR_pass_toy_`date "+%Y%m%d"`.log
 ```
-The printed fit parameter values need to be put into `plotRpf_CR_pass_toy.py` which can be used to plot the transfer functions
+The printed fit parameter values need to be put into `plotRpf_CR_pass_toy.py` in order to plot the transfer functions
 ```
 python plotRpf_CR_pass_toy.py
 ```
@@ -95,18 +95,16 @@ The Rpf parameter values can be printed with the following commands
 ```
 echo -e "Boosted SR pass toy:\nOrder 1 (best)" |& tee printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
 python printFitParameters.py -i 2017_boosted_SR_pass_toy/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
-echo -e "\nOrder 2" |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
-python printFitParameters.py -i 2017_boosted_SR_pass_toy/2_area/fitDiagnosticsTest.root |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
-echo -e "\n\nSemiboosted SR pass toy:\nOrder 1" |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
+echo -e "\n\nSemiboosted SR pass toy:\nOrder 1 (best)" |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
 python printFitParameters.py -i 2017_semiboosted_SR_pass_toy/1_area/fitDiagnosticsTest.root |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
-echo -e "\nOrder 2 (best)" |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
-python printFitParameters.py -i 2017_semiboosted_SR_pass_toy/2_area/fitDiagnosticsTest.root |& tee -a printFitParameters_SR_pass_toy_`date "+%Y%m%d"`.log
 ```
-The printed fit parameter values need to be put into `plotRpf_SR_pass_toy.py` which can be used to plot the transfer functions
+The printed fit parameter values need to be put into `plotRpf_SR_pass_toy.py` in order to plot the transfer functions
 ```
 python plotRpf_SR_pass_toy.py
 ```
-Note that the best polynomial order for the toy data fits might be different from the real data fits. For easier comparison, however, we are also checking parameter values for the polynomial orders used to generate the toy data, i.e., the best orders from the control region real data fits. To perform the same calculations for the combination of boosted and semiboosted channels, run
+Note that the best polynomial order for the toy data fits might in general be different from the real data fits.
+
+To perform the same calculations for the combination of boosted and semiboosted channels, run
 ```
 python -u HHH_2017_combined_SR_pass_toy.py |& tee 2017_combined_SR_pass_toy_`date "+%Y%m%d_%H%M%S"`.log
 ```

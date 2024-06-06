@@ -412,7 +412,7 @@ if __name__ == '__main__':
             polyOrder = order
             if polyOrder in []:
                 test_fit(strategy=2)
-            elif polyOrder in ["1","2","3"]:
+            elif polyOrder in ["0","1","2","3"]:
                 test_fit(strategy=1)
             else:
                 test_fit()

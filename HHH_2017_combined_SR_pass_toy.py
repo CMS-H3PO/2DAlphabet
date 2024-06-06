@@ -288,11 +288,11 @@ def test_fit(polyOrderB,polyOrderSB,strategy=0):
     twoD.MakeCard(subset, '{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB))
 
     params_b = {}
-    params_b["1"] = {'qcd_b_rpfT_1_par0': '6.772', 'qcd_b_rpfT_1_par1': '-2.607', 'qcd_b_rpfT_1_par2': '-0.647'}
-    params_b["2"] = {'qcd_b_rpfT_2_par0': '6.931', 'qcd_b_rpfT_2_par1': '-9.837', 'qcd_b_rpfT_2_par2': '6.289', 'qcd_b_rpfT_2_par3': '-20.419', 'qcd_b_rpfT_2_par4': '14.530', 'qcd_b_rpfT_2_par5': '5.300'}
+    params_b["1"] = {'qcd_b_rpfT_1_par0': '8.440', 'qcd_b_rpfT_1_par1': '-4.119', 'qcd_b_rpfT_1_par2': '-1.112'}
+    params_b["2"] = {'qcd_b_rpfT_2_par0': '8.096', 'qcd_b_rpfT_2_par1': '-1.555', 'qcd_b_rpfT_2_par2': '-1.642', 'qcd_b_rpfT_2_par3': '-11.636', 'qcd_b_rpfT_2_par4': '-0.640', 'qcd_b_rpfT_2_par5': '11.133'}
     params_sb = {}
-    params_sb["1"] = {'qcd_sb_rpfT_1_par0': '4.872', 'qcd_sb_rpfT_1_par1': '-2.275', 'qcd_sb_rpfT_1_par2': '-0.904'}
-    params_sb["2"] = {'qcd_sb_rpfT_2_par0': '5.262', 'qcd_sb_rpfT_2_par1': '-1.998', 'qcd_sb_rpfT_2_par2': '-5.295', 'qcd_sb_rpfT_2_par3': '-2.884', 'qcd_sb_rpfT_2_par4': '-0.066', 'qcd_sb_rpfT_2_par5': '10.428'}
+    params_sb["1"] = {'qcd_sb_rpfT_1_par0': '4.924', 'qcd_sb_rpfT_1_par1': '-3.531', 'qcd_sb_rpfT_1_par2': '0.058'}
+    params_sb["2"] = {'qcd_sb_rpfT_2_par0': '2.761', 'qcd_sb_rpfT_2_par1': '-58.616', 'qcd_sb_rpfT_2_par2': '-99.115', 'qcd_sb_rpfT_2_par3': '26.556', 'qcd_sb_rpfT_2_par4': '62.035', 'qcd_sb_rpfT_2_par5': '20.751'}
 
     setParams = {}
 
@@ -481,7 +481,7 @@ if __name__ == '__main__':
     # make_env_tarball()
 
 
-    bestOrders = {"2017_combined_SR_pass_toy":["1","2"]}
+    bestOrders = {"2017_combined_SR_pass_toy":["1","1"]}
     for working_area in ["2017_combined_SR_pass_toy"]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
@@ -490,10 +490,10 @@ if __name__ == '__main__':
 
         strategy=2
         
-        skipPlot = [["2","1"],["2","2"]]
+        skipPlot = [["1","2"],["2","2"]]
 
         for orderB in ["1","2"]:
-            for orderSB in ["1","2"]:
+            for orderSB in ["1"]:
                 test_fit(orderB,orderSB,strategy=strategy)
                 if [orderB,orderSB] not in skipPlot:
                     test_plot(orderB,orderSB)
@@ -503,10 +503,10 @@ if __name__ == '__main__':
                     #test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
 
         test_FTest(["1","1"],["2","1"])
-        test_FTest(["1","1"],["1","2"])
-        test_FTest(["1","1"],["2","2"])
-        test_FTest(["1","2"],["2","2"])
-        test_FTest(["2","1"],["2","2"])
+        #test_FTest(["1","1"],["1","2"])
+        #test_FTest(["1","1"],["2","2"])
+        #test_FTest(["1","2"],["2","2"])
+        #test_FTest(["2","1"],["2","2"])
   
         # limit calculation put at the end since it crashes when run right after GoF
         test_limit(working_area,bestOrders[working_area][0],bestOrders[working_area][1],'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
