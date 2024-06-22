@@ -3,16 +3,17 @@
 The following steps need to be done only once for the initial installation
 ```
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-export SCRAM_ARCH=slc7_amd64_gcc700
-cmsrel CMSSW_10_6_14
-cd CMSSW_10_6_14/src
+export SCRAM_ARCH=el9_amd64_gcc12
+cmsrel CMSSW_14_1_0_pre4
+cd CMSSW_14_1_0_pre4/src
 cmsenv
-git clone -b v8.2.1 https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
-curl -s https://raw.githubusercontent.com/mroguljic/CombineHarvester/master/CombineTools/scripts/sparse-checkout-ssh.sh | bash
+git clone -b v10.0.1 --depth 1 https://github.com/cms-analysis/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+git clone -b CMSWW_14_1_0_pre4 --depth 1 https://github.com/JHU-Tools/CombineHarvester.git
+scram b clean
 scram b -j 8
 cd -
 
-python -m virtualenv twoD-env
+python3 -m venv twoD-env
 source twoD-env/bin/activate
 git clone git@github.com:CMS-H3PO/2DAlphabet.git
 cd 2DAlphabet
@@ -23,7 +24,7 @@ You now have all the required software installed and the enviroment set up.
 To set up environment in a new shell, run the following
 ```
 source /cvmfs/cms.cern.ch/cmsset_default.sh
-cd CMSSW_10_6_14
+cd CMSSW_14_1_0_pre4
 cmsenv
 cd -
 source twoD-env/bin/activate
