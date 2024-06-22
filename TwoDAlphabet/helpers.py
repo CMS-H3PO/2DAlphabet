@@ -18,7 +18,7 @@ def open_json(f):
         dict: JSON opened as a python dictionary.
     '''
     with open(f) as fInput_config:
-        input_config = json.load(fInput_config, object_hook=ascii_encode_dict)  # Converts most of the unicode to ascii
+        input_config = json.load(fInput_config)  # Converts most of the unicode to ascii
 
     return input_config
 
@@ -32,14 +32,14 @@ def ascii_encode_dict(data):
         dict: Dict encoded with ascii instead of unicode.
     '''
     def _ascii_encode(x):
-        if isinstance(x, unicode):
+        if isinstance(x, str):
             return x.encode('ascii')
         elif isinstance(x, dict):
             return ascii_encode_dict(x)
         elif isinstance(x, list):
             out = []
             for s in x:
-                if isinstance(s, unicode):
+                if isinstance(s, str):
                     out.append(s.encode('ascii'))
                 else:
                     out.append(s)
@@ -279,7 +279,7 @@ def _combineTool_impacts_fix(fileNameExpected):
     potential_files_to_rename = glob.glob(seed_version)
 
     # Only run if there are seeded files to rename
-    if potential_files_to_rename > 0:
+    if len(potential_files_to_rename) > 0:
         all_seeds = list(set([f.split('.')[-2] for f in potential_files_to_rename]))
         if len(all_seeds) > 1:
             raise RuntimeError('More than one seed found when trying to move files for combineTool (%s). Clean up the area and try again.'%all_seeds)
