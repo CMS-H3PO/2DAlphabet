@@ -408,7 +408,9 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in ["2","3"]:
+            if polyOrder in ["2"]:
+                test_fit(strategy=2, rMin=-4, rMax=6)
+            if polyOrder in ["3"]:
                 test_fit(strategy=2, rMin=-5, rMax=5)
             else:
                 test_fit(strategy=1, rMin=-5, rMax=5)
