@@ -421,7 +421,7 @@ def test_FTest(orders1,orders2):
         fdist.SetParameter(2,ftest_nbins-ftest_p2)
 
         pval = fdist.Integral(0.0,base_fstat[0])
-        print 'P-value: %s'%pval
+        print('P-value: %s'%pval)
 
         c = TCanvas('c','c',800,600)    
         c.SetLeftMargin(0.12) 
