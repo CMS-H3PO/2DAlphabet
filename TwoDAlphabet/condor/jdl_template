@@ -1,5 +1,6 @@
 universe	= vanilla
 executable 	= TEMPSCRIPT
+requirements = (machine == "lorientree02.irb.hr" )
 Output 		= notneeded/output_$(Cluster)_$(Process).stdout
 Error 		= notneeded/output_$(Cluster)_$(Process).stderr
 Log 		= notneeded/output_$(Cluster)_$(Process).log

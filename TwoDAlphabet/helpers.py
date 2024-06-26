@@ -336,7 +336,9 @@ class CondorRunner():
             execute_cmd("sed 's$TEMPSCRIPT${0}$g' {1}/condor/jdl_template > {2}".format(self.run_script_path, abs_twoD_dir_base, out_jdl))
             execute_cmd("sed -i 's$TEMPARGS${0}$g' {1}".format(self.run_args_path, out_jdl))
             execute_cmd("chmod +x {0}".format(self.run_script_path))
-            execute_cmd("condor_submit "+out_jdl)
+            #execute_cmd("condor_submit "+out_jdl)
+            print("condor_submit "+out_jdl)
+            input("Press Enter to continue...")
             execute_cmd("mv {0} notneeded/".format(out_jdl))
             print("Waiting for all jobs to finish...")
             for log in glob.glob('notneeded/output_*.log'):
