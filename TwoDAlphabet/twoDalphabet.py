@@ -180,7 +180,8 @@ class TwoDAlphabet:
         for n in obj.nuisances:
             d = {c:n[c] for c in nuis_obj_cols}
             d['owner'] = process+'_'+region
-            self.ledger.alphaParams = self.ledger.alphaParams._append(d, ignore_index=True)
+            d_df = pandas.DataFrame([d])
+            self.ledger.alphaParams = pandas.concat([self.ledger.alphaParams, d_df], ignore_index=True)
 
         for rph_cat in rph.values():
             print ('Adding RooParametricHist... %s'%rph_cat.GetName())
