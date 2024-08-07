@@ -84,6 +84,8 @@ class Plotter(object):
         hslice.GetXaxis().SetTitle(xtitle)
         hslice.GetYaxis().SetTitle(ytitle)
 
+        color = int(color) # ROOT call in C++ sometimes cannot convert it to int
+
         if proc_type == 'BKG':
             hslice.SetFillColor(color)
             hslice.SetLineColorAlpha(0,0)
@@ -137,10 +139,11 @@ class Plotter(object):
                     proc_type = 'TOTAL'
                     proc_title = 'TotalBkg'
 
-                self.df = self.df.append({'process':process,
+                new_row = pandas.DataFrame([{'process':process,
                                           'region':region,
                                           'process_type': proc_type,
-                                          'title': proc_title}, ignore_index=True)
+                                          'title': proc_title}])
+                self.df = pandas.concat([self.df, new_row], ignore_index=True)
                 
                 for time in ['prefit','postfit']:
                     # 2D distributions first
@@ -302,7 +305,8 @@ class Plotter(object):
                                     subtitle=slice_str, totalBkg=this_totalbkg,
                                     logyFlag=logyFlag, year=self.twoD.options.year,
                                     extraText='Preliminary', savePDF=True, savePNG=True, ROOTout=False)
-                        pads = pads.append({'pad':out_pad_name+'.png', 'region':region, 'proj':projn, 'logy':logyFlag}, ignore_index=True)
+                        new_row = pandas.DataFrame([{'pad':out_pad_name+'.png', 'region':region, 'proj':projn, 'logy':logyFlag}])
+                        pads = pandas.concat([pads, new_row], ignore_index=True)
 
         for logy in ['','_logy']:
             for proj in ['postfit_projx','postfit_projy']:
@@ -312,7 +316,7 @@ class Plotter(object):
                 else:
                     these_pads = these_pads.loc[these_pads.logy.eq(True)]
                 
-                these_pads = these_pads.sort_values(by=['region','proj']).pad.to_list()
+                these_pads = these_pads.sort_values(by=['region','proj'])['pad'].to_list()
                 out_can_name = '{d}/{proj}{logy}'.format(d=self.dir, proj=proj,logy=logy)
                 make_can(out_can_name, these_pads)
         
@@ -347,10 +351,11 @@ class Plotter(object):
                         datastyle='histe', year=self.twoD.options.year, extraText='Preliminary'
                     )
                     
-                    pads = pads.append({'pad':out_pad_name+'.png','process':process,'region':region,'proj':projn}, ignore_index=True)
+                    new_row = pandas.DataFrame([{'pad':out_pad_name+'.png','process':process,'region':region,'proj':projn}])
+                    pads= pandas.concat([pads, new_row], ignore_index=True)
 
         for process, padgroup in pads.groupby('process'):
-            these_pads = padgroup.sort_values(by=['region','proj']).pad.to_list()
+            these_pads = padgroup.sort_values(by=['region','proj'])['pad'].to_list()
             make_can('{d}/{p}_{proj}'.format(d=self.dir, p=process,proj=proj), these_pads)
         
     def plot_transfer_funcs(self):
@@ -881,7 +886,7 @@ def gen_post_fit_shapes():
             workspace_file = 'higgsCombineTest.FitDiagnostics.mH120.root'
         else:
             workspace_file = 'higgsCombineTest.FitDiagnostics.mH120.123456.root'
-        shapes_cmd = 'PostFit2DShapesFromWorkspace -w {w} -o postfitshapes_{t}.root -f fitDiagnosticsTest.root:fit_{t} --postfit --samples 100 --print 2> PostFitShapes2D_stderr_{t}.txt'.format(t=t,w=workspace_file)
+        shapes_cmd = 'PostFit2DShapesFromWorkspace -w {w} --output postfitshapes_{t}.root -f fitDiagnosticsTest.root:fit_{t} --postfit --samples 100 --print > PostFitShapes2D_stderr_{t}.txt'.format(t=t,w=workspace_file)
         execute_cmd(shapes_cmd)
     fit_result_file.Close()
 

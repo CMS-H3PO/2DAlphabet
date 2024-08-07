@@ -166,21 +166,22 @@ class TwoDAlphabet:
         self.ledger._checkAgainstConfig(process, region)
 
         rph,norm = obj.RooParametricHist(name=process+'_'+region)
-        model_obj_row = {
+        model_obj_row = pandas.DataFrame([{
             "process": process,
             "region": region,
             "process_type": ptype,
             "color": color,
             'title': title_to_use
-        }
+        }])
 
-        self.ledger.alphaObjs = self.ledger.alphaObjs.append(model_obj_row, ignore_index=True)
+        self.ledger.alphaObjs = pandas.concat([self.ledger.alphaObjs, model_obj_row], ignore_index=True)
 
         nuis_obj_cols = ['name', 'constraint']
         for n in obj.nuisances:
             d = {c:n[c] for c in nuis_obj_cols}
             d['owner'] = process+'_'+region
-            self.ledger.alphaParams = self.ledger.alphaParams.append(d, ignore_index=True)
+            d_df = pandas.DataFrame([d])
+            self.ledger.alphaParams = pandas.concat([self.ledger.alphaParams, d_df], ignore_index=True)
 
         for rph_cat in rph.values():
             print ('Adding RooParametricHist... %s'%rph_cat.GetName())
@@ -243,7 +244,7 @@ class TwoDAlphabet:
             df = self.df
 
         hists = {}
-        for g, group_df in df.groupby(['source_filename']):
+        for g, group_df in df.groupby('source_filename'):
             out_df = group_df.copy(True)
             out_df = out_df[out_df['variation'].eq('nominal') | out_df["syst_type"].eq("shapes")]
             out_df['out_histname'] = out_df.apply(_get_out_name, axis=1)
@@ -593,7 +594,7 @@ class Ledger():
         self.alphaParams = pandas.DataFrame(columns=['name','constraint','owner'])
 
     def append(self, toAppend):
-        self.df.append(toAppend, ignore_index=True if isinstance(toAppend, dict) else False)
+        pandas.concat([self.df, pandas.DataFrame([toAppend])], ignore_index=True if isinstance(toAppend, dict) else False)
 
     def select(self,f,*args):
         def _kept_owner(row, owner_names):
