@@ -282,17 +282,33 @@ def test_make(jsonConfig,findreplace={}):
     twoD.Save()
     
 
-def test_fit(polyOrderB,polyOrderSB,strategy=0):
+def test_fit(polyOrderB,polyOrderSB,strategy=0,rMin=-1,rMax=10,extra=''):
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
     subset = twoD.ledger.select(_select_bkg, polyOrderB, polyOrderSB)
     twoD.MakeCard(subset, '{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB))
 
     params_b = {}
-    params_b["1"] = {'qcd_b_rpfT_1_par0': '8.440', 'qcd_b_rpfT_1_par1': '-4.119', 'qcd_b_rpfT_1_par2': '-1.112'}
-    params_b["2"] = {'qcd_b_rpfT_2_par0': '8.096', 'qcd_b_rpfT_2_par1': '-1.555', 'qcd_b_rpfT_2_par2': '-1.642', 'qcd_b_rpfT_2_par3': '-11.636', 'qcd_b_rpfT_2_par4': '-0.640', 'qcd_b_rpfT_2_par5': '11.133'}
+    params_b["0"] = {'qcd_b_rpfT_0_par0': '6.9148311373'}
+    params_b["1"] = {'qcd_b_rpfT_1_par0': '8.6575722598',
+                     'qcd_b_rpfT_1_par1': '-5.7893436833',
+                     'qcd_b_rpfT_1_par2': '0.1387015498'}
+    params_b["2"] = {'qcd_b_rpfT_2_par0': '8.3453528879',
+                     'qcd_b_rpfT_2_par1': '-3.8788781063',
+                     'qcd_b_rpfT_2_par2': '0.1503823786',
+                     'qcd_b_rpfT_2_par3': '-5.2885497254',
+                     'qcd_b_rpfT_2_par4': '-0.7838629221',
+                     'qcd_b_rpfT_2_par5': '4.0069225054'}
     params_sb = {}
-    params_sb["1"] = {'qcd_sb_rpfT_1_par0': '4.924', 'qcd_sb_rpfT_1_par1': '-3.531', 'qcd_sb_rpfT_1_par2': '0.058'}
-    params_sb["2"] = {'qcd_sb_rpfT_2_par0': '2.761', 'qcd_sb_rpfT_2_par1': '-58.616', 'qcd_sb_rpfT_2_par2': '-99.115', 'qcd_sb_rpfT_2_par3': '26.556', 'qcd_sb_rpfT_2_par4': '62.035', 'qcd_sb_rpfT_2_par5': '20.751'}
+    params_sb["0"] = {'qcd_sb_rpfT_0_par0': '4.7913920207'}
+    params_sb["1"] = {'qcd_sb_rpfT_1_par0': '5.8709689421',
+                      'qcd_sb_rpfT_1_par1': '-4.6498027147',
+                      'qcd_sb_rpfT_1_par2': '0.0964047426'}
+    params_sb["2"] = {'qcd_sb_rpfT_2_par0': '0.2468173970',
+                      'qcd_sb_rpfT_2_par1': '-8.0929020713',
+                      'qcd_sb_rpfT_2_par2': '-5.0885123821',
+                      'qcd_sb_rpfT_2_par3': '-28.2105931629',
+                      'qcd_sb_rpfT_2_par4': '-30.1007173566',
+                      'qcd_sb_rpfT_2_par5': '-25.0249291863'}
 
     setParams = {}
 
@@ -306,7 +322,7 @@ def test_fit(polyOrderB,polyOrderSB,strategy=0):
     else:
         setParams.update(params_sb[polyOrderSB])
 
-    twoD.MLfit('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), strategy=strategy, verbosity=0, rMax=1, extra='--cminDefaultMinimizerTolerance 0.01', setParams=setParams)
+    twoD.MLfit('{0}-b_{1}-sb_area'.format(polyOrderB, polyOrderSB), strategy=strategy, verbosity=0, rMax=1, extra=extra, setParams=setParams)
 
 def test_limit(working_area,polyOrderB,polyOrderSB,json_file,blind=True,strategy=0,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
@@ -488,25 +504,28 @@ if __name__ == '__main__':
         
         test_make(jsonConfig)
 
-        strategy=2
-        
-        skipPlot = [["1","2"],["2","2"]]
-
-        for orderB in ["1","2"]:
-            for orderSB in ["1"]:
-                test_fit(orderB,orderSB,strategy=strategy)
-                if [orderB,orderSB] not in skipPlot:
-                    test_plot(orderB,orderSB)
+        for orderB in ["0","1","2"]:
+            for orderSB in ["0","1","2"]:
+                if [orderB,orderSB] in [["1","1"]]: # currently failing fits
+                    continue
+                if [orderB,orderSB] in [["1","1"]]:
+                    test_fit(orderB,orderSB,strategy=2,rMin=-1,rMax=1)
+                else:
+                    test_fit(orderB,orderSB,strategy=1,rMin=-1,rMax=5)
+                test_plot(orderB,orderSB)
                 if [orderB,orderSB]==bestOrders[working_area]:
                     test_GoF(orderB,orderSB) # this waits for toy fits on Condor to finish
                     test_GoF_plot(orderB,orderSB)
-                    #test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
+                    test_limit(working_area,orderB,orderSB,'%s/runConfig.json'%working_area,blind=True,strategy=2,extra="--rMin=-1 --rMax=5")
 
-        test_FTest(["1","1"],["2","1"])
+        test_FTest(["0","0"],["0","1"])
+        test_FTest(["0","0"],["1","0"])
+        #test_FTest(["0","1"],["1","1"])
+        #test_FTest(["1","0"],["1","1"])
         #test_FTest(["1","1"],["1","2"])
-        #test_FTest(["1","1"],["2","2"])
-        #test_FTest(["1","2"],["2","2"])
-        #test_FTest(["2","1"],["2","2"])
+        #test_FTest(["1","1"],["2","1"])
+        test_FTest(["2","1"],["2","2"])
+        test_FTest(["1","2"],["2","2"])
   
-        # limit calculation put at the end since it crashes when run right after GoF
-        test_limit(working_area,bestOrders[working_area][0],bestOrders[working_area][1],'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
+        # limit calculation put at the end in case it crashes when run right after GoF
+        #test_limit(working_area,bestOrders[working_area][0],bestOrders[working_area][1],'%s/runConfig.json'%working_area,blind=True,strategy=2,extra="--rMin=-1 --rMax=4")

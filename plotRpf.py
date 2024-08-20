@@ -29,16 +29,16 @@ class Pol_2:
 # boosted (best order)
 p_b = Pol_1()
 rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b,x_min,x_max,y_min,y_max,3)
-rpf_boosted_VR.SetParameter(0,8.0882007206)
-rpf_boosted_VR.SetParameter(1,-4.1288497421)
-rpf_boosted_VR.SetParameter(2,-0.4421545562)
+rpf_boosted_VR.SetParameter(0,8.0881995331)
+rpf_boosted_VR.SetParameter(1,-4.1287599152)
+rpf_boosted_VR.SetParameter(2,-0.4422355465)
 
 # semiboosted (best order)
 p_sb = Pol_1()
 rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb,x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_VR.SetParameter(0,4.7173787323)
-rpf_semiboosted_VR.SetParameter(1,-2.4539323352)
-rpf_semiboosted_VR.SetParameter(2,0.1276845726)
+rpf_semiboosted_VR.SetParameter(0,5.6427557544)
+rpf_semiboosted_VR.SetParameter(1,-4.5204553635)
+rpf_semiboosted_VR.SetParameter(2,0.1308225866)
 
 
 if __name__ == '__main__':

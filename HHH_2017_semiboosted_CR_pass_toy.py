@@ -406,9 +406,9 @@ if __name__ == '__main__':
 
         test_make(jsonConfig)
 
-        for order in ["0","1","2","3"]:
+        for order in ["0","1","2"]:
             polyOrder = order
-            if polyOrder in []:
+            if polyOrder in ["2"]:
                 test_fit(strategy=1)
             else:
                 test_fit()
@@ -419,4 +419,4 @@ if __name__ == '__main__':
 
         test_FTest("0","1")
         test_FTest("1","2")
-        test_FTest("2","3")
+        #test_FTest("2","3")

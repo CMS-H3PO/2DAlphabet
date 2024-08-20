@@ -208,7 +208,7 @@ def test_make(jsonConfig,findreplace={}):
     twoD.Save()
     
 
-def test_fit(strategy=0):
+def test_fit(strategy=0,rMin=-1,rMax=10,extra=''):
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
     subset = twoD.ledger.select(_select_bkg, polyOrder)
     twoD.MakeCard(subset, '{0}_area'.format(polyOrder))
@@ -221,7 +221,7 @@ def test_fit(strategy=0):
     #     print("Fit cmd: ", fitCmd)
     #     os.system(fitCmd)
 
-    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
+    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,rMin=rMin,rMax=rMax,extra=extra,verbosity=0)
 
 def test_limit(working_area,orderSR,json_file,blind=True,strategy=0,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
@@ -408,20 +408,22 @@ if __name__ == '__main__':
 
         test_make(jsonConfig)
 
-        for order in ["0","1","2"]:
+        for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in ["0","1","2"]:
-                test_fit(strategy=2)
-            elif polyOrder in []:
-                test_fit(strategy=1)
+            if polyOrder in ["0","3"]:
+                test_fit(strategy=1,rMin=-1,rMax=1)
+            elif polyOrder in ["2"]:
+                test_fit(strategy=1,rMin=-5,rMax=10)
+            elif polyOrder in ["1"]:
+                test_fit(strategy=2,rMin=-1,rMax=1)
             else:
                 test_fit()
             test_plot()
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish
                 test_GoF_plot()
-                test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=1,extra="--rMin=-1 --rMax=5")
+                test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=2,extra="--rMin=-1 --rMax=5")
 
         test_FTest("0","1")
         test_FTest("1","2")
-        #test_FTest("2","3")
+        test_FTest("2","3")
