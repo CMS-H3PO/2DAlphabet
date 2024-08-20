@@ -61,11 +61,11 @@ python plotRpf.py
 ```
 The toy data is generated using the `generateToys.py` script which imports the transfer functions from `plotRpf.py`
 ```
-python generateToys.py -t /STORE/HHH/Histograms/2017/latest/TTbar_Histograms.root -d /STORE/HHH/Histograms/2017/latest/JetHT_Histograms.root
+python generateToys.py -t symlink2histograms_2017/TTbar_Histograms.root -d symlink2histograms_2017/JetHT_Histograms.root
 ```
 Two output files are produced, `JetHT_Histograms_VR_pass_toy.root` with the toy data in the pass category of the control regions and `JetHT_Histograms_SR_pass_toy.root` with the toy data in the pass category of the signal regions. These files need to be moved to the same folder with the other histogram files
 ```
-mv JetHT_Histograms_*_pass_toy.root /STORE/HHH/Histograms/2017/latest/
+mv JetHT_Histograms_*_pass_toy.root symlink2histograms_2017
 ```
 The toy data in the control regions is used in `HHH_2017_boosted_CR_pass_toy.py` and `HHH_2017_semiboosted_CR_pass_toy.py` as a sort of sanity check (closure test) to check whether the toy data fits converge to parameter values similar to those used in the generation of the toy data
 ```
