@@ -66,7 +66,7 @@
        "HIST_DOWN":"mjj_vs_mjjj_SR_$region__$syst_down",
        "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_$systUp",
        "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_$systDown",
-       "PATH":"/STORE/HHH/Histograms/2017/latest",
+       "PATH":"symlink2histograms_2017",
        "FILE":"$process_Histograms.root"
     },
     "BINNING":{
