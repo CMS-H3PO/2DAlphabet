@@ -30,10 +30,10 @@ cd -
 source twoD-env/bin/activate
 cd 2DAlphabet
 ```
-or alternatively just run
+or alternatively just source the activation script
 ```
-source 2DAlphabet/activate_env
 cd 2DAlphabet
+source activate_env
 ```
 
 # Running fits
