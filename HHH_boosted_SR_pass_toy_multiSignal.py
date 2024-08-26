@@ -6,6 +6,7 @@ from TwoDAlphabet.helpers import make_env_tarball, cd, execute_cmd
 from TwoDAlphabet.ftest import FstatCalc
 import os
 import ROOT as r
+from argparse import ArgumentParser
 '''--------------------------Helper functions---------------------------'''
 def _gof_for_FTest(twoD, subtag, card_or_w='card.txt'):
 
@@ -404,6 +405,19 @@ if __name__ == '__main__':
     # This only needs to be run once unless you fundamentally change your working environment.
     # make_env_tarball()
 
+    # usage example
+    Description = "Example: %(prog)s -y 2017"
+
+    # input parameters
+    parser = ArgumentParser(description=Description)
+
+    parser.add_argument("-y", "--year", dest="year",
+                        help="Data taking year(s) (e.g. 2017, Run2)",
+                        required=True,
+                        metavar="YEAR")
+
+    (options, args) = parser.parse_known_args()
+
     sigNames = [
         "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",
         "XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1200_MY-600", "XToYHTo6B_MX-1200_MY-800", "XToYHTo6B_MX-1200_MY-1000",
@@ -422,8 +436,8 @@ if __name__ == '__main__':
     #rMax = 2
     #strategy = 1
 
-    bestOrder = {"2017_boosted_SR_pass_toy_multiSignal":"1"}
-    for working_area in ["2017_boosted_SR_pass_toy_multiSignal"]:
+    bestOrder = {"{}_boosted_SR_pass_toy_multiSignal".format(options.year):"1"}
+    for working_area in ["{}_boosted_SR_pass_toy_multiSignal".format(options.year)]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 

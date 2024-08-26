@@ -6,6 +6,7 @@ from TwoDAlphabet.helpers import make_env_tarball, cd, execute_cmd
 from TwoDAlphabet.ftest import FstatCalc
 import os
 import ROOT as r
+from argparse import ArgumentParser
 '''--------------------------Helper functions---------------------------'''
 def _gof_for_FTest(twoD, subtag, card_or_w='card.txt'):
 
@@ -496,9 +497,21 @@ if __name__ == '__main__':
     # This only needs to be run once unless you fundamentally change your working environment.
     # make_env_tarball()
 
+    # usage example
+    Description = "Example: %(prog)s -y 2017"
 
-    bestOrders = {"2017_combined_SR_pass_toy":["1","1"]}
-    for working_area in ["2017_combined_SR_pass_toy"]:
+    # input parameters
+    parser = ArgumentParser(description=Description)
+
+    parser.add_argument("-y", "--year", dest="year",
+                        help="Data taking year(s) (e.g. 2017, Run2)",
+                        required=True,
+                        metavar="YEAR")
+
+    (options, args) = parser.parse_known_args()
+
+    bestOrders = {"{}_combined_SR_pass_toy".format(options.year):["1","1"]}
+    for working_area in ["{}_combined_SR_pass_toy".format(options.year)]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
         
@@ -506,10 +519,13 @@ if __name__ == '__main__':
 
         for orderB in ["0","1","2"]:
             for orderSB in ["0","1","2"]:
-                if [orderB,orderSB] in [["1","1"]]: # currently failing fits
-                    continue
-                if [orderB,orderSB] in [["1","1"]]:
-                    test_fit(orderB,orderSB,strategy=2,rMin=-1,rMax=1)
+                if options.year == "2017":
+                    if [orderB,orderSB] in [["1","1"]]: # currently failing fits
+                        continue
+                    if [orderB,orderSB] in [["1","1"]]:
+                        test_fit(orderB,orderSB,strategy=2,rMin=-1,rMax=1)
+                    else:
+                        test_fit(orderB,orderSB,strategy=1,rMin=-1,rMax=5)
                 else:
                     test_fit(orderB,orderSB,strategy=1,rMin=-1,rMax=5)
                 test_plot(orderB,orderSB)

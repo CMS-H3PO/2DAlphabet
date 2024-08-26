@@ -6,6 +6,7 @@ from TwoDAlphabet.helpers import make_env_tarball, cd, execute_cmd
 from TwoDAlphabet.ftest import FstatCalc
 import os
 import ROOT as r
+from argparse import ArgumentParser
 '''--------------------------Helper functions---------------------------'''
 def _gof_for_FTest(twoD, subtag, card_or_w='card.txt'):
 
@@ -398,9 +399,21 @@ if __name__ == '__main__':
     # This only needs to be run once unless you fundamentally change your working environment.
     # make_env_tarball()
 
+    # usage example
+    Description = "Example: %(prog)s -y 2017"
 
-    bestOrder = {"2017_boosted_CR":"1"}
-    for working_area in ["2017_boosted_CR"]:
+    # input parameters
+    parser = ArgumentParser(description=Description)
+
+    parser.add_argument("-y", "--year", dest="year",
+                        help="Data taking year(s) (e.g. 2017, Run2)",
+                        required=True,
+                        metavar="YEAR")
+
+    (options, args) = parser.parse_known_args()
+
+    bestOrder = {"{}_boosted_CR".format(options.year):"1"}
+    for working_area in ["{}_boosted_CR".format(options.year)]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
@@ -408,10 +421,13 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in ["2"]:
-                test_fit(strategy=2, rMin=-4, rMax=6)
-            if polyOrder in ["3"]:
-                test_fit(strategy=2, rMin=-5, rMax=5)
+            if options.year == "2017":
+                if polyOrder in ["2"]:
+                    test_fit(strategy=2, rMin=-4, rMax=6)
+                if polyOrder in ["3"]:
+                    test_fit(strategy=2, rMin=-5, rMax=5)
+                else:
+                    test_fit(strategy=1, rMin=-5, rMax=5)
             else:
                 test_fit(strategy=1, rMin=-5, rMax=5)
             test_plot()

@@ -6,6 +6,7 @@ from TwoDAlphabet.helpers import make_env_tarball, cd, execute_cmd
 from TwoDAlphabet.ftest import FstatCalc
 import os
 import ROOT as r
+from argparse import ArgumentParser
 '''--------------------------Helper functions---------------------------'''
 def _gof_for_FTest(twoD, subtag, card_or_w='card.txt'):
 
@@ -208,7 +209,7 @@ def test_make(jsonConfig,findreplace={}):
     twoD.Save()
     
 
-def test_fit(strategy=0):
+def test_fit(strategy=0, rMin=-1, rMax=10):
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
     subset = twoD.ledger.select(_select_bkg, polyOrder)
     twoD.MakeCard(subset, '{0}_area'.format(polyOrder))
@@ -221,7 +222,7 @@ def test_fit(strategy=0):
     #     print("Fit cmd: ", fitCmd)
     #     os.system(fitCmd)
 
-    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
+    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,rMin=rMin,rMax=rMax,verbosity=0)
 
 def test_limit(working_area,orderSR,json_file,blind=True):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
@@ -398,9 +399,21 @@ if __name__ == '__main__':
     # This only needs to be run once unless you fundamentally change your working environment.
     # make_env_tarball()
 
+    # usage example
+    Description = "Example: %(prog)s -y 2017"
 
-    bestOrder = {"2017_semiboosted_CR":"1"}
-    for working_area in ["2017_semiboosted_CR"]:
+    # input parameters
+    parser = ArgumentParser(description=Description)
+
+    parser.add_argument("-y", "--year", dest="year",
+                        help="Data taking year(s) (e.g. 2017, Run2)",
+                        required=True,
+                        metavar="YEAR")
+
+    (options, args) = parser.parse_known_args()
+
+    bestOrder = {"{}_semiboosted_CR".format(options.year):"1"}
+    for working_area in ["{}_semiboosted_CR".format(options.year)]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
@@ -408,10 +421,13 @@ if __name__ == '__main__':
 
         for order in ["0","1","2","3"]:
             polyOrder = order
-            if polyOrder in ["3"]:
-                test_fit(strategy=1)
+            if options.year == "2017":
+                if polyOrder in ["3"]:
+                    test_fit(strategy=1)
+                else:
+                    test_fit()
             else:
-                test_fit()
+                test_fit(strategy=1, rMin=-5, rMax=5)
             test_plot()
             if polyOrder==bestOrder[working_area]:
                 test_GoF() # this waits for toy fits on Condor to finish
