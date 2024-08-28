@@ -3,7 +3,7 @@ from argparse import ArgumentParser
 
 
 def generate(ttbar_path, data_path, region):
-    from plotRpf import x_min, x_max, y_min, y_max, rpf_boosted_VR, rpf_semiboosted_VR
+    from plotRpf_VR import x_min, x_max, y_min, y_max, rpf_boosted_VR, rpf_semiboosted_VR
     import ROOT
 
     print('Processing {0} region...\n'.format(region))

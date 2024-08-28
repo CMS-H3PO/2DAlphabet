@@ -412,8 +412,8 @@ if __name__ == '__main__':
 
     (options, args) = parser.parse_known_args()
 
-    bestOrder = {"{}_boosted_CR_pass_toy".format(options.year):"1"}
-    for working_area in ["{}_boosted_CR_pass_toy".format(options.year)]:
+    bestOrder = {"{}_boosted_VR_pass_toy".format(options.year):"1"}
+    for working_area in ["{}_boosted_VR_pass_toy".format(options.year)]:
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
