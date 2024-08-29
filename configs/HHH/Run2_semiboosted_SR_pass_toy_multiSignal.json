@@ -33,26 +33,13 @@
         }
     },
     "REGIONS":{
-       "fail_boosted":{
+       "fail":{
           "PROCESSES":[
             "TTbar"
           ],
           "BINNING":"default"
        },
-       "pass_boosted":{
-          "PROCESSES":[
-            "TTbar",
-            "SIGNAME"
-          ],
-          "BINNING":"default"
-       },
-       "fail_semiboosted":{
-          "PROCESSES":[
-            "TTbar"
-          ],
-          "BINNING":"default"
-       },
-       "pass_semiboosted":{
+       "pass":{
           "PROCESSES":[
             "TTbar",
             "SIGNAME"
@@ -61,12 +48,12 @@
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_SR_$region_nominal",
-       "HIST_UP":"mjj_vs_mjjj_SR_$region__$syst_up",
-       "HIST_DOWN":"mjj_vs_mjjj_SR_$region__$syst_down",
-       "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_$systUp",
-       "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_$systDown",
-       "PATH":"symlink2histograms_2017",
+       "HIST":"mjj_vs_mjjj_SR_$region_semiboosted_nominal",
+       "HIST_UP":"mjj_vs_mjjj_SR_$region_semiboosted__$syst_up",
+       "HIST_DOWN":"mjj_vs_mjjj_SR_$region_semiboosted__$syst_down",
+       "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_semiboosted_$systUp",
+       "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_semiboosted_$systDown",
+       "PATH":"symlink2histograms_Run2",
        "FILE":"$process_Histograms.root",
        "SIGNAME": [
           "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",

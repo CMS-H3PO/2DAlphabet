@@ -53,7 +53,7 @@
        "HIST_DOWN":"mjj_vs_mjjj_SR_$region_boosted__$syst_down",
        "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_boosted_$systUp",
        "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_boosted_$systDown",
-       "PATH":"/STORE/HHH/Histograms/2017/20231220_123208",
+       "PATH":"symlink2histograms_2017",
        "FILE":"$process_Histograms.root",
        "SIGNAME": [
           "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",

@@ -21,7 +21,7 @@
           "TITLE":"t#bar{t}",
           "LOC":"PATH/FILE:HIST"
        },
-       "SIGNAME":{
+       "XToYHTo6B_MX-2500_MY-800":{
           "SYSTEMATICS":[
              "lumi"
           ],
@@ -42,7 +42,7 @@
        "pass_boosted":{
           "PROCESSES":[
             "TTbar",
-            "SIGNAME"
+            "XToYHTo6B_MX-2500_MY-800"
           ],
           "BINNING":"default"
        },
@@ -55,7 +55,7 @@
        "pass_semiboosted":{
           "PROCESSES":[
             "TTbar",
-            "SIGNAME"
+            "XToYHTo6B_MX-2500_MY-800"
           ],
           "BINNING":"default"
        }
@@ -66,18 +66,8 @@
        "HIST_DOWN":"mjj_vs_mjjj_SR_$region__$syst_down",
        "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_$systUp",
        "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_$systDown",
-       "PATH":"symlink2histograms_2017",
-       "FILE":"$process_Histograms.root",
-       "SIGNAME": [
-          "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",
-          "XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1200_MY-600", "XToYHTo6B_MX-1200_MY-800", "XToYHTo6B_MX-1200_MY-1000",
-          "XToYHTo6B_MX-1600_MY-300", "XToYHTo6B_MX-1600_MY-600", "XToYHTo6B_MX-1600_MY-800", "XToYHTo6B_MX-1600_MY-1000", "XToYHTo6B_MX-1600_MY-1200", "XToYHTo6B_MX-1600_MY-1400",
-          "XToYHTo6B_MX-2000_MY-300", "XToYHTo6B_MX-2000_MY-600", "XToYHTo6B_MX-2000_MY-800", "XToYHTo6B_MX-2000_MY-1000", "XToYHTo6B_MX-2000_MY-1200", "XToYHTo6B_MX-2000_MY-1600", "XToYHTo6B_MX-2000_MY-1800",
-          "XToYHTo6B_MX-2500_MY-300", "XToYHTo6B_MX-2500_MY-600", "XToYHTo6B_MX-2500_MY-800", "XToYHTo6B_MX-2500_MY-1000", "XToYHTo6B_MX-2500_MY-1200", "XToYHTo6B_MX-2500_MY-1600", "XToYHTo6B_MX-2500_MY-2000", "XToYHTo6B_MX-2500_MY-2200",
-          "XToYHTo6B_MX-3000_MY-300", "XToYHTo6B_MX-3000_MY-600", "XToYHTo6B_MX-3000_MY-800", "XToYHTo6B_MX-3000_MY-1000", "XToYHTo6B_MX-3000_MY-1200", "XToYHTo6B_MX-3000_MY-1600", "XToYHTo6B_MX-3000_MY-2000", "XToYHTo6B_MX-3000_MY-2500", "XToYHTo6B_MX-3000_MY-2800",
-          "XToYHTo6B_MX-3500_MY-300", "XToYHTo6B_MX-3500_MY-600", "XToYHTo6B_MX-3500_MY-800", "XToYHTo6B_MX-3500_MY-1000", "XToYHTo6B_MX-3500_MY-1200", "XToYHTo6B_MX-3500_MY-1600", "XToYHTo6B_MX-3500_MY-2000", "XToYHTo6B_MX-3500_MY-2500", "XToYHTo6B_MX-3500_MY-2800",
-          "XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-1000", "XToYHTo6B_MX-4000_MY-1200", "XToYHTo6B_MX-4000_MY-1600", "XToYHTo6B_MX-4000_MY-2000", "XToYHTo6B_MX-4000_MY-2500", "XToYHTo6B_MX-4000_MY-2800"
-       ]
+       "PATH":"symlink2histograms_Run2",
+       "FILE":"$process_Histograms.root"
     },
     "BINNING":{
        "default":{

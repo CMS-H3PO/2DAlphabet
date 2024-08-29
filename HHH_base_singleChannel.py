@@ -1,11 +1,9 @@
-from time import time
 from TwoDAlphabet import plot
 from TwoDAlphabet.twoDalphabet import MakeCard, TwoDAlphabet
 from TwoDAlphabet.alphawrap import BinnedDistribution, ParametricFunction
 from TwoDAlphabet.helpers import make_env_tarball, cd, execute_cmd
 from TwoDAlphabet.ftest import FstatCalc
-import os
-import ROOT as r
+
 '''--------------------------Helper functions---------------------------'''
 def _gof_for_FTest(twoD, subtag, card_or_w='card.txt'):
 
@@ -53,7 +51,14 @@ def _select_bkg(row, args):
     '''
     poly_order = args[0]
     if row.process_type == 'SIGNAL':
-        return True
+        if len(args)>1:
+            signame = args[1]
+            if signame in row.process:
+                return True
+            else:
+                return False
+        else:
+            return True
     elif 'qcd_' in row.process:
         if row.process == 'qcd_'+poly_order:
             return True
@@ -123,7 +128,7 @@ _rpf_options = {
 }
 
 '''---------------Primary functions---------------------------'''
-def test_make(jsonConfig,findreplace={}):
+def test_make(working_area,jsonConfig,findreplace={}):
     '''Constructs the workspace for either the CR or SR (a different function
     could build them simultanesouly but in this example, we don't care to fit
     the two simultanesouly so separate treatment is fine).
@@ -208,22 +213,16 @@ def test_make(jsonConfig,findreplace={}):
     twoD.Save()
     
 
-def test_fit(strategy=0):
+def test_fit(working_area,polyOrder,sigName=None,strategy=0,rMin=-1,rMax=10,setParams={},extra=''):
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
-    subset = twoD.ledger.select(_select_bkg, polyOrder)
+    if sigName is not None:
+        subset = twoD.ledger.select(_select_bkg, polyOrder, sigName)
+    else:
+        subset = twoD.ledger.select(_select_bkg, polyOrder)
     twoD.MakeCard(subset, '{0}_area'.format(polyOrder))
-    #apply TnP and run fit
-    # with cd(working_area+"/"+'{0}_area'.format(polyOrder)):
-    #     # print("Creating TnP wspace: {0}/Tnp.root".format(os.getcwd()))
-    #     # TnPCmd = "text2workspace.py  -m 125 -P HiggsAnalysis.CombinedLimit.TagAndProbeExtended:tagAndProbe --PO categories=ZJets_bc,WJets_c card.txt  -o TnP.root"
-    #     fitCmd = "combine -M FitDiagnostics TnP.root --cminDefaultMinimizerStrategy 0 --robustHesse 1 --saveWorkspace"
-    #     # os.system(TnPCmd)
-    #     print("Fit cmd: ", fitCmd)
-    #     os.system(fitCmd)
+    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,rMin=rMin,rMax=rMax,setParams=setParams,extra=extra,verbosity=0)
 
-    twoD.MLfit('{0}_area'.format(polyOrder),strategy=strategy,verbosity=0)
-
-def test_limit(working_area,orderSR,json_file,blind=True):
+def test_limit(working_area,orderSR,json_file,blind=True,strategy=0,extra=''):
     '''Perform a blinded limit. To be blinded, the Combine algorithm (via option `--run blind`)
     will create an Asimov toy dataset from the pre-fit model. Since the TF parameters are meaningless
     in our true "pre-fit", we need to load in the parameter values from a different fit so we have
@@ -242,12 +241,14 @@ def test_limit(working_area,orderSR,json_file,blind=True):
         subtag='{0}_area'.format(orderSR),
         blindData=blind,
         verbosity=1,
+        strategy=strategy,
         setParams=params_to_set,
-        condor=False
+        condor=False,
+        extra=extra
     )
 
 
-def test_plot():
+def test_plot(working_area,polyOrder):
     '''Load the twoD object again and run standard plots for a specific subtag.
     Assumes loading the Ledger in this sub-directory but a different one can
     be provided if desired.
@@ -256,7 +257,7 @@ def test_plot():
     subset = twoD.ledger.select(_select_bkg, polyOrder)
     twoD.StdPlots('{0}_area'.format(polyOrder), subset)
 
-def test_GoF():
+def test_GoF(working_area,polyOrder):
     '''Perform a Goodness of Fit test using an existing working area.
     Requires using data so SRorCR is enforced to be 'CR' to avoid accidental unblinding.
     '''
@@ -277,11 +278,11 @@ def test_GoF():
     # See test_GoF_plot() for plotting (which will also collect the outputs from the jobs).
 
 
-def test_GoF_plot():
+def test_GoF_plot(working_area,polyOrder):
     plot.plot_gof(working_area,'{0}_area'.format(polyOrder), condor=True,lorien=True)
 
 
-def test_Impacts():
+def test_Impacts(working_area,polyOrder):
 
     twoD = TwoDAlphabet(working_area, '%s/runConfig.json'%working_area, loadPrevious=True)
     subset = twoD.ledger.select(_select_bkg, polyOrder)
@@ -292,7 +293,7 @@ def test_Impacts():
     )
 
 
-def test_FTest(poly1,poly2):
+def test_FTest(working_area,poly1,poly2):
     '''Perform an F-test using existing working areas.
     '''
 
@@ -319,8 +320,10 @@ def test_FTest(poly1,poly2):
     print(base_fstat)
 
     def plot_FTest(base_fstat,nRpfs1,nRpfs2,nBins):
-        from ROOT import TF1, TH1F, TLegend, TPaveText, TLatex, TArrow, TCanvas, kBlue, gStyle
+        from ROOT import TF1, TH1F, TLegend, TPaveText, TLatex, TArrow, TCanvas, kRed, kBlue, gStyle
         gStyle.SetOptStat(0000)
+        gStyle.SetPadTickX(1)  # to get the tick marks on the opposite side of the frame
+        gStyle.SetPadTickY(1)  # to get the tick marks on the opposite side of the frame
 
         if len(base_fstat) == 0: base_fstat = [0.0]
 
@@ -351,6 +354,7 @@ def test_FTest(poly1,poly2):
         ftestobs  = TArrow(base_fstat[0],0.25,base_fstat[0],0)
         ftestobs.SetLineColor(kBlue+1)
         ftestobs.SetLineWidth(2)
+        fdist.SetLineColor(kRed)
         fdist.Draw('same')
 
         ftestobs.Draw()
@@ -385,38 +389,3 @@ def test_FTest(poly1,poly2):
             c.SaveAs(working_area+'/ftest_{0}_vs_{1}_notoys.{2}'.format(poly1,poly2,ext))
 
     plot_FTest(base_fstat,nRpfs1,nRpfs2,nBins)
-
-def test_sf(working_area,polyOrder):
-    os.chdir("{0}/{1}_area".format(working_area,polyOrder))
-    fitCmd = "combine -M MultiDimFit TnP.root --algo singles --cminDefaultMinimizerStrategy=0"
-    print("Fit cmd: ", fitCmd)
-    os.system(fitCmd)
-    os.chdir("../..")
-
-if __name__ == '__main__':
-    # Provided for convenience is this function which will package the current CMSSW and store it on the user's EOS (assumes FNAL).
-    # This only needs to be run once unless you fundamentally change your working environment.
-    # make_env_tarball()
-
-
-    bestOrder = {"2017_semiboosted_CR_pass_toy":"1"}
-    for working_area in ["2017_semiboosted_CR_pass_toy"]:
-
-        jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
-
-        test_make(jsonConfig)
-
-        for order in ["0","1","2"]:
-            polyOrder = order
-            if polyOrder in ["2"]:
-                test_fit(strategy=1)
-            else:
-                test_fit()
-            test_plot()
-            if polyOrder==bestOrder[working_area]:
-                test_GoF() # this waits for toy fits on Condor to finish
-                test_GoF_plot()
-
-        test_FTest("0","1")
-        test_FTest("1","2")
-        #test_FTest("2","3")
