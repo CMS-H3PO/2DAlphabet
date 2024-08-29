@@ -8,7 +8,7 @@
           "COLOR":1,
           "TYPE":"DATA",
           "TITLE":"data_obs",
-          "LOC":"PATH/JetHT_Histograms_SR_pass_toy.root:HIST"
+          "LOC":"PATH/JetHT_Histograms.root:HIST"
        },
        "TTbar":{
           "SYSTEMATICS":[
@@ -21,7 +21,17 @@
           "TITLE":"t#bar{t}",
           "LOC":"PATH/FILE:HIST"
        },
-       "SIGNAME":{
+       "QCD":{
+          "SYSTEMATICS":[
+             "lumi"
+          ],
+          "SCALE":1.0,
+          "COLOR":8,
+          "TYPE":"BKG",
+          "TITLE":"QCD",
+          "LOC":"PATH/FILE:HIST"
+       },
+       "XToYHTo6B_MX-2500_MY-800":{
           "SYSTEMATICS":[
              "lumi"
           ],
@@ -42,29 +52,19 @@
        "pass":{
           "PROCESSES":[
             "TTbar",
-            "SIGNAME"
+            "XToYHTo6B_MX-2500_MY-800"
           ],
           "BINNING":"default"
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_SR_$region_semiboosted_nominal",
-       "HIST_UP":"mjj_vs_mjjj_SR_$region_semiboosted__$syst_up",
-       "HIST_DOWN":"mjj_vs_mjjj_SR_$region_semiboosted__$syst_down",
-       "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_semiboosted_$systUp",
-       "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_semiboosted_$systDown",
-       "PATH":"symlink2histograms_2017",
-       "FILE":"$process_Histograms.root",
-       "SIGNAME": [
-          "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",
-          "XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1200_MY-600", "XToYHTo6B_MX-1200_MY-800", "XToYHTo6B_MX-1200_MY-1000",
-          "XToYHTo6B_MX-1600_MY-300", "XToYHTo6B_MX-1600_MY-600", "XToYHTo6B_MX-1600_MY-800", "XToYHTo6B_MX-1600_MY-1000", "XToYHTo6B_MX-1600_MY-1200", "XToYHTo6B_MX-1600_MY-1400",
-          "XToYHTo6B_MX-2000_MY-300", "XToYHTo6B_MX-2000_MY-600", "XToYHTo6B_MX-2000_MY-800", "XToYHTo6B_MX-2000_MY-1000", "XToYHTo6B_MX-2000_MY-1200", "XToYHTo6B_MX-2000_MY-1600", "XToYHTo6B_MX-2000_MY-1800",
-          "XToYHTo6B_MX-2500_MY-300", "XToYHTo6B_MX-2500_MY-600", "XToYHTo6B_MX-2500_MY-800", "XToYHTo6B_MX-2500_MY-1000", "XToYHTo6B_MX-2500_MY-1200", "XToYHTo6B_MX-2500_MY-1600", "XToYHTo6B_MX-2500_MY-2000", "XToYHTo6B_MX-2500_MY-2200",
-          "XToYHTo6B_MX-3000_MY-300", "XToYHTo6B_MX-3000_MY-600", "XToYHTo6B_MX-3000_MY-800", "XToYHTo6B_MX-3000_MY-1000", "XToYHTo6B_MX-3000_MY-1200", "XToYHTo6B_MX-3000_MY-1600", "XToYHTo6B_MX-3000_MY-2000", "XToYHTo6B_MX-3000_MY-2500", "XToYHTo6B_MX-3000_MY-2800",
-          "XToYHTo6B_MX-3500_MY-300", "XToYHTo6B_MX-3500_MY-600", "XToYHTo6B_MX-3500_MY-800", "XToYHTo6B_MX-3500_MY-1000", "XToYHTo6B_MX-3500_MY-1200", "XToYHTo6B_MX-3500_MY-1600", "XToYHTo6B_MX-3500_MY-2000", "XToYHTo6B_MX-3500_MY-2500", "XToYHTo6B_MX-3500_MY-2800",
-          "XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-1000", "XToYHTo6B_MX-4000_MY-1200", "XToYHTo6B_MX-4000_MY-1600", "XToYHTo6B_MX-4000_MY-2000", "XToYHTo6B_MX-4000_MY-2500", "XToYHTo6B_MX-4000_MY-2800"
-       ]
+       "HIST":"mjj_vs_mjjj_VR_$region_boosted_nominal",
+       "HIST_UP":"mjj_vs_mjjj_VR_$region_boosted__$syst_up",
+       "HIST_DOWN":"mjj_vs_mjjj_VR_$region_boosted__$syst_down",
+       "HIST_ALT_UP":"mjj_vs_mjjj_VR_$region_boosted_$systUp",
+       "HIST_ALT_DOWN":"mjj_vs_mjjj_VR_$region_boosted_$systDown",
+       "PATH":"symlink2histograms_Run2",
+       "FILE":"$process_Histograms.root"
     },
     "BINNING":{
        "default":{
@@ -132,7 +132,7 @@
        "plotTemplateComparisons":false,
        "plotUncerts":true,
        "plotTitles":false,
-       "year":17,
+       "year":2,
        "plotEvtsPerUnit":true
     }
  }

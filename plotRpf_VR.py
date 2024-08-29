@@ -1,4 +1,5 @@
 import ROOT
+from argparse import ArgumentParser
 
 # variable ranges
 x_min = 1000.
@@ -25,23 +26,59 @@ class Pol_2:
         return 0.01*(par[0]+par[1]*x+par[2]*y+par[3]*x*y+par[4]*x**2+par[5]*y**2)
 
 
-# fail-to-pass transfer functions
-# boosted (best order)
-p_b = Pol_1()
-rpf_boosted_VR = ROOT.TF2("rpf_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b,x_min,x_max,y_min,y_max,3)
-rpf_boosted_VR.SetParameter(0,8.0881995331)
-rpf_boosted_VR.SetParameter(1,-4.1287599152)
-rpf_boosted_VR.SetParameter(2,-0.4422355465)
+# various dictionaries
+p_b = {}
+p_sb = {}
+rpf_boosted_VR = {}
+rpf_semiboosted_VR = {}
 
-# semiboosted (best order)
-p_sb = Pol_1()
-rpf_semiboosted_VR = ROOT.TF2("rpf_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb,x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_VR.SetParameter(0,5.6427557544)
-rpf_semiboosted_VR.SetParameter(1,-4.5204553635)
-rpf_semiboosted_VR.SetParameter(2,0.1308225866)
+# fail-to-pass transfer functions
+# 2017 boosted (best order)
+p_b["2017"] = Pol_1()
+rpf_boosted_VR["2017"] = ROOT.TF2("rpf_2017_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b["2017"],x_min,x_max,y_min,y_max,3)
+rpf_boosted_VR["2017"].SetParameter(0, 6.7883914210)
+rpf_boosted_VR["2017"].SetParameter(1,-2.0860648454)
+rpf_boosted_VR["2017"].SetParameter(2,-0.1686687186)
+
+# 2017 semiboosted (best order)
+p_sb["2017"] = Pol_2()
+rpf_semiboosted_VR["2017"] = ROOT.TF2("rpf_2017_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb["2017"],x_min,x_max,y_min,y_max,6)
+rpf_semiboosted_VR["2017"].SetParameter(0,  6.4651734716)
+rpf_semiboosted_VR["2017"].SetParameter(1,-10.0929566939)
+rpf_semiboosted_VR["2017"].SetParameter(2,  0.8282578892)
+rpf_semiboosted_VR["2017"].SetParameter(3, -1.4141915980)
+rpf_semiboosted_VR["2017"].SetParameter(4,  6.5962144738)
+rpf_semiboosted_VR["2017"].SetParameter(5, -0.2529193492)
+
+# Run2 boosted (best order)
+p_b["Run2"] = Pol_1()
+rpf_boosted_VR["Run2"] = ROOT.TF2("rpf_Run2_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b["Run2"],x_min,x_max,y_min,y_max,3)
+rpf_boosted_VR["Run2"].SetParameter(0, 6.5534827179)
+rpf_boosted_VR["Run2"].SetParameter(1,-2.0400984340)
+rpf_boosted_VR["Run2"].SetParameter(2, 0.0269989296)
+
+# Run2 semiboosted (best order)
+p_sb["Run2"] = Pol_1()
+rpf_semiboosted_VR["Run2"] = ROOT.TF2("rpf_Run2_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb["Run2"],x_min,x_max,y_min,y_max,3)
+rpf_semiboosted_VR["Run2"].SetParameter(0, 5.7540057036)
+rpf_semiboosted_VR["Run2"].SetParameter(1,-4.3803180949)
+rpf_semiboosted_VR["Run2"].SetParameter(2, 0.1271903704)
 
 
 if __name__ == '__main__':
+    # usage example
+    Description = "Example: %(prog)s -y 2017"
+
+    # input parameters
+    parser = ArgumentParser(description=Description)
+
+    parser.add_argument("-y", "--year", dest="year",
+                        help="Data taking year(s) (e.g. 2017, Run2)",
+                        required=True,
+                        metavar="YEAR")
+
+    (options, args) = parser.parse_known_args()
+
     # to run in the batch mode (to prevent canvases from popping up)
     ROOT.gROOT.SetBatch()
 
@@ -57,10 +94,10 @@ if __name__ == '__main__':
     c = ROOT.TCanvas("c", "",1000,800)
     c.cd()
     
-    rpf_boosted_VR.Draw("colz")
+    rpf_boosted_VR[options.year].Draw("colz")
 
-    c.SaveAs("rpf_boosted_VR.png")
+    c.SaveAs("rpf_{}_boosted_VR.png".format(options.year))
 
-    rpf_semiboosted_VR.Draw("colz")
+    rpf_semiboosted_VR[options.year].Draw("colz")
 
-    c.SaveAs("rpf_semiboosted_VR.png")
+    c.SaveAs("rpf_{}_semiboosted_VR.png".format(options.year))

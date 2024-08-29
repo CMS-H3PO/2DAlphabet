@@ -2,7 +2,7 @@ import os
 from argparse import ArgumentParser
 
 
-def generate(ttbar_path, data_path, region):
+def generate(year, ttbar_path, data_path, region):
     from plotRpf_VR import x_min, x_max, y_min, y_max, rpf_boosted_VR, rpf_semiboosted_VR
     import ROOT
 
@@ -58,7 +58,7 @@ def generate(ttbar_path, data_path, region):
                 print('WARNING: qcd_fail_b negative for (mjjj, mjj)=({0}, {1}). Manually set to 0 (data_fail_b={2}, ttbar_fail_b={3})'.format(x_center, y_center, data_fail_b, ttbar_fail_b))
                 qcd_fail_b = 0.
 
-            qcd_pass_b_exp = qcd_fail_b * rpf_boosted_VR.Eval(x_center, y_center)
+            qcd_pass_b_exp = qcd_fail_b * rpf_boosted_VR[year].Eval(x_center, y_center)
             
             # in case the transfer function becomes negative (it shouldn't in the phase space of interest)
             if qcd_pass_b_exp < 0.:
@@ -84,7 +84,7 @@ def generate(ttbar_path, data_path, region):
                 print('WARNING: qcd_fail_sb negative for (mjjj, mjj)=({0}, {1}). Manually set to 0 (data_fail_sb={2}, ttbar_fail_sb={3})'.format(x_center, y_center, data_fail_sb, ttbar_fail_sb))
                 qcd_fail_sb = 0.
 
-            qcd_pass_sb_exp = qcd_fail_sb * rpf_semiboosted_VR.Eval(x_center, y_center)
+            qcd_pass_sb_exp = qcd_fail_sb * rpf_semiboosted_VR[year].Eval(x_center, y_center)
             
             # in case the transfer function becomes negative (it shouldn't in the phase space of interest)
             if qcd_pass_sb_exp < 0.:
@@ -112,10 +112,15 @@ def generate(ttbar_path, data_path, region):
 
 if __name__ == '__main__':
     # usage example
-    Description = "Example: %(prog)s -t /STORE/HHH/Histograms/2017/20231019_162502/TTbar_Histograms.root -d /STORE/HHH/Histograms/2017/20231019_162502/JetHT_Histograms.root"
+    Description = "Example: %(prog)s -y 2017 -t symlink2histograms_2017/TTbar_Histograms.root -d symlink2histograms_2017/JetHT_Histograms.root"
     
     # input parameters
     parser = ArgumentParser(description=Description)
+
+    parser.add_argument("-y", "--year", dest="year",
+                        help="Data taking year(s) (e.g. 2017, Run2)",
+                        required=True,
+                        metavar="YEAR")
 
     parser.add_argument("-t", "--ttbar", dest="ttbar",
                       help="Path to ttbar histograms",
@@ -130,5 +135,5 @@ if __name__ == '__main__':
     (options, args) = parser.parse_known_args()
     
     # generate toy data
-    generate(options.ttbar, options.data, 'VR')
-    generate(options.ttbar, options.data, 'SR')
+    generate(options.year, options.ttbar, options.data, 'VR')
+    generate(options.year, options.ttbar, options.data, 'SR')
