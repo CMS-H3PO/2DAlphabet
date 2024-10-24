@@ -49,8 +49,11 @@ mpl_to_root_colors = {
     'teal': 840, 
     'azure': 860,
     'violet': 880,
-    'pink': 900
+    'pink': 900,
+    1: 1,
+    2: 632
 }
+
 # And a helper function to return the matplotlib color name from ROOT TColor
 def root_to_matplotlib_color(TColor):
     return list(mpl_to_root_colors.keys())[list(mpl_to_root_colors.values()).index(TColor)]
