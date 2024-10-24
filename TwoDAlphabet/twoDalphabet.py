@@ -473,7 +473,7 @@ class TwoDAlphabet:
         return masked_regions
 
     def GoodnessOfFit(self, subtag, ntoys, card_or_w='card.txt', freezeSignal=False, seed=123456,
-                            verbosity=0, extra='', condor=False, eosRootfiles=None, njobs=0, makeEnv=False):
+                            verbosity=0, extra='', condor=False, eosRootfiles=None, njobs=0, makeEnv=False, lorienTag=False):
         # NOTE: There's no way to blind data here - need to evaluate it to get the p-value
         # param_str = '' if setParams == {} else '--setParameters '+','.join(['%s=%s'%(p,v) for p,v in setParams.items()])
 
@@ -530,12 +530,13 @@ class TwoDAlphabet:
                     runIn=run_dir,
                     toGrab=run_dir+'/higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root',
                     eosRootfileTarball=eosRootfiles,
-                    remakeEnv=makeEnv
+                    remakeEnv=makeEnv,
+                    lorienTag=lorienTag
                 )
                 condor.submit()
             
     def SignalInjection(self, subtag, injectAmount, ntoys, blindData=True, card_or_w='card.txt', rMin=-5, rMax=5, 
-                              seed=123456, verbosity=0, setParams={}, defMinStrat=0, extra='', condor=False, eosRootfiles=None, njobs=0, makeEnv=False):
+                              seed=123456, verbosity=0, setParams={}, defMinStrat=0, extra='', condor=False, eosRootfiles=None, njobs=0, makeEnv=False, lorienTag=False):
         run_dir = self.tag+'/'+subtag
         _runDirSetup(run_dir)
         
@@ -584,7 +585,8 @@ class TwoDAlphabet:
                     runIn=run_dir,
                     toGrab='{run_dir}/fitDiagnostics_sigInj_r{rinj}*.root'.format(run_dir=run_dir,rinj=rinj),
                     eosRootfileTarball=eosRootfiles,
-                    remakeEnv=False
+                    remakeEnv=False,
+                    lorienTag=lorienTag
                 )
                 condor.submit()
 
@@ -608,7 +610,7 @@ class TwoDAlphabet:
                         toPkg=self.tag+'/',
                         toGrab=run_dir+'/higgsCombineTest.AsymptoticLimits.mH120.root',
                         eosRootfileTarball=eosRootfiles,
-                remakeEnv=makeEnv
+                        remakeEnv=makeEnv,
                     )
                     condor.submit()
                 

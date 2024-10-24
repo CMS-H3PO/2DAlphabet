@@ -584,8 +584,7 @@ def make_ax_1D(outname, binning, data, bkgs=[], signals=[], title='', subtitle='
     ax.legend([handles[idx] for idx in leg_order],[labels[idx] for idx in leg_order])
     ax.autoscale(axis='x', tight=True)
     ax.margins(x=0) # remove white space at left and right margins of plot 
-
-    hep.cms.label(loc=0, ax=ax, data = not dataOff, label=extraText, rlabel='') # CMS + label, where label is typically “Preliminary” “Supplementary”, “Private Work” or “Work in Progress”
+    hep.cms.label(loc=0, ax=ax, data = not dataOff, llabel=extraText, rlabel='') # CMS + label, where label is typically “Preliminary” “Supplementary”, “Private Work” or “Work in Progress”
     hep.cms.lumitext(lumiText, ax=ax)                       # Typically luminosity + sqrt(s)
     # Can't use the hep.cms.text() wrapper without "CMS" being added, so add the slice text manually
     if slicetitle:
@@ -898,17 +897,22 @@ def plot_correlation_matrix(varsToIgnore, threshold=0, corrText=False):
 
     fit_result_file.Close()
 
-def plot_gof(tag, subtag, seed=123456, condor=False):
+def plot_gof(tag, subtag, seed=123456, condor=False, lorien=False):
     with cd(tag+'/'+subtag):
         if condor:
-            tmpdir = 'notneeded/tmp/'
-            execute_cmd('mkdir '+tmpdir) 
-            execute_cmd('cat %s_%s_gof_toys_output_*.tgz | tar zxvf - -i --strip-components 2 -C %s'%(tag,subtag,tmpdir))
-            toy_limit_tree = ROOT.TChain('limit')
-            if len(glob.glob(tmpdir+'higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root')) == 0:
-                raise Exception('No files found')
-            toy_limit_tree.Add(tmpdir+'higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root') 
-            
+            if not lorien:
+                tmpdir = 'notneeded/tmp/'
+                execute_cmd('mkdir '+tmpdir) 
+                execute_cmd('cat %s_%s_gof_toys_output_*.tgz | tar zxvf - -i --strip-components 2 -C %s'%(tag,subtag,tmpdir))
+                toy_limit_tree = ROOT.TChain('limit')
+                if len(glob.glob(tmpdir+'higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root')) == 0:
+                    raise Exception('No files found')
+                toy_limit_tree.Add(tmpdir+'higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root') 
+            else:
+                toy_limit_tree = ROOT.TChain('limit')
+                if len(glob.glob('higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root')) == 0:
+                    raise Exception('No files found')
+                toy_limit_tree.Add('higgsCombine_gof_toys.GoodnessOfFit.mH120.*.root')             
         else:
             toyOutput = ROOT.TFile.Open('higgsCombine_gof_toys.GoodnessOfFit.mH120.{seed}.root'.format(seed=seed))
             toy_limit_tree = toyOutput.Get('limit')
@@ -976,7 +980,7 @@ def plot_gof(tag, subtag, seed=123456, condor=False):
         cout.Print('gof_plot.png','png')
 
     if condor:
-            execute_cmd('rm -r '+tmpdir)
+            execute_cmd('rm -r notneeded/*')
 
 def plot_signalInjection(tag, subtag, injectedAmount, seed=123456, stats=True, condor=False):
     # if injectedAmount is not an integer, need to look for different file
