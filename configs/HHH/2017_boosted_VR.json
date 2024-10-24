@@ -31,7 +31,7 @@
           "TITLE":"QCD",
           "LOC":"PATH/FILE:HIST"
        },
-       "XToYHTo6B_MX-2500_MY-800":{
+       "XToYHTo6B_MX-4000_MY-300":{
           "SYSTEMATICS":[
              "lumi"
           ],
@@ -52,25 +52,25 @@
        "pass":{
           "PROCESSES":[
             "TTbar",
-            "XToYHTo6B_MX-2500_MY-800"
+            "XToYHTo6B_MX-4000_MY-300"
           ],
           "BINNING":"default"
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_VR_$region_boosted_nominal",
-       "HIST_UP":"mjj_vs_mjjj_VR_$region_boosted__$syst_up",
-       "HIST_DOWN":"mjj_vs_mjjj_VR_$region_boosted__$syst_down",
-       "HIST_ALT_UP":"mjj_vs_mjjj_VR_$region_boosted_$systUp",
-       "HIST_ALT_DOWN":"mjj_vs_mjjj_VR_$region_boosted_$systDown",
+       "HIST":"mj_vs_mjj_VR_$region_boosted_nominal",
+       "HIST_UP":"mj_vs_mjj_VR_$region_boosted__$syst_up",
+       "HIST_DOWN":"mj_vs_mjj_VR_$region_boosted__$syst_down",
+       "HIST_ALT_UP":"mj_vs_mjj_VR_$region_boosted_$systUp",
+       "HIST_ALT_DOWN":"mj_vs_mjj_VR_$region_boosted_$systDown",
        "PATH":"symlink2histograms_2017",
        "FILE":"$process_Histograms.root"
     },
     "BINNING":{
        "default":{
           "X":{
-             "NAME":"MJJJ",
-             "TITLE":"M_{JJJ} [GeV]",
+             "NAME":"MJJ",
+             "TITLE":"M_{JJ} [GeV]",
              "BINS":[
                 1000,
                 1200,
@@ -91,25 +91,30 @@
              "SIGEND":2600
           },
           "Y":{
-             "NAME":"MJJ",
-             "TITLE":"M_{JJ} [GeV]",
+             "NAME":"MJ",
+             "TITLE":"M_{J} [GeV]",
              "BINS":[
-                200,
+                250,
                 300,
+                350,
                 400,
+                450,
+                500,
+                550,
                 600,
+                650,
+                700,
+                750,
                 800,
+                850,
+                900,
+                950,
                 1000,
-                1200,
-                1400,
-                1600,
-                1800,
-                2000,
-                2500,
-                3000,
-                3500,
-                4000,
-                4500
+                1050,
+                1100,
+                1150,
+                1200
+
             ]
           }
        }

@@ -28,38 +28,27 @@ class Pol_2:
 
 # various dictionaries
 p_b = {}
-p_sb = {}
 rpf_boosted_SR = {}
-rpf_semiboosted_SR = {}
 
 # fail-to-pass transfer functions
 # 2017 boosted (best order)
 p_b["2017"] = Pol_1()
-rpf_boosted_SR["2017"] = ROOT.TF2("rpf_2017_boosted_SR;m_{jjj} [GeV];m_{jj} [GeV]",p_b["2017"],x_min,x_max,y_min,y_max,3)
-rpf_boosted_SR["2017"].SetParameter(0, 6.9722293911)
-rpf_boosted_SR["2017"].SetParameter(1,-2.6216322625)
-rpf_boosted_SR["2017"].SetParameter(2, 1.1057040331)
+rpf_boosted_SR["2017"] = ROOT.TF2("rpf_2017_boosted_SR;m_{jj} [GeV];m_{j} [GeV]",p_b["2017"],x_min,x_max,y_min,y_max,3)
+rpf_boosted_SR["2017"].SetParameter(0, 4.6941115572)
+rpf_boosted_SR["2017"].SetParameter(1,-5.2814921441)
+rpf_boosted_SR["2017"].SetParameter(2,-2.2973885405)
 
-# 2017 semiboosted (best order)
-p_sb["2017"] = Pol_1()
-rpf_semiboosted_SR["2017"] = ROOT.TF2("rpf_2017_semiboosted_SR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb["2017"],x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_SR["2017"].SetParameter(0, 6.3419944445)
-rpf_semiboosted_SR["2017"].SetParameter(1,-7.9777135785)
-rpf_semiboosted_SR["2017"].SetParameter(2, 2.0819610327)
 
 # Run2 boosted (best order)
 p_b["Run2"] = Pol_1()
-rpf_boosted_SR["Run2"] = ROOT.TF2("rpf_Run2_boosted_SR;m_{jjj} [GeV];m_{jj} [GeV]",p_b["Run2"],x_min,x_max,y_min,y_max,3)
-rpf_boosted_SR["Run2"].SetParameter(0, 6.5297055558)
-rpf_boosted_SR["Run2"].SetParameter(1,-2.5859269353)
-rpf_boosted_SR["Run2"].SetParameter(2, 0.7874599276)
+rpf_boosted_SR["Run2"] = ROOT.TF2("rpf_Run2_boosted_SR;m_{jj} [GeV];m_{j} [GeV]",p_b["Run2"],x_min,x_max,y_min,y_max,3)
+rpf_boosted_SR["Run2"].SetParameter(0, 5.1383734978)
+rpf_boosted_SR["Run2"].SetParameter(1,-4.7515270606)
+rpf_boosted_SR["Run2"].SetParameter(2, 0.6725236095)
+rpf_boosted_SR["Run2"].SetParameter(3, 6.1429982120)
+rpf_boosted_SR["Run2"].SetParameter(4,-0.3270565914)
+rpf_boosted_SR["Run2"].SetParameter(5,-20.0679402014)
 
-# Run2 semiboosted (best order)
-p_sb["Run2"] = Pol_1()
-rpf_semiboosted_SR["Run2"] = ROOT.TF2("rpf_Run2_semiboosted_SR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb["Run2"],x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_SR["Run2"].SetParameter(0, 5.9207814471)
-rpf_semiboosted_SR["Run2"].SetParameter(1,-4.5875310779)
-rpf_semiboosted_SR["Run2"].SetParameter(2,-0.2105124716)
 
 
 if __name__ == '__main__':
@@ -94,7 +83,3 @@ if __name__ == '__main__':
     rpf_boosted_SR[options.year].Draw("colz")
 
     c.SaveAs("rpf_{}_boosted_SR_pass_toy.png".format(options.year))
-
-    rpf_semiboosted_SR[options.year].Draw("colz")
-
-    c.SaveAs("rpf_{}_semiboosted_SR_pass_toy.png".format(options.year))

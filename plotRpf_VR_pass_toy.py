@@ -28,41 +28,30 @@ class Pol_2:
 
 # various dictionaries
 p_b = {}
-p_sb = {}
 rpf_boosted_VR = {}
-rpf_semiboosted_VR = {}
 
 # fail-to-pass transfer functions
 # 2017 boosted (best order)
 p_b["2017"] = Pol_1()
-rpf_boosted_VR["2017"] = ROOT.TF2("rpf_2017_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b["2017"],x_min,x_max,y_min,y_max,3)
-rpf_boosted_VR["2017"].SetParameter(0, 6.8436666543)
-rpf_boosted_VR["2017"].SetParameter(1,-3.6156471188)
-rpf_boosted_VR["2017"].SetParameter(2, 1.5817990449)
+rpf_boosted_VR["2017"] = ROOT.TF2("rpf_2017_boosted_VR;m_{jj} [GeV];m_{j} [GeV]",p_b["2017"],x_min,x_max,y_min,y_max,3)
+rpf_boosted_VR["2017"].SetParameter(0, 4.9513329067)
+rpf_boosted_VR["2017"].SetParameter(1,-4.4865278603)
+rpf_boosted_VR["2017"].SetParameter(2, 2.8717761188)
+rpf_boosted_VR["2017"].SetParameter(3,-8.1218327900)
+rpf_boosted_VR["2017"].SetParameter(4,-0.1279852074)
+rpf_boosted_VR["2017"].SetParameter(5,-10.3435255647)
 
-# 2017 semiboosted (best order)
-p_sb["2017"] = Pol_2()
-rpf_semiboosted_VR["2017"] = ROOT.TF2("rpf_2017_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb["2017"],x_min,x_max,y_min,y_max,6)
-rpf_semiboosted_VR["2017"].SetParameter(0,  7.0566158433)
-rpf_semiboosted_VR["2017"].SetParameter(1,-12.5188265625)
-rpf_semiboosted_VR["2017"].SetParameter(2,  0.3226356388)
-rpf_semiboosted_VR["2017"].SetParameter(3, 13.4650381833)
-rpf_semiboosted_VR["2017"].SetParameter(4,  6.3150490979)
-rpf_semiboosted_VR["2017"].SetParameter(5,-11.5925476469)
 
 # Run2 boosted (best order)
 p_b["Run2"] = Pol_1()
-rpf_boosted_VR["Run2"] = ROOT.TF2("rpf_Run2_boosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_b["Run2"],x_min,x_max,y_min,y_max,3)
-rpf_boosted_VR["Run2"].SetParameter(0, 6.6233835282)
-rpf_boosted_VR["Run2"].SetParameter(1,-1.7767097306)
-rpf_boosted_VR["Run2"].SetParameter(2,-0.7376929257)
+rpf_boosted_VR["Run2"] = ROOT.TF2("rpf_Run2_boosted_VR;m_{jj} [GeV];m_{j} [GeV]",p_b["Run2"],x_min,x_max,y_min,y_max,3)
+rpf_boosted_VR["Run2"].SetParameter(0, 5.1383734978)
+rpf_boosted_VR["Run2"].SetParameter(1,-4.7515270606)
+rpf_boosted_VR["Run2"].SetParameter(2, 0.6725236095)
+rpf_boosted_VR["Run2"].SetParameter(3, 6.1429982120)
+rpf_boosted_VR["Run2"].SetParameter(4,-0.3270565914)
+rpf_boosted_VR["Run2"].SetParameter(5,-20.0679402014)
 
-# Run2 semiboosted (best order)
-p_sb["Run2"] = Pol_1()
-rpf_semiboosted_VR["Run2"] = ROOT.TF2("rpf_Run2_semiboosted_VR;m_{jjj} [GeV];m_{jj} [GeV]",p_sb["Run2"],x_min,x_max,y_min,y_max,3)
-rpf_semiboosted_VR["Run2"].SetParameter(0, 5.9068958750)
-rpf_semiboosted_VR["Run2"].SetParameter(1,-4.5963924421)
-rpf_semiboosted_VR["Run2"].SetParameter(2,-0.0621328287)
 
 
 if __name__ == '__main__':
@@ -97,7 +86,3 @@ if __name__ == '__main__':
     rpf_boosted_VR[options.year].Draw("colz")
 
     c.SaveAs("rpf_{}_boosted_VR_pass_toy.png".format(options.year))
-
-    rpf_semiboosted_VR[options.year].Draw("colz")
-
-    c.SaveAs("rpf_{}_semiboosted_VR_pass_toy.png".format(options.year))

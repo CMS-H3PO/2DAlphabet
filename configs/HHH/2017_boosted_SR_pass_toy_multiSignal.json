@@ -48,29 +48,38 @@
        }
     },
     "GLOBAL":{
-       "HIST":"mjj_vs_mjjj_SR_$region_boosted_nominal",
-       "HIST_UP":"mjj_vs_mjjj_SR_$region_boosted__$syst_up",
-       "HIST_DOWN":"mjj_vs_mjjj_SR_$region_boosted__$syst_down",
-       "HIST_ALT_UP":"mjj_vs_mjjj_SR_$region_boosted_$systUp",
-       "HIST_ALT_DOWN":"mjj_vs_mjjj_SR_$region_boosted_$systDown",
+       "HIST":"mj_vs_mjj_SR_$region_boosted_nominal",
+       "HIST_UP":"mj_vs_mjj_SR_$region_boosted__$syst_up",
+       "HIST_DOWN":"mj_vs_mjj_SR_$region_boosted__$syst_down",
+       "HIST_ALT_UP":"mj_vs_mjj_SR_$region_boosted_$systUp",
+       "HIST_ALT_DOWN":"mj_vs_mjj_SR_$region_boosted_$systDown",
        "PATH":"symlink2histograms_2017",
        "FILE":"$process_Histograms.root",
        "SIGNAME": [
-          "XToYHTo6B_MX-1000_MY-300", "XToYHTo6B_MX-1000_MY-600", "XToYHTo6B_MX-1000_MY-800",
-          "XToYHTo6B_MX-1200_MY-300", "XToYHTo6B_MX-1200_MY-600", "XToYHTo6B_MX-1200_MY-800", "XToYHTo6B_MX-1200_MY-1000",
-          "XToYHTo6B_MX-1600_MY-300", "XToYHTo6B_MX-1600_MY-600", "XToYHTo6B_MX-1600_MY-800", "XToYHTo6B_MX-1600_MY-1000", "XToYHTo6B_MX-1600_MY-1200", "XToYHTo6B_MX-1600_MY-1400",
-          "XToYHTo6B_MX-2000_MY-300", "XToYHTo6B_MX-2000_MY-600", "XToYHTo6B_MX-2000_MY-800", "XToYHTo6B_MX-2000_MY-1000", "XToYHTo6B_MX-2000_MY-1200", "XToYHTo6B_MX-2000_MY-1600", "XToYHTo6B_MX-2000_MY-1800",
-          "XToYHTo6B_MX-2500_MY-300", "XToYHTo6B_MX-2500_MY-600", "XToYHTo6B_MX-2500_MY-800", "XToYHTo6B_MX-2500_MY-1000", "XToYHTo6B_MX-2500_MY-1200", "XToYHTo6B_MX-2500_MY-1600", "XToYHTo6B_MX-2500_MY-2000", "XToYHTo6B_MX-2500_MY-2200",
-          "XToYHTo6B_MX-3000_MY-300", "XToYHTo6B_MX-3000_MY-600", "XToYHTo6B_MX-3000_MY-800", "XToYHTo6B_MX-3000_MY-1000", "XToYHTo6B_MX-3000_MY-1200", "XToYHTo6B_MX-3000_MY-1600", "XToYHTo6B_MX-3000_MY-2000", "XToYHTo6B_MX-3000_MY-2500", "XToYHTo6B_MX-3000_MY-2800",
-          "XToYHTo6B_MX-3500_MY-300", "XToYHTo6B_MX-3500_MY-600", "XToYHTo6B_MX-3500_MY-800", "XToYHTo6B_MX-3500_MY-1000", "XToYHTo6B_MX-3500_MY-1200", "XToYHTo6B_MX-3500_MY-1600", "XToYHTo6B_MX-3500_MY-2000", "XToYHTo6B_MX-3500_MY-2500", "XToYHTo6B_MX-3500_MY-2800",
-          "XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-1000", "XToYHTo6B_MX-4000_MY-1200", "XToYHTo6B_MX-4000_MY-1600", "XToYHTo6B_MX-4000_MY-2000", "XToYHTo6B_MX-4000_MY-2500", "XToYHTo6B_MX-4000_MY-2800"
+          "XToYHTo6B_MX-1300_MY-250", "XToYHTo6B_MX-1300_MY-300", "XToYHTo6B_MX-1300_MY-350", "XToYHTo6B_MX-1300_MY-400", "XToYHTo6B_MX-1300_MY-450", "XToYHTo6B_MX-1300_MY-500",
+          "XToYHTo6B_MX-1400_MY-250", "XToYHTo6B_MX-1400_MY-300", "XToYHTo6B_MX-1400_MY-350", "XToYHTo6B_MX-1400_MY-400", "XToYHTo6B_MX-1400_MY-450", "XToYHTo6B_MX-1400_MY-500",
+          "XToYHTo6B_MX-1500_MY-250", "XToYHTo6B_MX-1500_MY-300", "XToYHTo6B_MX-1500_MY-350", "XToYHTo6B_MX-1500_MY-400", "XToYHTo6B_MX-1500_MY-450", "XToYHTo6B_MX-1500_MY-500",
+          "XToYHTo6B_MX-1600_MY-250", "XToYHTo6B_MX-1600_MY-300", "XToYHTo6B_MX-1600_MY-350", "XToYHTo6B_MX-1600_MY-400", "XToYHTo6B_MX-1600_MY-450", "XToYHTo6B_MX-1600_MY-500",
+          "XToYHTo6B_MX-1700_MY-250", "XToYHTo6B_MX-1700_MY-300", "XToYHTo6B_MX-1700_MY-350", "XToYHTo6B_MX-1700_MY-400", "XToYHTo6B_MX-1700_MY-450", "XToYHTo6B_MX-1700_MY-500",
+          "XToYHTo6B_MX-1800_MY-250", "XToYHTo6B_MX-1800_MY-300", "XToYHTo6B_MX-1800_MY-350", "XToYHTo6B_MX-1800_MY-400", "XToYHTo6B_MX-1800_MY-450", "XToYHTo6B_MX-1800_MY-500",
+          "XToYHTo6B_MX-1900_MY-250", "XToYHTo6B_MX-1900_MY-300", "XToYHTo6B_MX-1900_MY-350", "XToYHTo6B_MX-1900_MY-400", "XToYHTo6B_MX-1900_MY-450", "XToYHTo6B_MX-1900_MY-500",
+          "XToYHTo6B_MX-2000_MY-250", "XToYHTo6B_MX-2000_MY-300", "XToYHTo6B_MX-2000_MY-350", "XToYHTo6B_MX-2000_MY-400", "XToYHTo6B_MX-2000_MY-450", "XToYHTo6B_MX-2000_MY-500", "XToYHTo6B_MX-2000_MY-600",
+          "XToYHTo6B_MX-2200_MY-250", "XToYHTo6B_MX-2200_MY-300", "XToYHTo6B_MX-2200_MY-350", "XToYHTo6B_MX-2200_MY-400", "XToYHTo6B_MX-2200_MY-450", "XToYHTo6B_MX-2200_MY-500", "XToYHTo6B_MX-2200_MY-600",
+          "XToYHTo6B_MX-2400_MY-250", "XToYHTo6B_MX-2400_MY-300", "XToYHTo6B_MX-2400_MY-350", "XToYHTo6B_MX-2400_MY-400", "XToYHTo6B_MX-2400_MY-450", "XToYHTo6B_MX-2400_MY-500", "XToYHTo6B_MX-2400_MY-600",
+          "XToYHTo6B_MX-2500_MY-250", "XToYHTo6B_MX-2500_MY-300", "XToYHTo6B_MX-2500_MY-350", "XToYHTo6B_MX-2500_MY-400", "XToYHTo6B_MX-2500_MY-450", "XToYHTo6B_MX-2500_MY-500", "XToYHTo6B_MX-2500_MY-600", "XToYHTo6B_MX-2500_MY-700",
+          "XToYHTo6B_MX-2600_MY-250", "XToYHTo6B_MX-2600_MY-300", "XToYHTo6B_MX-2600_MY-350", "XToYHTo6B_MX-2600_MY-400", "XToYHTo6B_MX-2600_MY-450", "XToYHTo6B_MX-2600_MY-500", "XToYHTo6B_MX-2600_MY-600", "XToYHTo6B_MX-2600_MY-700", "XToYHTo6B_MX-2600_MY-800",
+          "XToYHTo6B_MX-2800_MY-250", "XToYHTo6B_MX-2800_MY-300", "XToYHTo6B_MX-2800_MY-350", "XToYHTo6B_MX-2800_MY-400", "XToYHTo6B_MX-2800_MY-450", "XToYHTo6B_MX-2800_MY-500", "XToYHTo6B_MX-2800_MY-600", "XToYHTo6B_MX-2800_MY-700", "XToYHTo6B_MX-2800_MY-800",
+          "XToYHTo6B_MX-3000_MY-250", "XToYHTo6B_MX-3000_MY-300", "XToYHTo6B_MX-3000_MY-350", "XToYHTo6B_MX-3000_MY-400", "XToYHTo6B_MX-3000_MY-450", "XToYHTo6B_MX-3000_MY-500", "XToYHTo6B_MX-3000_MY-600", "XToYHTo6B_MX-3000_MY-700", "XToYHTo6B_MX-3000_MY-800",
+          "XToYHTo6B_MX-3500_MY-250", "XToYHTo6B_MX-3500_MY-300", "XToYHTo6B_MX-3500_MY-350", "XToYHTo6B_MX-3500_MY-400", "XToYHTo6B_MX-3500_MY-450", "XToYHTo6B_MX-3500_MY-500", "XToYHTo6B_MX-3500_MY-600", "XToYHTo6B_MX-3500_MY-700", "XToYHTo6B_MX-3500_MY-800",
+          "XToYHTo6B_MX-4000_MY-250", "XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-350", "XToYHTo6B_MX-4000_MY-400", "XToYHTo6B_MX-4000_MY-450", "XToYHTo6B_MX-4000_MY-500", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-700", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-900"
        ]
+
     },
     "BINNING":{
        "default":{
           "X":{
-             "NAME":"MJJJ",
-             "TITLE":"M_{JJJ} [GeV]",
+             "NAME":"MJJ",
+             "TITLE":"M_{JJ} [GeV]",
              "BINS":[
                 1000,
                 1200,
@@ -91,25 +100,29 @@
              "SIGEND":2600
           },
           "Y":{
-             "NAME":"MJJ",
-             "TITLE":"M_{JJ} [GeV]",
+             "NAME":"MJ",
+             "TITLE":"M_{J} [GeV]",
              "BINS":[
-                200,
+                250,
                 300,
+                350,
                 400,
+                450,
+                500,
+                550,
                 600,
+                650,
+                700,
+                750,
                 800,
+                850,
+                900,
+                950,
                 1000,
-                1200,
-                1400,
-                1600,
-                1800,
-                2000,
-                2500,
-                3000,
-                3500,
-                4000,
-                4500
+                1050,
+                1100,
+                1150,
+                1200
             ]
           }
        }
