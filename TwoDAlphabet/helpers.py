@@ -372,7 +372,7 @@ class CondorRunner():
         if not self.lorienTag:
             abs_twoD_dir_base = abs_path[:abs_path.find(self.cmssw)]+self.cmssw+'/src/2DAlphabet/TwoDAlphabet/'
         else:
-            abs_twoD_dir_base = abs_path[:abs_path.find('H3PO')]+'/2DAlphabet/TwoDAlphabet/'
+            abs_twoD_dir_base = abs_path[:abs_path.find('HHH_2DAlphabet')]+'/2DAlphabet/TwoDAlphabet/'
         timestr = time.strftime("%Y%m%d-%H%M%S")
         out_jdl = 'temp_'+timestr+'_jdl'
 
