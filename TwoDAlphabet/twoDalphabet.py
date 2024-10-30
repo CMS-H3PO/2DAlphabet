@@ -591,7 +591,7 @@ class TwoDAlphabet:
                 condor.submit()
 
     def Limit(self, subtag, card_or_w='card.txt', blindData=True, verbosity=0, strategy=0,
-                    setParams={}, condor=False, eosRootfiles=None, makeEnv=False):
+                    setParams={}, condor=False, eosRootfiles=None, makeEnv=False, extra=''):
         if subtag == '': 
             raise RuntimeError('The subtag for limits must be non-empty so that the limit will be run in a nested directory.')
 
@@ -599,7 +599,7 @@ class TwoDAlphabet:
         _runDirSetup(run_dir)
 
         with cd(run_dir):
-            limit_cmd = _runLimit(blindData, verbosity, strategy, setParams, card_or_w, condor) # runs on this line if location == 'local'
+            limit_cmd = _runLimit(blindData, verbosity, strategy, setParams, card_or_w, condor, extra) # runs on this line if location == 'local'
             
             if condor:
                 if not makeEnv:
@@ -952,19 +952,20 @@ def _runMLfit(cardOrW, blinding, verbosity, strategy, rMin, rMax, setParams, use
 
     execute_cmd(fit_cmd, out='FitDiagnostics.log')
 
-def _runLimit(blindData, verbosity, strategy, setParams, card_or_w='card.txt', condor=False):
+def _runLimit(blindData, verbosity, strategy, setParams, card_or_w='card.txt', condor=False, extra=''):
     # card_or_w could be `morphedWorkspace.root --snapshotName morphedModel`
     param_options = ''
     if len(setParams) > 0:
         param_options = '--setParameters '+','.join('%s=%s'%(k,v) for k,v in setParams.items())
 
-    limit_cmd = 'combine -M AsymptoticLimits -d {card_or_w} --saveWorkspace --cminDefaultMinimizerStrategy {strategy} {param_opt} {blind_opt} -v {verb}' 
+    limit_cmd = 'combine -M AsymptoticLimits -d {card_or_w} --saveWorkspace --cminDefaultMinimizerStrategy {strategy} {param_opt} {blind_opt} -v {verb} {extra}' 
     limit_cmd = limit_cmd.format(
         card_or_w=card_or_w,
         blind_opt='--run=blind' if blindData else '',
         strategy=strategy,
         param_opt=param_options,
-        verb=verbosity
+        verb=verbosity,
+        extra=extra
     )
 
     # Run combine if not on condor
