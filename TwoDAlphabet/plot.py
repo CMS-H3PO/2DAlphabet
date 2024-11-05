@@ -367,7 +367,7 @@ class Plotter(object):
                 else:
                     these_axes = these_axes.loc[these_axes.logy.eq(True)]
 
-                if (len(these_axes) > 9) and (len(regionsToGroup) == 0):
+                if (len(these_axes) > 12) and (len(regionsToGroup) == 0):
                     raise RuntimeError('histlist of size %s not currently supported. Instead, call plot_projections() with regionsToGroup list describing the regions you want to group together.'%len(these_axes))
                 elif (len(these_axes) > 9) and (len(regionsToGroup) > 0):
                     validRegions = these_axes['region'].to_list()
