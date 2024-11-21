@@ -59,7 +59,7 @@ Note that piping output to the `tee` command will both print it to the terminal 
 Now set the best-fit polynomial orders, for `2017`
 ```
 export BEST_B=1
-export BEST_SB=2
+export BEST_SB=1
 ```
 and for `Run2`
 ```

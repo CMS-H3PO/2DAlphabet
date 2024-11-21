@@ -19,13 +19,13 @@ if __name__ == '__main__':
     # best-fit parameter values from individual fits
     setParams = {}
     if options.year == "2017":
-        params_b = {'qcd_b_rpfT_1_par0':  '6.9722293911',
-                    'qcd_b_rpfT_1_par1': '-2.6216322625',
-                    'qcd_b_rpfT_1_par2':  '1.1057040331'}
+        params_b = {'qcd_b_rpfT_1_par0':  '9.0671063787',
+                    'qcd_b_rpfT_1_par1': '-7.9961090410',
+                    'qcd_b_rpfT_1_par2': '-1.0853168536'}
 
-        params_sb = {'qcd_sb_rpfT_1_par0':  '6.3419944445',
-                     'qcd_sb_rpfT_1_par1': '-7.9777135785',
-                     'qcd_sb_rpfT_1_par2':  '2.0819610327'}
+        params_sb = {'qcd_sb_rpfT_1_par0':  '5.2883690935',
+                     'qcd_sb_rpfT_1_par1': '-5.4452818419',
+                     'qcd_sb_rpfT_1_par2': '-0.2615423644'}
 
         setParams.update(params_b)
         setParams.update(params_sb)
@@ -52,7 +52,7 @@ if __name__ == '__main__':
             for orderSB in ["1"]:
                 if options.year == "2017":
                     if [orderB,orderSB] in [["1","1"]]:
-                        test_fit(working_area,orderB,orderSB,strategy=2,rMin=-1,rMax=1,setParams=setParams)
+                        test_fit(working_area,orderB,orderSB,strategy=1,rMin=-1,rMax=1,setParams=setParams)
                     else:
                         test_fit(working_area,orderB,orderSB,strategy=1,rMin=-1,rMax=5)
                 else:

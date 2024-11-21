@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
         test_make(working_area,jsonConfig)
 
-        for polyOrder in ["0","1","2","3"]:
+        for polyOrder in ["0","1","2"]:
             if options.year == "2017":
                 test_fit(working_area,polyOrder,strategy=1, rMin=-5, rMax=5)
             else:
@@ -39,4 +39,4 @@ if __name__ == '__main__':
 
         test_FTest(working_area,"0","1")
         test_FTest(working_area,"1","2")
-        test_FTest(working_area,"2","3")
+        #test_FTest(working_area,"2","3")

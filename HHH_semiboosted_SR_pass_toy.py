@@ -21,16 +21,14 @@ if __name__ == '__main__':
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
-        #test_make(working_area,jsonConfig)
+        test_make(working_area,jsonConfig)
 
-        for polyOrder in ["2","3"]:
+        for polyOrder in ["0","1","2"]:
             if options.year == "2017":
                 if polyOrder in ["1"]:
-                    test_fit(working_area,polyOrder,strategy=2, rMin=-1, rMax=1)
+                    test_fit(working_area,polyOrder,strategy=2, rMin=-2, rMax=2, setParams={'qcd_rpfT_1_par0':'5.0','qcd_rpfT_1_par1':'-5.0','qcd_rpfT_1_par2':'-0.5'})
                 elif polyOrder in ["2"]:
-                    test_fit(working_area,polyOrder,strategy=1, rMin=-5, rMax=5, setParams={'qcd_rpfT_2_par0':'7.0','qcd_rpfT_2_par1':'-10.0','qcd_rpfT_2_par2':'-0.4','qcd_rpfT_2_par3':'3.0','qcd_rpfT_2_par4':'5.0','qcd_rpfT_2_par5':'0.6'})
-                elif polyOrder in ["3"]:
-                    continue
+                    test_fit(working_area,polyOrder,strategy=2, rMin=-2, rMax=2, setParams={'qcd_rpfT_2_par0':'5.4','qcd_rpfT_2_par1':'-4.0','qcd_rpfT_2_par2':'-1.9','qcd_rpfT_2_par3':'17.0','qcd_rpfT_2_par4':'-6.0','qcd_rpfT_2_par5':'-11.0'})
                 else:
                     test_fit(working_area,polyOrder,strategy=1, rMin=-5, rMax=5)
             else:
@@ -44,7 +42,7 @@ if __name__ == '__main__':
                 test_GoF_plot(working_area,polyOrder)
                 test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=2,extra="--rMin=-1 --rMax=5")
 
-        #test_FTest(working_area,"0","1")
+        test_FTest(working_area,"0","1")
         test_FTest(working_area,"1","2")
-        if options.year!="2017":
-            test_FTest(working_area,"2","3")
+        #if options.year != "2017":
+            #test_FTest(working_area,"2","3")
