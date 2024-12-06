@@ -1,0 +1,109 @@
+[SetFlag] Changing value of flag "workspaces-use-clone" from 0 to 1
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset fail_HIGH
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset fail_LOW
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset fail_SIG
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset pass_HIGH
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset pass_LOW
+[#1] INFO:ObjectHandling -- RooWorkspace::import(w) importing dataset pass_SIG
+[SetFlag] Changing value of flag "workspaces-use-clone" from 0 to 1
+>> Doing prefit: fail_HIGH,TTbar
+>> Doing prefit: fail_HIGH,qcd
+>> Doing prefit: fail_HIGH,TotalBkg
+>> Doing prefit: fail_HIGH,TotalSig
+>> Doing prefit: fail_HIGH,TotalProcs
+>> Doing prefit: fail_LOW,TTbar
+>> Doing prefit: fail_LOW,qcd
+>> Doing prefit: fail_LOW,TotalBkg
+>> Doing prefit: fail_LOW,TotalSig
+>> Doing prefit: fail_LOW,TotalProcs
+>> Doing prefit: fail_SIG,TTbar
+>> Doing prefit: fail_SIG,qcd
+>> Doing prefit: fail_SIG,TotalBkg
+>> Doing prefit: fail_SIG,TotalSig
+>> Doing prefit: fail_SIG,TotalProcs
+>> Doing prefit: pass_HIGH,TTbar
+>> Doing prefit: pass_HIGH,XToYHTo6B_MX-4000_MY-300
+>> Doing prefit: pass_HIGH,qcd_3
+>> Doing prefit: pass_HIGH,TotalBkg
+>> Doing prefit: pass_HIGH,TotalSig
+>> Doing prefit: pass_HIGH,TotalProcs
+>> Doing prefit: pass_LOW,TTbar
+>> Doing prefit: pass_LOW,XToYHTo6B_MX-4000_MY-300
+>> Doing prefit: pass_LOW,qcd_3
+>> Doing prefit: pass_LOW,TotalBkg
+>> Doing prefit: pass_LOW,TotalSig
+>> Doing prefit: pass_LOW,TotalProcs
+>> Doing prefit: pass_SIG,TTbar
+>> Doing prefit: pass_SIG,XToYHTo6B_MX-4000_MY-300
+>> Doing prefit: pass_SIG,qcd_3
+>> Doing prefit: pass_SIG,TotalBkg
+>> Doing prefit: pass_SIG,TotalSig
+>> Doing prefit: pass_SIG,TotalProcs
+Bin                       Total relative bkg uncert. (prefit)
+----------------------------------------------------------
+fail_HIGH                 0.00078   
+fail_LOW                  0.00123   
+fail_SIG                  0.00091   
+pass_HIGH                 0.09663   
+pass_LOW                  0.06548   
+pass_SIG                  0.07708   
+>> Doing postfit: fail_HIGH,TTbar
+>> Doing postfit: fail_HIGH,qcd
+>> Doing postfit: fail_HIGH,TotalBkg
+>> Doing postfit: fail_HIGH,TotalSig
+>> Doing postfit: fail_HIGH,TotalProcs
+>> Doing postfit: fail_LOW,TTbar
+>> Doing postfit: fail_LOW,qcd
+>> Doing postfit: fail_LOW,TotalBkg
+>> Doing postfit: fail_LOW,TotalSig
+>> Doing postfit: fail_LOW,TotalProcs
+>> Doing postfit: fail_SIG,TTbar
+>> Doing postfit: fail_SIG,qcd
+>> Doing postfit: fail_SIG,TotalBkg
+>> Doing postfit: fail_SIG,TotalSig
+>> Doing postfit: fail_SIG,TotalProcs
+>> Doing postfit: pass_HIGH,TTbar
+>> Doing postfit: pass_HIGH,XToYHTo6B_MX-4000_MY-300
+>> Doing postfit: pass_HIGH,qcd_3
+>> Doing postfit: pass_HIGH,TotalBkg
+>> Doing postfit: pass_HIGH,TotalSig
+>> Doing postfit: pass_HIGH,TotalProcs
+>> Doing postfit: pass_LOW,TTbar
+>> Doing postfit: pass_LOW,XToYHTo6B_MX-4000_MY-300
+>> Doing postfit: pass_LOW,qcd_3
+>> Doing postfit: pass_LOW,TotalBkg
+>> Doing postfit: pass_LOW,TotalSig
+>> Doing postfit: pass_LOW,TotalProcs
+>> Doing postfit: pass_SIG,TTbar
+>> Doing postfit: pass_SIG,XToYHTo6B_MX-4000_MY-300
+>> Doing postfit: pass_SIG,qcd_3
+>> Doing postfit: pass_SIG,TotalBkg
+>> Doing postfit: pass_SIG,TotalSig
+>> Doing postfit: pass_SIG,TotalProcs
+
+Bin                       Total relative bkg uncert. (postfit)
+----------------------------------------------------------
+fail_HIGH                 0.00406   
+fail_LOW                  0.00196   
+fail_SIG                  0.00358   
+pass_HIGH                 0.02671   
+pass_LOW                  0.00781   
+pass_SIG                  0.01214   
+
+Bin                       Process              Scale factor
+----------------------------------------------------------
+fail_HIGH                 TTbar                0.98927   
+fail_HIGH                 qcd                  0.99907   
+fail_LOW                  TTbar                0.98927   
+fail_LOW                  qcd                  1.00013   
+fail_SIG                  TTbar                0.98927   
+fail_SIG                  qcd                  0.99955   
+pass_HIGH                 TTbar                0.98927   
+pass_HIGH                 XToYHTo6B_MX-4000_MY-300 1.00000   
+pass_HIGH                 qcd_3                2.68816   
+pass_LOW                  TTbar                0.98927   
+pass_LOW                  XToYHTo6B_MX-4000_MY-300 1.00000   
+pass_LOW                  qcd_3                4.16567   
+pass_SIG                  TTbar                0.98927   
+pass_SIG                  XToYHTo6B_MX-4000_MY-300 1.00000   
+pass_SIG                  qcd_3                3.29165   

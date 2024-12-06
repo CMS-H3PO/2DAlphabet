@@ -1,0 +1,10 @@
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 374857
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 765596
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 497912
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 669913
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 930009
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 345684
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 629338
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 120772
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 75478
+combine -M GoodnessOfFit -d card.txt --algo=saturated  -n _gof_toys -v 0  --toysFrequentist -t 50 -s 542769

@@ -1,0 +1,3 @@
+qcd_rpfT_0_par0:lumi = -0.45249664453504435
+topxsec:lumi = 0.21350568674719764
+topxsec:qcd_rpfT_0_par0 = -0.854485594578565

@@ -1,0 +1,10 @@
+,process,region,process_type,title
+0,data_obs,fail,DATA,data_obs
+1,TTbar,fail,BKG,t#bar{t}
+2,qcd,fail,BKG,Background
+3,TotalBkg,fail,TOTAL,TotalBkg
+4,data_obs,pass,DATA,data_obs
+5,TTbar,pass,BKG,t#bar{t}
+6,XToYHTo6B_MX-4000_MY-300,pass,SIGNAL,Signal
+7,qcd_0,pass,BKG,Background
+8,TotalBkg,pass,TOTAL,TotalBkg

@@ -60,15 +60,15 @@ if __name__ == '__main__':
           "XToYHTo6B_MX-4000_MY-250", "XToYHTo6B_MX-4000_MY-300", "XToYHTo6B_MX-4000_MY-350", "XToYHTo6B_MX-4000_MY-400", "XToYHTo6B_MX-4000_MY-450", "XToYHTo6B_MX-4000_MY-500", "XToYHTo6B_MX-4000_MY-600", "XToYHTo6B_MX-4000_MY-700", "XToYHTo6B_MX-4000_MY-800", "XToYHTo6B_MX-4000_MY-900"
     ]
 
-    r_Min = -5
-    r_Max = 1
+    r_Min = -1
+    r_Max = 5
     strat = 1
 
 
-    sigNames = ["XToYHTo6B_MX-4000_MY-500"]
+    sigNames = ["XToYHTo6B_MX-4000_MY-350"]
 
     r_Min = -1
-    r_Max = 5
+    r_Max = 2
     strat = 1
 
 
@@ -79,7 +79,7 @@ if __name__ == '__main__':
 
         jsonConfig   = 'configs/HHH/{0}.json'.format(working_area)
 
-        test_make(working_area,jsonConfig) # this line can be commented out when reprocessing a subset of signal samples if signal cross sections have not been modified
+        #test_make(working_area,jsonConfig) # this line can be commented out when reprocessing a subset of signal samples if signal cross sections have not been modified
         polyOrder = bestOrder[working_area]
 
         for sig in sigNames:

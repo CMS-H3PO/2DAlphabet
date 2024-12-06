@@ -1,0 +1,137 @@
+{
+  "BINNING": {
+    "default": {
+      "X": {
+        "BINS": [
+          1000,
+          1200,
+          1400,
+          1600,
+          1800,
+          2000,
+          2200,
+          2400,
+          2600,
+          2800,
+          3000,
+          3500,
+          4000,
+          4500
+        ],
+        "NAME": "MJJ",
+        "SIGEND": 2600,
+        "SIGSTART": 2200,
+        "TITLE": "M_{JJ} [GeV]"
+      },
+      "Y": {
+        "BINS": [
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "NAME": "MJ",
+        "TITLE": "M_{J} [GeV]"
+      }
+    }
+  },
+  "GLOBAL": {
+    "FILE": "$process_Histograms.root",
+    "HIST": "mj_vs_mjj_SR_$region_boosted_nominal",
+    "HIST_ALT_DOWN": "mj_vs_mjj_SR_$region_boosted_$systDown",
+    "HIST_ALT_UP": "mj_vs_mjj_SR_$region_boosted_$systUp",
+    "HIST_DOWN": "mj_vs_mjj_SR_$region_boosted__$syst_down",
+    "HIST_UP": "mj_vs_mjj_SR_$region_boosted__$syst_up",
+    "PATH": "symlink2histograms_Run2"
+  },
+  "NAME": "HHH",
+  "OPTIONS": {
+    "blindedFit": [],
+    "blindedPlots": [],
+    "plotEvtsPerUnit": true,
+    "plotPrefitSigInFitB": false,
+    "plotTemplateComparisons": false,
+    "plotTitles": false,
+    "plotUncerts": true,
+    "year": 3
+  },
+  "PROCESSES": {
+    "TTbar": {
+      "COLOR": 2,
+      "LOC": "symlink2histograms_Run2/$process_Histograms.root:mj_vs_mjj_SR_$region_boosted_nominal",
+      "NAME": "TTbar",
+      "SCALE": 1.0,
+      "SYSTEMATICS": [
+        "lumi",
+        "topxsec"
+      ],
+      "TITLE": "t#bar{t}",
+      "TYPE": "BKG",
+      "VARIATION": "nominal"
+    },
+    "XToYHTo6B_MX-4000_MY-300": {
+      "COLOR": 1,
+      "LOC": "symlink2histograms_Run2/$process_Histograms.root:mj_vs_mjj_SR_$region_boosted_nominal",
+      "NAME": "XToYHTo6B_MX-4000_MY-300",
+      "SCALE": 1.0,
+      "SYSTEMATICS": [
+        "lumi"
+      ],
+      "TITLE": "Signal",
+      "TYPE": "SIGNAL",
+      "VARIATION": "nominal"
+    },
+    "data_obs": {
+      "COLOR": 1,
+      "LOC": "symlink2histograms_Run2/JetHT_Histograms_SR_pass_toy.root:mj_vs_mjj_SR_$region_boosted_nominal",
+      "NAME": "data_obs",
+      "SCALE": 1.0,
+      "SYSTEMATICS": [],
+      "TITLE": "data_obs",
+      "TYPE": "DATA",
+      "VARIATION": "nominal"
+    }
+  },
+  "REGIONS": {
+    "fail": {
+      "BINNING": "default",
+      "PROCESSES": [
+        "TTbar"
+      ]
+    },
+    "pass": {
+      "BINNING": "default",
+      "PROCESSES": [
+        "TTbar",
+        "XToYHTo6B_MX-4000_MY-300"
+      ]
+    }
+  },
+  "SYSTEMATICS": {
+    "lumi": {
+      "CODE": 0,
+      "VAL": 1.023
+    },
+    "topxsec": {
+      "CODE": 1,
+      "VALDOWN": 0.938,
+      "VALUP": 1.061
+    }
+  }
+}

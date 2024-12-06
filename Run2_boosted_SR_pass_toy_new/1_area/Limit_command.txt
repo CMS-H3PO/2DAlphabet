@@ -1,0 +1,1 @@
+combine -M AsymptoticLimits -d card.txt --saveWorkspace --cminDefaultMinimizerStrategy 1 --setParameters qcd_rpfT_1_par0=4.457500028758118,qcd_rpfT_1_par1=-3.875994629004414,qcd_rpfT_1_par2=1.079695125417313 --run=blind -v 1 --rMin=-1 --rMax=5

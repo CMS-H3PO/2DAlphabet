@@ -32,8 +32,10 @@ if __name__ == '__main__':
                 else:
                     test_fit(working_area,polyOrder,strategy=1, rMin=-5, rMax=5)
             else:
-                if polyOrder in ["0", "1"]:
+                if polyOrder in ["0"]:
                     test_fit(working_area,polyOrder,strategy=1, rMin=-5, rMax=5)
+                elif polyOrder in ["1"]:
+                    test_fit(working_area,polyOrder,strategy=2, rMin=-5, rMax=5, setParams={'qcd_rpfT_1_par0':'4.0','qcd_rpfT_1_par1':'-3.0','qcd_rpfT_1_par2':'1.0'})
                 elif polyOrder in ["2", "3"]:
                     test_fit(working_area,polyOrder,strategy=1, rMin=-5, rMax=1)
                 else:
@@ -47,4 +49,5 @@ if __name__ == '__main__':
         test_FTest(working_area,"0","1")
         test_FTest(working_area,"1","2")
         test_FTest(working_area,"2","3")
+
 

@@ -1,0 +1,1 @@
+combine -M FitDiagnostics card.txt --text2workspace --channel-masks --setParameters r=0 --saveWorkspace --cminDefaultMinimizerStrategy 1 --rMin -1 --rMax 1 -v 0 

@@ -79,7 +79,7 @@ def makePlot(fit_area, year, config, polyOrder):
     CMS_lumi.cmsTextSize = 0.5
     CMS_lumi.cmsTextOffset = 0.8
     CMS_lumi.lumiTextSize = 0.4
-    CMS_lumi.CMS_lumi(c, 17, 11)
+    CMS_lumi.CMS_lumi(c, 3, 11)
 
     c.SetLogz()
 

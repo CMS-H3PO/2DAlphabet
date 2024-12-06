@@ -1,0 +1,1 @@
+combine -M FitDiagnostics card.txt --text2workspace --channel-masks --setParameters qcd_rpfT_1_par0=4.38,qcd_rpfT_1_par1=-4.01,qcd_rpfT_1_par2=0.10,r=0 --saveWorkspace --cminDefaultMinimizerStrategy 1 --rMin -1 --rMax 1 -v 0 

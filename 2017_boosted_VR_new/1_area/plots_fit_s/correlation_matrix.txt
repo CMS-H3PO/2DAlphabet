@@ -1,0 +1,15 @@
+qcd_rpfT_1_par0:lumi = -0.06418934283713545
+qcd_rpfT_1_par1:lumi = 0.03255190060672141
+qcd_rpfT_1_par1:qcd_rpfT_1_par0 = -0.7261731542248473
+qcd_rpfT_1_par2:lumi = -0.03972158321143647
+qcd_rpfT_1_par2:qcd_rpfT_1_par0 = -0.28763953648662977
+qcd_rpfT_1_par2:qcd_rpfT_1_par1 = -0.207471162547046
+r:lumi = 0.015954798385931054
+r:qcd_rpfT_1_par0 = 0.4581634877777029
+r:qcd_rpfT_1_par1 = -0.6970265921815549
+r:qcd_rpfT_1_par2 = -0.030828973562567513
+topxsec:lumi = 0.010002708887679772
+topxsec:qcd_rpfT_1_par0 = -0.166351091158694
+topxsec:qcd_rpfT_1_par1 = 0.08684143658796978
+topxsec:qcd_rpfT_1_par2 = -0.09651505381972128
+topxsec:r = -0.0033856392358673605

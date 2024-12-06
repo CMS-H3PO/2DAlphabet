@@ -1,0 +1,11 @@
+ <<< Combine >>> 
+ <<< v10.0.1 >>>
+>>> Random number generator seed is 123456
+>>> Method used is FitDiagnostics
+Set Default Value of Parameter r To : 0
+>>> 0 out of 6 channels masked
+
+
+ --- FitDiagnostics ---
+Best fit r: 0.0347707  -0.00021486/+0.0344329  (68% CL)
+Done in 0.13 min (cpu), 0.13 min (real)

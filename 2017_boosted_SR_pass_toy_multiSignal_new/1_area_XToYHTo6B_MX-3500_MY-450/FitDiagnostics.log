@@ -1,0 +1,15 @@
+ <<< Combine >>> 
+ <<< v10.0.1 >>>
+>>> Random number generator seed is 123456
+>>> Method used is FitDiagnostics
+Set Default Value of Parameter qcd_rpfT_1_par0 To : 4.38
+Set Default Value of Parameter qcd_rpfT_1_par1 To : -4.01
+Set Default Value of Parameter qcd_rpfT_1_par2 To : 0.1
+Set Default Value of Parameter r To : 0
+>>> 0 out of 6 channels masked
+
+[WARNING]: Unable to determine uncertainties on all fit parameters in b-only fit. Have a look at https://cms-analysis.github.io/HiggsAnalysis-CombinedLimit/part3/nonstandard/#fit-parameter-uncertainties for more information.
+
+ --- FitDiagnostics ---
+Best fit r: -0.00228644  -5.98294e-06/+0.00226264  (68% CL)
+Done in 0.05 min (cpu), 0.05 min (real)

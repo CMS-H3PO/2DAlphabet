@@ -1,0 +1,8 @@
+,process,region,obj,norm,process_type,color,combine_idx,title
+0,qcd,fail,,,BKG,400,,Background
+1,qcd_0,pass,,,BKG,400,,Background
+2,qcd_1,pass,,,BKG,400,,Background
+3,qcd_2,pass,,,BKG,400,,Background
+4,qcd_3,pass,,,BKG,400,,Background
+5,qcd_4,pass,,,BKG,400,,Background
+6,qcd_5,pass,,,BKG,400,,Background

@@ -1,0 +1,11 @@
+,process,region,binning,color,process_type,scale,variation,source_filename,source_histname,alias,title,combine_idx,lnN,shapes,syst_type,direction,variation_alias
+0,data_obs,fail,default,1,DATA,1.0,nominal,symlink2histograms_2017/JetHT_Histograms_SR_pass_toy.root,mj_vs_mjj_SR_fail_boosted_nominal,data_obs,data_obs,,,,,,
+1,TTbar,fail,default,2,BKG,1.0,lumi,symlink2histograms_2017/TTbar_Histograms.root,mj_vs_mjj_SR_fail_boosted_nominal,TTbar,t#bar{t},,1.023,,lnN,,
+2,TTbar,fail,default,2,BKG,1.0,topxsec,symlink2histograms_2017/TTbar_Histograms.root,mj_vs_mjj_SR_fail_boosted_nominal,TTbar,t#bar{t},,0.938/1.061,,lnN,,
+3,TTbar,fail,default,2,BKG,1.0,nominal,symlink2histograms_2017/TTbar_Histograms.root,mj_vs_mjj_SR_fail_boosted_nominal,TTbar,t#bar{t},,,,,,
+4,data_obs,pass,default,1,DATA,1.0,nominal,symlink2histograms_2017/JetHT_Histograms_SR_pass_toy.root,mj_vs_mjj_SR_pass_boosted_nominal,data_obs,data_obs,,,,,,
+5,TTbar,pass,default,2,BKG,1.0,lumi,symlink2histograms_2017/TTbar_Histograms.root,mj_vs_mjj_SR_pass_boosted_nominal,TTbar,t#bar{t},,1.023,,lnN,,
+6,TTbar,pass,default,2,BKG,1.0,topxsec,symlink2histograms_2017/TTbar_Histograms.root,mj_vs_mjj_SR_pass_boosted_nominal,TTbar,t#bar{t},,0.938/1.061,,lnN,,
+7,TTbar,pass,default,2,BKG,1.0,nominal,symlink2histograms_2017/TTbar_Histograms.root,mj_vs_mjj_SR_pass_boosted_nominal,TTbar,t#bar{t},,,,,,
+196,XToYHTo6B_MX-3000_MY-500,pass,default,1,SIGNAL,1.0,lumi,symlink2histograms_2017/XToYHTo6B_MX-3000_MY-500_Histograms.root,mj_vs_mjj_SR_pass_boosted_nominal,XToYHTo6B_MX-3000_MY-500,Signal,,1.023,,lnN,,
+197,XToYHTo6B_MX-3000_MY-500,pass,default,1,SIGNAL,1.0,nominal,symlink2histograms_2017/XToYHTo6B_MX-3000_MY-500_Histograms.root,mj_vs_mjj_SR_pass_boosted_nominal,XToYHTo6B_MX-3000_MY-500,Signal,,,,,,

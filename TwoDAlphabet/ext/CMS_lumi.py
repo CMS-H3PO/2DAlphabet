@@ -87,6 +87,9 @@ def CMS_lumi(pad,  iPeriod=1,  iPosX=11, sim=False ):
     elif ( iPeriod==2 ):
         lumiText += lumi_2016_13TeV+' + '+lumi_2017_13TeV + ' + ' + lumi_2018_13TeV
         lumiText += " (13 TeV)"
+    elif ( iPeriod==3 ):
+        lumiText += "101 fb^{-1}"
+        lumiText += " (13 TeV)"
     # elif ( iPeriod==7 ):
     #     if( outOfFrame ):lumiText += "#scale[0.85]{"
     #     lumiText += lumi_13TeV 

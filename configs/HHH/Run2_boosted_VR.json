@@ -136,7 +136,7 @@
        "plotTemplateComparisons":false,
        "plotUncerts":true,
        "plotTitles":false,
-       "year":2,
+       "year":3,
        "plotEvtsPerUnit":true
     }
  }
