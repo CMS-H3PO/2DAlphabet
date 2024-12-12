@@ -1,6 +1,6 @@
 from HHH_base_singleChannel import *
 from argparse import ArgumentParser
-
+import os
 
 if __name__ == '__main__':
     # usage example
@@ -49,7 +49,7 @@ if __name__ == '__main__':
         for sig in sigNames:
             print("\nProcessing {0}...\n".format(sig))
 
-            test_fit(working_area,polyOrder,polyOrder,sigName=sig,strategy=2)
+            test_fit(working_area,polyOrder,sigName=sig,strategy=2)
             
             test_limit(working_area,polyOrder,'%s/runConfig.json'%working_area,blind=True,strategy=strategy,extra=("--rMin=-1 --rMax={0}".format(rMax)))
 
